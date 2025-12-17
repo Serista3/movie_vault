@@ -1,4 +1,10 @@
+type ButtonType = 'button' | 'submit' | 'reset';
+
 interface ButtonProps {
+  type?: ButtonType;
+  name?: string;
+  value?: string;
+  disabled?: boolean;
   className?: string;
   onClick?: () => void;
   children?: React.ReactNode;

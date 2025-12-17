@@ -1,6 +1,13 @@
 import { NavLink } from 'react-router';
 
-const SideNavigation: React.FC<{ isOpen: boolean }> = function (props) {
+import Auth from '../Auth';
+
+interface SideNavigationProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function SideNavigation({ isOpen, onClose }: SideNavigationProps) {
   const navLinkClass = `font-light hover:text-main-light transition-colors`;
   const activeNavLinkClass = navLinkClass + ' text-main-light';
 
@@ -9,14 +16,15 @@ const SideNavigation: React.FC<{ isOpen: boolean }> = function (props) {
   };
 
   return (
-    <>
-      <div className={`fixed bg-back-dark backdrop-blur-xs h-screen w-full ${props.isOpen ? '' : 'hidden'}`}></div>
+    <aside>
+      <div className={`fixed bg-[rgba(0,0,0,0.3)] h-screen w-full ${isOpen ? '' : 'hidden'}`} onClick={onClose}></div>
       <nav
-        className={`flex flex-col gap-8 p-6 bg-back-light text-white w-3/4 h-screen fixed z-20 transition-all ${
-          props.isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`flex flex-col gap-6 p-6 bg-back-dark text-white w-3/4 h-screen fixed z-20 transition-all ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <ul className="flex flex-col gap-2">
+        <Auth />
+        <ul className="flex flex-col gap-2 border-t border-gray-dark pt-8">
           <li>
             <NavLink to="movies" className={activeNavLink}>
               Movies
@@ -39,8 +47,6 @@ const SideNavigation: React.FC<{ isOpen: boolean }> = function (props) {
           </li>
         </ul>
       </nav>
-    </>
+    </aside>
   );
 };
-
-export default SideNavigation;

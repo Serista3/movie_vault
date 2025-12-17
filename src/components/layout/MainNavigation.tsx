@@ -15,9 +15,13 @@ export default function MainNavigation() {
     setIsSideNavOpen(prev => !prev);
   }
 
+  const onCloseSideNav = function(): void {
+    setIsSideNavOpen(false);
+  }
+
   return (
     <>
-      <header className='p-3 bg-main-light flex items-center justify-between border-b border-gray-dark shadow-md'>
+      <header className='p-3 bg-main-light flex items-center justify-between border-b border-gray-dark shadow-md sticky top-0 z-30'>
         <Button className='rounded-full bg-back-light hover:bg-back-dark px-2' onClick={toggleSidenNav}>
           <IconContext.Provider value={{ className: 'text-xl text-main-light' }}>
             <AiOutlineMenu />
@@ -30,7 +34,7 @@ export default function MainNavigation() {
           </IconContext.Provider>
         </Button>
       </header>
-      <SideNavigation isOpen={isSideNavOpen} />
+      <SideNavigation isOpen={isSideNavOpen} onClose={onCloseSideNav} />
     </>
   );
 }
