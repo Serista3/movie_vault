@@ -28,6 +28,7 @@
 }
 
 body {
+  color: var(--text-light);
   background-color: var(--back-light);
   font-family: 'Kanit', sans-serif;
   line-height: 1.75;

@@ -1,5 +1,9 @@
-const Logo: React.FC<{ className?: string }> = function({ className }){
-  return <h1 className={`text-3xl font-semibold ${ className ?? '' }`}>MovieVault</h1>;
-}
+import { Link } from "react-router";
 
-export default Logo;
+export default function Logo({ className }: { className?: string }) {
+  return (
+    <Link to="/">
+      <h1 className={`text-3xl font-semibold text-back-light ${ className ?? '' }`}>MovieVault</h1>
+    </Link>
+  );
+}
