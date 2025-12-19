@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouteLoaderData, useFetcher } from 'react-router';
-import { BASE_URL } from '../services/endpoints';
-import { fetchCreateRequestToken } from '../services/authApi';
+import { BASE_URL } from '../services/config';
+import { createRequestToken } from '../services/auth.service';
 import { type User } from '../types/auth';
 
 import Button from './common/Button';
@@ -29,7 +29,7 @@ export default function Auth() {
     setIsError({ isError: false, message: '' });
     setIsLoading(true);
 
-    const data = await fetchCreateRequestToken();
+    const data = await createRequestToken();
 
     if ('request_token' in data) {
       const requestToken = data.request_token;

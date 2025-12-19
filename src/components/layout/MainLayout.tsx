@@ -1,5 +1,5 @@
 import { Outlet, redirect, useNavigation } from 'react-router';
-import { fetchCurrentUser, fetchCreateSession, fetchDeleteSession } from '../../services/authApi';
+import { getCurrentUser, createSession, deleteSession } from '../../services/auth.service';
 
 import MainNavigation from './MainNavigation';
 import FooterNavigation from './FooterNavigation';
@@ -26,7 +26,7 @@ export const loader = async function({ request }: { request: Request }) {
   const requestToken = url.searchParams.get('request_token');
 
   if (approved === 'true' && requestToken) {
-    const session = await fetchCreateSession(requestToken);
+    const session = await createSession(requestToken);
     if ('session_id' in session) {
       localStorage.setItem('session_id', session.session_id);
     }
@@ -37,7 +37,7 @@ export const loader = async function({ request }: { request: Request }) {
   const sessionId = localStorage.getItem('session_id');
 
   if(sessionId) {
-    const userData = await fetchCurrentUser(sessionId);
+    const userData = await getCurrentUser(sessionId);
     return { sessionId, userData, isAuthenticated: true };
   }
   
@@ -50,7 +50,7 @@ export const action = async function({ request }: { request: Request}){
   const sessionId = localStorage.getItem('session_id');
 
   if(type === 'logout' && sessionId){
-    fetchDeleteSession(sessionId);
+    deleteSession(sessionId);
     localStorage.removeItem('session_id');
   }
 }

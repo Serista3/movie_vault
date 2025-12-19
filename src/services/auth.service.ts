@@ -1,7 +1,7 @@
-import { API_READ_ACCESS_TOKEN } from "./endpoints";
-import { type User, type RequestToken, type CreateSession, type DeleteSession } from "../types/auth";
+import { API_READ_ACCESS_TOKEN } from "./config";
+import type { User, RequestToken, CreateSession, DeleteSession } from "../types";
 
-export const fetchCurrentUser = async function(sessionId: string){
+export const getCurrentUser = async function(sessionId: string){
   try {
     const res = await fetch(`https://api.themoviedb.org/3/account/22551364?session_id=${sessionId}`, {
       method: 'GET',
@@ -22,7 +22,7 @@ export const fetchCurrentUser = async function(sessionId: string){
   }
 }
 
-export const fetchCreateRequestToken = async function(){
+export const createRequestToken = async function(){
   try {
     const res = await fetch(`https://api.themoviedb.org/3/authentication/token/new`, {
       method: 'GET',
@@ -41,7 +41,7 @@ export const fetchCreateRequestToken = async function(){
   }
 }
 
-export const fetchCreateSession = async function(requestToken: string){
+export const createSession = async function(requestToken: string){
   try {
     const res = await fetch(`https://api.themoviedb.org/3/authentication/session/new`, {
       method: 'POST',
@@ -66,7 +66,7 @@ export const fetchCreateSession = async function(requestToken: string){
   }
 }
 
-export const fetchDeleteSession = async function(session_id: string){
+export const deleteSession = async function(session_id: string){
   try {
     const res = await fetch('https://api.themoviedb.org/3/authentication/session', {
       method: 'DELETE',
