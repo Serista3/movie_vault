@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useRouteLoaderData, useFetcher } from 'react-router';
-import { BASE_URL } from '../services/config';
 import { createRequestToken } from '../services/auth.service';
 import { type User } from '../types/auth';
 
@@ -33,7 +32,7 @@ export default function Auth() {
 
     if ('request_token' in data) {
       const requestToken = data.request_token;
-      window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${BASE_URL}`;
+      window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${window.location.origin}/`;
     }
 
     if ('isError' in data && data.isError) {

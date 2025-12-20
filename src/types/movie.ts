@@ -1,4 +1,6 @@
-import { type Media } from "./media";
+import type { Media, MediaImage, MediaKeyword, MediaVideo, MediaGenre, MediaLanguage } from "./media";
+import type { CompanySummary } from "./company";
+import type { CreditCastMember, CreditCrewMember } from "./person";
 
 export interface MovieSummary extends Media {
     backdrop_path: string | null;
@@ -15,36 +17,61 @@ export interface MovieSummary extends Media {
 }
 
 export interface MovieDetail extends MovieSummary {
-    belongs_to_collection: null | {
-        id: number;
-        name: string;
-        poster_path: string | null;
-    }
+    belongs_to_collection: null | string;
     budget: number;
-    genres: {
-        id: number;
-        name: string;
-    }[];
+    genres: MediaGenre[];
     homepage: string | null;
     imdb_id: string | null;
-    production_companies: {
-        id: number;
-        logo_path: string | null;
-        name: string;
-        origin_country: string;
-    }[];
+    production_companies: CompanySummary[];
     production_countries: {
         iso_3166_1: string;
         name: string;
     }[];
     revenue: number;
-    runtime: number | null;
-    spoken_languages: {
-        english_name: string;
-        iso_639_1: string;
-        name: string;
-    }[];
+    runtime: number | null; 
+    spoken_languages: MediaLanguage[];
     status: string;
     tagline: string | null;
 }
 
+export interface MovieAccountStates {
+    id: number;
+    favorite: boolean;
+    rated: false | {
+        value: number;
+    };
+    watchlist: boolean;
+}
+
+export interface MovieCredits {
+    id: number;
+    cast: CreditCastMember[] | CreditCrewMember[];
+}
+
+export interface MovieExternalIds {
+    id: number;
+    imdb_id: string | null;
+    wikidata_id: null | string;
+    facebook_id: string | null;
+    instagram_id: string | null;
+    twitter_id: string | null;
+}
+
+export interface MovieImages {
+    backdrops: MediaImage[];
+}
+
+export interface MovieKeywords {
+    id: number;
+    keywords: MediaKeyword[];
+}
+
+export interface MovieRecommendations {
+    page: number;
+    results: MovieSummary[];
+}
+
+export interface MovieVideos {
+    id: number;
+    results: MediaVideo[];
+}

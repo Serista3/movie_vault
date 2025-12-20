@@ -1,92 +1,29 @@
-import { API_READ_ACCESS_TOKEN } from "./config";
+import { optionMethodPost } from "./config";
+import { tmdbFetch } from "../utils/api";
 import type { User, RequestToken, CreateSession, DeleteSession } from "../types";
 
 export const getCurrentUser = async function(sessionId: string){
-  try {
-    const res = await fetch(`https://api.themoviedb.org/3/account/22551364?session_id=${sessionId}`, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer ' + API_READ_ACCESS_TOKEN
-      }
-    })
-
-    if(!res.ok)
-      throw new Error('Failed to fetch current user');
-
-    const data: User = await res.json();
-    return data;
-
-  } catch (error){
-    return { isError: true, message: (error as Error).message }
-  }
+  return tmdbFetch<User>(`/account/22551364?session_id=${sessionId}`);
 }
 
 export const createRequestToken = async function(){
-  try {
-    const res = await fetch(`https://api.themoviedb.org/3/authentication/token/new`, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer ' + API_READ_ACCESS_TOKEN
-      }
-    })
-    if(!res.ok)
-      throw new Error('Failed to fetch request token');
-
-    const data: RequestToken = await res.json();
-    return data;
-  } catch (error) {
-    return { isError: true, message: (error as Error).message }
-  }
+  return tmdbFetch<RequestToken>(`/authentication/token/new`);
 }
 
 export const createSession = async function(requestToken: string){
-  try {
-    const res = await fetch(`https://api.themoviedb.org/3/authentication/session/new`, {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: 'Bearer ' + API_READ_ACCESS_TOKEN
-      },
-      body: JSON.stringify({
-        "request_token": requestToken
-      })
+  return tmdbFetch<CreateSession>(`/authentication/session/new`, {
+    ...optionMethodPost,
+    body: JSON.stringify({
+      request_token: requestToken
     })
-
-    if(!res.ok)
-      throw new Error('Failed to create session');
-
-    const data: CreateSession = await res.json();
-    return data;
-
-  } catch (error){
-    return { isError: true, message: (error as Error).message }
-  }
+  });
 }
 
 export const deleteSession = async function(session_id: string){
-  try {
-    const res = await fetch('https://api.themoviedb.org/3/authentication/session', {
-      method: 'DELETE',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        Authorization: 'Bearer ' + API_READ_ACCESS_TOKEN
-      },
-      body: JSON.stringify({
-        session_id: session_id
-      })
+  return tmdbFetch<DeleteSession>(`/authentication/session`, {
+    ...optionMethodPost,
+    body: JSON.stringify({
+      session_id: session_id
     })
-
-    if(!res.ok)
-      throw new Error('Failed to delete session');
-
-    const data: DeleteSession = await res.json();
-    return data;
-
-  } catch (error){
-    return { isError: true, message: (error as Error).message }
-  }
+  });
 }
