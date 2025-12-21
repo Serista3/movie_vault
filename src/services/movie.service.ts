@@ -7,13 +7,13 @@ import type {
     MovieExternalIds, 
     MovieImages, 
     MovieKeywords, 
-    MovieRecommendations,
+    MovieVideos,
     ReviewSummary
 } from "../types";
 import { tmdbFetch } from "../utils/api";
 
 export const getMovieLists = async function(category: string, page: number){
-    return tmdbFetch<MovieSummary>(`/movie/${category}?language=en-US&page=${page}`);
+    return tmdbFetch<MediaResponse<MovieSummary>>(`/movie/${category}?language=en-US&page=${page}`);
 }
 
 export const getMovie = async function(movieId: number){
@@ -41,7 +41,7 @@ export const getMovieKeywords = async function(movieId: number){
 }
 
 export const getMovieRecommendations = async function(movieId: number, page: number){
-    return tmdbFetch<MovieRecommendations>(`/movie/${movieId}/recommendations?language=en-US&page=${page}`);
+    return tmdbFetch<MediaResponse<MovieSummary>>(`/movie/${movieId}/recommendations?language=en-US&page=${page}`);
 }
 
 export const getMovieReviews = async function(movieId: number, page: number){
@@ -49,5 +49,5 @@ export const getMovieReviews = async function(movieId: number, page: number){
 }
 
 export const getMovieVideos = async function(movieId: number){
-    return tmdbFetch<MovieRecommendations>(`/movie/${movieId}/videos?language=en-US`);
+    return tmdbFetch<MovieVideos>(`/movie/${movieId}/videos?language=en-US`);
 }

@@ -6,3 +6,5 @@ export * from './trending';
 export * from './person';
 export * from './company';
 export * from './review';
+export * from './tvShow';
+export * from './network';

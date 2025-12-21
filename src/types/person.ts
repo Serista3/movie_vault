@@ -1,7 +1,8 @@
 import type { Media, MediaImage } from "./media";
 import type { MovieSummary } from "./movie";
+import type { TvShowSummary } from "./tvShow";
 
-export type KnownForItem = MovieSummary;
+export type KnownForItem = MovieSummary | TvShowSummary;
 
 export interface BasePerson extends Media {
     gender: number;
@@ -28,6 +29,12 @@ export interface PersonMovieCredit extends MovieSummary {
     character: string;
     credit_id: string;
     order: number;
+}
+
+export interface PersonTvCredit extends TvShowSummary {
+    credit_id: string;
+    department: string;
+    job: string;
 }
 
 export interface PersonCombinedCredits {

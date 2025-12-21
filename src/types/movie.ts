@@ -1,4 +1,4 @@
-import type { Media, MediaImage, MediaKeyword, MediaVideo, MediaGenre, MediaLanguage } from "./media";
+import type { Media, MediaImage, MediaKeyword, MediaVideo, MediaGenre, MediaLanguage, MediaCountry } from "./media";
 import type { CompanySummary } from "./company";
 import type { CreditCastMember, CreditCrewMember } from "./person";
 
@@ -23,10 +23,7 @@ export interface MovieDetail extends MovieSummary {
     homepage: string | null;
     imdb_id: string | null;
     production_companies: CompanySummary[];
-    production_countries: {
-        iso_3166_1: string;
-        name: string;
-    }[];
+    production_countries: MediaCountry[];
     revenue: number;
     runtime: number | null; 
     spoken_languages: MediaLanguage[];
@@ -64,11 +61,6 @@ export interface MovieImages {
 export interface MovieKeywords {
     id: number;
     keywords: MediaKeyword[];
-}
-
-export interface MovieRecommendations {
-    page: number;
-    results: MovieSummary[];
 }
 
 export interface MovieVideos {
