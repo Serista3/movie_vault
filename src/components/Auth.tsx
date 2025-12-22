@@ -1,15 +1,9 @@
-import { useState } from 'react';
-import { useRouteLoaderData, useFetcher } from 'react-router';
+import { useState, Suspense } from 'react';
+import { useFetcher, useRouteLoaderData, Await } from 'react-router';
 import { createRequestToken } from '../services/auth.service';
-import { type User } from '../types/auth';
+import type { UserDataResponse } from '../types';
 
 import Button from './common/Button';
-
-interface Session {
-  sessionId?: string;
-  userData?: User;
-  isAuthenticated?: boolean;
-}
 
 export default function Auth() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,9 +13,8 @@ export default function Auth() {
       message: '',
     }
   );
-
+  const data = useRouteLoaderData('root') as UserDataResponse;
   const fetcher = useFetcher();
-  const data = useRouteLoaderData<Session>('root');
   const isAuthenticated = data?.isAuthenticated;
 
   const handleLogin = async function () {
@@ -44,11 +37,21 @@ export default function Auth() {
   return (
     <div className="user flex flex-col gap-4">
       <div className="username font-semibold text-xl flex items-center gap-3 mb-1">
-        <div className='rounded-full bg-back-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>
-          {isAuthenticated ? data?.userData?.username.at(0)?.toUpperCase() : 'G'}
-        </div>
-        {!isAuthenticated && <div>Guest</div>}
-        {isAuthenticated && <div>{data?.userData?.username}</div>}
+        <Suspense fallback={<div className='rounded-full bg-back-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>Anonymous</div>}>
+          <Await resolve={data?.userData}>
+            {data => {
+              return (
+                <>
+                  <div className='rounded-full bg-back-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>
+                    {isAuthenticated ? data?.username?.at(0)?.toUpperCase() : 'G'}
+                  </div>
+                  {!isAuthenticated && <div>Guest</div>}
+                  {isAuthenticated && <div>{data?.username}</div>}
+                </>
+              )
+            }}
+          </Await>
+        </Suspense>
       </div>
       {!isAuthenticated && (
         <form>

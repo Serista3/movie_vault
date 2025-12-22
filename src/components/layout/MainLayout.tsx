@@ -1,17 +1,13 @@
-import { Outlet, redirect, useNavigation } from 'react-router';
+import { Outlet, redirect } from 'react-router';
 import { getCurrentUser, createSession, deleteSession } from '../../services/auth.service';
 
 import MainNavigation from './MainNavigation';
 import FooterNavigation from './FooterNavigation';
 
 export default function MainLayout() {
-  const navigation = useNavigation();
-  const isNavigation = Boolean(navigation.location);
-
   return (
     <>
       <MainNavigation />
-      {isNavigation && <div className='loading-indicator'>Loading...</div>}
       <div className='main min-h-screen'>
         <Outlet />
       </div>
@@ -37,7 +33,7 @@ export const loader = async function({ request }: { request: Request }) {
   const sessionId = localStorage.getItem('session_id');
 
   if(sessionId) {
-    const userData = await getCurrentUser(sessionId);
+    const userData = getCurrentUser(sessionId);
     return { sessionId, userData, isAuthenticated: true };
   }
   

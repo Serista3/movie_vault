@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import { getMovieImages } from "../services/movie.service";
+import MediaList from "../components/MediaList";
 
 export default function Home() {
-  const getData = async () => {
-    const data = await getMovieImages(123);
-    console.log(data);
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
-
-  return <h1>Home Page</h1>;
+  return (
+    <div className="home flex flex-col gap-25 py-8">
+      <div className="px-4">
+        <MediaList category="popular" page={1} media_type='movie' />
+      </div>
+      <div className="px-4">
+        <MediaList category="popular" page={2} media_type='tv' />
+      </div>
+    </div>
+  );
 }

@@ -17,7 +17,7 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
 
   return (
     <aside>
-      <div className={`fixed bg-[rgba(0,0,0,0.3)] h-screen w-full ${isOpen ? '' : 'hidden'}`} onClick={onClose}></div>
+      <div className={`fixed bg-[rgba(0,0,0,0.65)] h-screen w-full pointer-events-auto z-10 ${isOpen ? '' : 'hidden'}`} onClick={onClose}></div>
       <nav
         className={`flex flex-col gap-6 p-6 bg-back-dark text-white w-3/4 h-screen fixed z-20 transition-all ${
           isOpen ? 'translate-x-0' : '-translate-x-full'

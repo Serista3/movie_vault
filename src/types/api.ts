@@ -1,3 +1,5 @@
+import type { User } from './auth';
+
 export interface TmdbSuccessResponse {
     success: boolean;
 }
@@ -11,4 +13,10 @@ export interface TmdbErrorResponse {
 export interface AppError {
     isError: boolean; 
     message: string;
+}
+
+export interface UserDataResponse {
+  sessionId: string;
+  userData: User;
+  isAuthenticated: boolean;
 }
