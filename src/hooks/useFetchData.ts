@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { useState, useCallback } from "react"
 
 import type { AppError } from "../types"
 
-export function useFetchData<T, P>(fetchFunction: Function, params: P[]) {
+export function useFetchData<T, P extends any[]>(fetchFunction: (...args: P) => Promise<T>, params: P) {
     const [data, setData] = useState<T | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<AppError | null>(null)
   
-    const fetchData = async function(){
+    const fetchData = useCallback(async function(){
       setIsLoading(true);
 
       try {
@@ -19,7 +19,7 @@ export function useFetchData<T, P>(fetchFunction: Function, params: P[]) {
       }
   
       setIsLoading(false);
-    }
+    }, [fetchFunction, params])
 
     return { data, isLoading, error, fetchData }
 }
