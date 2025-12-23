@@ -17,7 +17,7 @@ export const tmdbFetch = async function<T>(endpoint: string, options: RequestIni
 
         if (!res.ok){
             const errorData: TmdbErrorResponse = await res.json().catch(() => {});
-            throw new Error(errorData.status_message || 'tmdbFetch: Network response was not ok');
+            throw new Error(errorData?.status_message || 'tmdbFetch: Network response was not ok');
         }
 
         return await res.json() as T;

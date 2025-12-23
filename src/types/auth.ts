@@ -1,3 +1,5 @@
+import type { TmdbSuccessResponse } from "./api";
+
 export interface User {
   avatar: {
     gravatar: {
@@ -15,14 +17,12 @@ export interface User {
   username: string;
 }
 
-export interface RequestToken {
-  success: boolean;
+export interface RequestToken extends TmdbSuccessResponse {
   expires_at: string;
   request_token: string;
 }
 
-export interface CreateSession {
-  success: boolean;
+export interface CreateSession extends TmdbSuccessResponse {
   session_id: string;
 }
 
