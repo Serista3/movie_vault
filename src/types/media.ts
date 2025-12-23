@@ -1,4 +1,8 @@
+import type { MovieSummary } from './movie';
+import type { TvShowSummary } from './tvShow';
+
 export type MediaType = 'movie' | 'tv' | 'person';
+export type MediaSummary = MovieSummary | TvShowSummary;
 
 export interface Media {
     id: number;
