@@ -1,5 +1,5 @@
 import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '../components/layout/MainLayout';
-import Home from '../pages/Home';
+import Home, { loader as homeLoader } from '../pages/Home';
 import Movies from '../pages/Movies';
 import TvShows from '../pages/TvShows';
 import People from '../pages/People';
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     loader: mainLayoutLoader,
     action: mainLayoutAction,
     children: [
-      { index: true, Component: Home },
+      { index: true, Component: Home, loader: homeLoader },
       { path: 'movies', Component: Movies },
       { path: 'tv-shows', Component: TvShows },
       { path: 'people', Component: People },

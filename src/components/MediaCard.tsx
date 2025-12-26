@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import MediaRating from "./MediaRating"
 
 import { formatDateToReadable } from "../utils/formatters"
+import { IMAGE_BASE_URL } from "../services/config"
 import type { MediaSummary } from "../types"
 
 export default function MediaCard({ media }: { media: MediaSummary }) {
@@ -14,7 +15,7 @@ export default function MediaCard({ media }: { media: MediaSummary }) {
         <Link to={`/media/${media.id}`}>
           <img 
             className="object-cover w-full h-65 hover:scale-120 transition-transform duration-300 cursor-pointer" 
-            src={`https://image.tmdb.org/t/p/original/${'poster_path' in media ? media.poster_path : ''}`} 
+            src={`${IMAGE_BASE_URL}${'poster_path' in media ? media.poster_path : ''}`} 
             alt="media-poster"
             loading="lazy"
             />
