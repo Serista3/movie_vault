@@ -5,7 +5,7 @@ import ToggleSwitch from "../components/ToggleSwitch";
 
 import type { MediaSummary, MovieSummary } from "../types";
 
-import { getMovieLists } from "../services/movie.service";
+import { getMovieLists, getMovieVideos } from "../services/movie.service";
 import { getTvShowList } from "../services/tv.service";
 import { getTrending } from "../services/trending.service";
 
@@ -15,7 +15,7 @@ export default function Home() {
   const loaderData = useLoaderData<{top3NowPlaying: MediaSummary[]}>()
 
   return (
-    <div className="home flex flex-col gap-10 py-8">
+    <div className="home flex flex-col gap-10 pb-8">
       <Slider items={loaderData.top3NowPlaying} />
       <MediaRow title="Trending">
         <ToggleSwitch modes={['Today', 'This Week']} />
@@ -36,9 +36,26 @@ export default function Home() {
 export const loader = async function() {
   const nowPlayingMovies = await getMovieLists("now_playing", 1);
 
-  if('results' in nowPlayingMovies){
-    return { top3NowPlaying: nowPlayingMovies?.results.slice(0, 3) };
-  }
+  if(!nowPlayingMovies || !('results' in nowPlayingMovies))
+    return { top3NowPlaying: [] };
 
-  return null;
+  const top3NowPlaying = nowPlayingMovies.results.slice(0, 3);
+  
+  const movieWithTrailers = await Promise.all(
+    top3NowPlaying.map(async (movie) => {
+      const movieVideos = await getMovieVideos(movie.id);
+
+      if('results' in movieVideos){
+        const trailer = movieVideos.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+        return {
+          ...movie,
+          trailerKey: trailer ? trailer.key : undefined
+        }
+      }
+
+      return movie;
+    })
+  )
+
+  return { top3NowPlaying: movieWithTrailers };
 }

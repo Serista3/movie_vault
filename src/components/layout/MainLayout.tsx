@@ -1,18 +1,19 @@
 import { Outlet, redirect } from 'react-router';
 import { getCurrentUser, createSession, deleteSession } from '../../services/auth.service';
 
+import ModalProvider from '../../store/ModalContext';
 import MainNavigation from './MainNavigation';
 import FooterNavigation from './FooterNavigation';
 
 export default function MainLayout() {
   return (
-    <>
+    <ModalProvider>
       <MainNavigation />
       <div className='main min-h-screen'>
         <Outlet />
       </div>
       <FooterNavigation />
-    </>
+    </ModalProvider>
   );
 }
 

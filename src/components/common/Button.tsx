@@ -13,7 +13,7 @@ interface ButtonProps {
 export default function Button({ children, className, ...props }: ButtonProps) {
   const buttonClass = 'rounded-md px-4 text-back-light bg-main-light shadow-lg hover:bg-main-dark hover:shadow-xl active:scale-95';
   return (
-    <button className={`cursor-pointer py-2 font-medium transition-all ${className ?? buttonClass}`} {...props}>
+    <button className={`cursor-pointer py-1.5 font-medium transition-all ${className ?? buttonClass}`} {...props}>
       {children}
     </button>
   );
