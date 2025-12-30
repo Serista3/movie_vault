@@ -15,7 +15,7 @@ const defaultButtonClass = 'rounded-[10px] px-4 text-back-light bg-main-light ho
 export default function Button({ children, className = defaultButtonClass, ...props }: ButtonProps) {
   return (
     <button 
-      className={`button py-1.5 ${className} font-medium shadow-xl cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95`} 
+      className={`button py-1.5 ${className} font-medium shadow-xl cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow2xl active:scale-95 active:shadow-lg`} 
       {...props}>
       {children}
     </button>

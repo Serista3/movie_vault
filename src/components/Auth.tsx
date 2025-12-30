@@ -1,57 +1,31 @@
-import { useState, Suspense } from 'react';
-import { useFetcher, useRouteLoaderData, Await } from 'react-router';
+import { useFetcher, useRouteLoaderData } from 'react-router';
+import { useFetchData } from '../hooks/useFetchData';
+
 import { createRequestToken } from '../services/auth.service';
-import type { UserDataResponse } from '../types';
+import type { UserDataResponse, RequestToken, AppError } from '../types';
 
 import Button from './common/Button';
+import UserAvatar from './UserAvatar';
 
 export default function Auth() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<{ isError: boolean; message: string }>(
-    {
-      isError: false,
-      message: '',
-    }
-  );
+  const { fetchData, isLoading, error } = useFetchData<RequestToken | AppError, []>(createRequestToken , []);
   const data = useRouteLoaderData('root') as UserDataResponse;
   const fetcher = useFetcher();
   const isAuthenticated = data?.isAuthenticated;
 
   const handleLogin = async function () {
-    setIsError({ isError: false, message: '' });
-    setIsLoading(true);
+    const resData = await fetchData();
 
-    const data = await createRequestToken();
-
-    if ('request_token' in data) {
-      const requestToken = data.request_token;
+    if (resData && 'request_token' in resData) {
+      const requestToken = resData.request_token;
       window.location.href = `https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=${window.location.origin}/`;
-    }
-
-    if ('isError' in data && data.isError) {
-      setIsError({ isError: true, message: data.message });
-      setIsLoading(false);
     }
   };
 
   return (
     <div className="user flex flex-col gap-4">
       <div className="username font-semibold text-xl flex items-center gap-3 mb-1">
-        <Suspense fallback={<div className='rounded-full bg-back-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>Anonymous</div>}>
-          <Await resolve={data?.userData}>
-            {data => {
-              return (
-                <>
-                  <div className='rounded-full bg-back-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>
-                    {isAuthenticated ? data?.username?.at(0)?.toUpperCase() : 'G'}
-                  </div>
-                  {!isAuthenticated && <div>Guest</div>}
-                  {isAuthenticated && <div>{data?.username}</div>}
-                </>
-              )
-            }}
-          </Await>
-        </Suspense>
+        <UserAvatar userData={data?.userData} isAuthenticated={isAuthenticated} />
       </div>
       {!isAuthenticated && (
         <form>
@@ -63,17 +37,16 @@ export default function Auth() {
       {isAuthenticated && (
         <fetcher.Form method="post" action="/">
           <Button
-            className="rounded-md px-4 text-alert-light bg-back-dark border border-alert-light shadow-lg hover:bg-gray-dark hover:shadow-xl active:scale-95"
+            className="rounded-[10px] px-4 text-alert-light bg-back-dark border border-alert-light hover:bg-gray-dark"
             type="submit"
             name="type"
             value="logout"
-            disabled={fetcher.state === 'submitting'}
-          >
+            disabled={fetcher.state === 'submitting'} >
             {fetcher.state === 'submitting' ? 'Logging out...' : 'Logout'}
           </Button>
         </fetcher.Form>
       )}
-      {isError.isError && <div>{isError.message}</div>}
+      {error?.isError && <div>{error.message}</div>}
     </div>
   );
 }
