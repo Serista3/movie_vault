@@ -22,13 +22,13 @@ export default function MainNavigation() {
   return (
     <>
       <header className='p-3 bg-main-light flex items-center justify-between border-b border-gray-dark shadow-md sticky top-0 z-30'>
-        <Button className='rounded-full bg-back-light hover:bg-back-dark px-2' onClick={toggleSidenNav}>
+        <Button className='rounded-full bg-back-light hover:bg-back-dark px-1.5' onClick={toggleSidenNav}>
           <IconContext.Provider value={{ className: 'text-xl text-main-light' }}>
             <AiOutlineMenu />
           </IconContext.Provider>
         </Button>
         <Logo />
-        <Button className='rounded-full bg-back-light hover:bg-back-dark px-2'>
+        <Button className='rounded-full bg-back-light hover:bg-back-dark px-1.5'>
           <IconContext.Provider value={{ className: 'text-xl text-main-light' }}>
             <IoIosSearch />
           </IconContext.Provider>
