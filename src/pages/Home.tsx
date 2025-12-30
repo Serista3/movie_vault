@@ -1,5 +1,5 @@
 import Slider from "../components/common/Slider";
-import MediaRow from "../components/MediaRow";
+import MediaSection from "../components/MediaSection";
 import MediaList from "../components/MediaList";
 import ToggleSwitch from "../components/ToggleSwitch";
 
@@ -17,18 +17,18 @@ export default function Home() {
   return (
     <div className="home flex flex-col gap-10 pb-8">
       <Slider items={loaderData.top3NowPlaying} />
-      <MediaRow title="Trending">
+      <MediaSection title="Trending" className="max-w-300 mx-auto mb-8">
         <ToggleSwitch modes={['Today', 'This Week']} />
         <MediaList fetchFunction={getTrending<MovieSummary>} fetchArgs={['all', 'day']} />
-      </MediaRow>
-      <MediaRow title="Top Rated">
+      </MediaSection>
+      <MediaSection title="Top Rated" className="max-w-300 mx-auto mb-8">
         <ToggleSwitch modes={['Movies', 'TvShows']} />
         <MediaList fetchFunction={getMovieLists} fetchArgs={["top_rated", 1]} />
-      </MediaRow>
-      <MediaRow title="Popular">
+      </MediaSection>
+      <MediaSection title="Popular" className="max-w-300 mx-auto mb-8">
         <ToggleSwitch modes={['Movies', 'TvShows']} />
         <MediaList fetchFunction={getTvShowList} fetchArgs={["popular", 1]} />
-      </MediaRow>
+      </MediaSection>
     </div>
   );
 }
