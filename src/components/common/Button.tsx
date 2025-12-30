@@ -10,13 +10,14 @@ interface ButtonProps {
   children?: React.ReactNode;
 }
 
-export default function Button({ children, className, ...props }: ButtonProps) {
-  const buttonClass = 'rounded-md px-4 text-back-light bg-main-light shadow-lg hover:bg-main-dark hover:shadow-xl active:scale-95';
+const defaultButtonClass = 'rounded-[10px] px-4 text-back-light bg-main-light hover:bg-main-dark';
+
+export default function Button({ children, className = defaultButtonClass, ...props }: ButtonProps) {
   return (
-    <button className={`cursor-pointer py-1.5 font-medium transition-all ${className ?? buttonClass}`} {...props}>
+    <button 
+      className={`button py-1.5 ${className} font-medium shadow-xl cursor-pointer transition-all duration-300 hover:scale-105 active:scale-95`} 
+      {...props}>
       {children}
     </button>
   );
 };
-
-
