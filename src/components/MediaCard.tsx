@@ -10,7 +10,7 @@ import { formatDateToReadable } from "../utils/formatters"
 import { IMAGE_BASE_URL } from "../services/config"
 import type { MediaSummary } from "../types"
 
-export default function MediaCard({ media }: { media: MediaSummary }) {
+export default function MediaCard({ media, className = '' }: { media: MediaSummary, className?: string }) {
   const mediaCategory = 'title' in media  ? 'movie' : 'original_name' in media ? 'tv' : 'person';
   const path = `${'poster_path' in media ? media.poster_path : media.profile_path}`;
   const mediaImg = path ? `${IMAGE_BASE_URL}${path}` : noImage;
@@ -19,7 +19,7 @@ export default function MediaCard({ media }: { media: MediaSummary }) {
   const mediaRating = 'vote_average' in media ? Math.round(media.vote_average * 10) : 'N/A';
 
   return (
-    <Card className="flex flex-col justify-center gap-2 items-start flex-none w-45">
+    <Card className={`flex flex-col justify-center gap-2 items-start w-45 ${className}`}>
       <Link to={`/${mediaCategory}/${media.id}`}>
         <Image 
           className="hover:scale-120" 
@@ -34,7 +34,7 @@ export default function MediaCard({ media }: { media: MediaSummary }) {
           {mediaSubtitle}
         </p>
       </div>
-      {mediaCategory !== 'person' && <MediaRating rating={mediaRating} ratingTheme="text-main-light bg-back-light size-13 absolute top-2 right-2 z-4" />}
+      {mediaCategory !== 'person' && <MediaRating rating={mediaRating} className="absolute top-2 right-2 z-4" />}
     </Card>
   )
 }

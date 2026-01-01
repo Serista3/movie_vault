@@ -17,9 +17,10 @@ export function useFetchData<T, P extends any[]>(fetchFunction: (...args: P) => 
       } catch (error) {
         setError({ isError: true, message: 'Failed to fetch media.' });
         console.error("Failed to fetch media:", error);
+      } finally {
+        setIsLoading(false);
       }
   
-      setIsLoading(false);
     }, [fetchFunction, params])
 
     return { data, isLoading, error, fetchData }

@@ -1,17 +1,17 @@
 import { useRef, useEffect } from "react"
 import { useFetchData } from "../hooks/useFetchData"
 
-import MediaCard from "./MediaCard"
+import MediaGrid from "./MediaGrid"
 import MediaListSkeleton from "./skeleton/MediaListSkeleton"
 
 import type { MediaResponse, MediaSummary, AppError } from "../types"
 
-interface MediaListProps<P extends (string | number | boolean)[]> {
+interface LazyMediaRowProps<P extends any[]> {
   fetchFunction: (...args: P) => Promise<AppError | MediaResponse<MediaSummary>>; 
   fetchArgs: P; 
 }
 
-export default function MediaList<P extends (string | number | boolean)[]>({ fetchFunction, fetchArgs }: MediaListProps<P>){
+export default function LazyMediaRow<P extends any[]>({ fetchFunction, fetchArgs }: LazyMediaRowProps<P>){
   const { data, isLoading, error, fetchData } = useFetchData<AppError | MediaResponse<MediaSummary>, P>(fetchFunction, fetchArgs);
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -20,7 +20,6 @@ export default function MediaList<P extends (string | number | boolean)[]>({ fet
       async ([entry]) => {
         if (entry.isIntersecting && !data && !isLoading) {
           fetchData();
-
         }
       },
       { threshold: 0.1 }
@@ -33,14 +32,10 @@ export default function MediaList<P extends (string | number | boolean)[]>({ fet
   }, [fetchData, data, isLoading]);
 
   return (
-    <div 
-      ref={containerRef} 
-      className="flex items-start gap-4 min-h-90 w-full overflow-x-auto py-4 snap-x [&::-webkit-scrollbar]:w-0.5 [&::-webkit-scrollbar-track]:bg-gray-dark [&::-webkit-scrollbar-thumb]:bg-main-light [&::-webkit-scrollbar-thumb]:rounded-full">
-      {isLoading && <MediaListSkeleton />}
+    <div ref={containerRef} className="min-h-90 w-full flex flex-col justify-center">
+      {isLoading && <MediaListSkeleton /> }
+      {!isLoading && data && 'results' in data && <MediaGrid variant="horizontal" mediaList={data.results} limit={10} />}
       {error && <div>Error: {error.message}</div>}
-      {data && 'results' in data && data.results.slice(0, 10).map((media) => (
-        <MediaCard key={media.id} media={media} />
-      ))}
     </div>
   )
 }
