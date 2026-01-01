@@ -38,7 +38,7 @@ export const loader = async function({ request }: { request: Request }) {
     return { sessionId, userData, isAuthenticated: true };
   }
   
-  return null;
+  return { isAuthenticated: false };
 }
 
 export const action = async function({ request }: { request: Request}){

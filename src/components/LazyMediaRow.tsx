@@ -16,9 +16,11 @@ export default function LazyMediaRow<P extends any[]>({ fetchFunction, fetchArgs
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if(isLoading || data || error) return;
+
     const observer = new IntersectionObserver(
       async ([entry]) => {
-        if (entry.isIntersecting && !data && !isLoading) {
+        if (entry.isIntersecting && !data && !isLoading && !error) {
           fetchData();
         }
       },
@@ -29,12 +31,12 @@ export default function LazyMediaRow<P extends any[]>({ fetchFunction, fetchArgs
       observer.observe(containerRef.current);
 
     return () => observer.disconnect();
-  }, [fetchData, data, isLoading]);
+  }, [fetchData, data, isLoading, error]);
 
   return (
     <div ref={containerRef} className="min-h-90 w-full flex flex-col justify-center">
-      {isLoading && <MediaListSkeleton /> }
-      {!isLoading && data && 'results' in data && <MediaGrid variant="horizontal" mediaList={data.results} limit={10} />}
+      {isLoading && !error && <MediaListSkeleton /> }
+      {!isLoading && !error && data && 'results' in data && <MediaGrid variant="horizontal" mediaList={data.results} limit={10} />}
       {error && <div>Error: {error.message}</div>}
     </div>
   )

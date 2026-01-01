@@ -1,4 +1,4 @@
-import Slider from "../components/common/Slider";
+import MediaSlider from "../components/MediaSlider";
 import MediaSection from "../components/MediaSection";
 import LazyMediaRow from "../components/LazyMediaRow";
 import ToggleSwitch from "../components/ToggleSwitch";
@@ -10,7 +10,6 @@ import { getTvShowList } from "../services/tv.service";
 import { getTrending } from "../services/trending.service";
 
 import { useReducer } from "react";
-import { useLoaderData } from "react-router";
 
 interface SectionAction {
   type: 'CHANGE_MODE';
@@ -97,7 +96,6 @@ const selectModeReducer = function(prevState: SectionState[], action: SectionAct
 
 export default function Home() {
   const [sections, dispatchSection] = useReducer(selectModeReducer, defaultSections);
-  const loaderData = useLoaderData<{top3NowPlaying: MediaSummary[]}>()
 
   const handleToggleChange = function(title: string, mode: string) {
     dispatchSection({ type: 'CHANGE_MODE', title, mode });
@@ -105,7 +103,7 @@ export default function Home() {
 
   return (
     <div className="home flex flex-col gap-10 pb-8">
-      <Slider items={loaderData.top3NowPlaying} />
+      <MediaSlider />
       <div className="media-sections flex flex-col items-center gap-15 mb-20">
         {sections.map((section) => {
           return (
