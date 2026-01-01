@@ -1,31 +1,37 @@
 interface MediaRatingProps {
   rating: number | string;
   size?: number;
-  primaryColor?: string;
-  secondaryColor?: string;
-  tertiaryColor?: string;
   className?: string;
 }
 
-const primaryDefaultColor = 'text-main-light';
-const secondaryDefaultColor = 'bg-back-light';
-const tertiaryDefaultColor = 'text-gray-dark';
+const calCuratedRatingColors = function(rating: number): string{
+  switch(true){
+    case rating >= 70:
+      return 'text-green-500';
+    case rating >= 50:
+      return 'text-main-light';
+    case rating >= 30:
+      return 'text-orange-400';
+    default:
+      return 'text-red-500';
+  }
+}
 
 export default function MediaRating({ 
   rating,
   size = 52,
-  primaryColor = primaryDefaultColor, 
-  secondaryColor = secondaryDefaultColor, 
-  tertiaryColor = tertiaryDefaultColor,
   className = ''
 }: MediaRatingProps) {
   const strokeWidth = size / 20;
   const radius = 18 - (strokeWidth / 2);
   const circumference = 2 * Math.PI * radius;
   const offset = typeof rating === 'string' ? circumference : circumference - (rating / 100) * circumference;
+  const ratingColor = calCuratedRatingColors(typeof rating === 'number' ? rating : 0);
 
   return (
-    <div style={{ width: size, height: size }} className={`font-semibold ${className} ${primaryColor} ${secondaryColor} rounded-full flex justify-center items-center`}>
+    <div 
+      style={{ width: size, height: size }} 
+      className={`font-semibold ${className} text-white-light bg-back-light rounded-full flex justify-center items-center`}>
       {rating}%
       <svg className="-rotate-90 size-full absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <circle 
@@ -33,7 +39,7 @@ export default function MediaRating({
           cy="18" 
           r={radius} 
           fill="none" 
-          className={`stroke-current ${tertiaryColor}`} 
+          className={`stroke-current text-gray-dark`} 
           strokeWidth={strokeWidth} 
         />
         <circle 
@@ -41,7 +47,7 @@ export default function MediaRating({
           cy="18" 
           r={radius} 
           fill="none" 
-          className={`stroke-current ${primaryColor}`} 
+          className={`stroke-current ${ratingColor}`} 
           strokeWidth={strokeWidth} 
           strokeDasharray={circumference}
           strokeDashoffset={offset} 

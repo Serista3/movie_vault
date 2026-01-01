@@ -1,34 +1,130 @@
 import Slider from "../components/common/Slider";
 import MediaSection from "../components/MediaSection";
-import MediaList from "../components/MediaList";
+import LazyMediaRow from "../components/LazyMediaRow";
 import ToggleSwitch from "../components/ToggleSwitch";
 
-import type { MediaSummary, MovieSummary } from "../types";
+import type { MediaResponse, MediaSummary, AppError } from "../types";
 
 import { getMovieLists, getMovieVideos } from "../services/movie.service";
 import { getTvShowList } from "../services/tv.service";
 import { getTrending } from "../services/trending.service";
 
+import { useReducer } from "react";
 import { useLoaderData } from "react-router";
 
+interface SectionAction {
+  type: 'CHANGE_MODE';
+  title: string;
+  mode: string;
+}
+
+interface SectionState {
+  title: string;
+  modes: string[];
+  curMode: string;
+  fetchFunction: (...args: any[]) => Promise<MediaResponse<MediaSummary> | AppError>;
+  fetchArgs: any[];
+}
+
+const defaultSections: SectionState[] = [
+  { 
+    title: 'Trending', 
+    modes: ['Today', 'This Week'], 
+    curMode: 'Today', 
+    fetchFunction: getTrending<MediaSummary>, 
+    fetchArgs: ['all', 'day'] 
+  },
+  { 
+    title: 'Tv Series', 
+    modes: ['Airing today', 'On the air'], 
+    curMode: 'Airing today', 
+    fetchFunction: getTvShowList, 
+    fetchArgs: ["airing_today", 1] 
+  },
+  { 
+    title: 'Popular', 
+    modes: ['Movies', 'TvShows'], 
+    curMode: 'Movies', 
+    fetchFunction: getMovieLists, 
+    fetchArgs: ["popular", 1] 
+  },
+  { 
+    title: 'Movies', 
+    modes: ['Now Playing', 'Upcoming'], 
+    curMode: 'Now Playing', 
+    fetchFunction: getMovieLists, 
+    fetchArgs: ["now_playing", 1] 
+  },
+];
+
+function getArgsByMode(title: string, mode: string): any[] {
+  switch (title) {
+    case 'Trending': 
+      return mode === 'Today' ? ['all', 'day'] : ['all', 'week'];
+    case 'Tv Series': 
+      return mode === 'Airing today' ? ['airing_today', 1] : ['on_the_air', 1];
+    case 'Popular': 
+      return mode === 'Movies' ? ['popular', 1] : ['popular', 1];
+    case 'Movies': 
+      return mode === 'Now Playing' ? ['now_playing', 1] : ['upcoming', 1];
+    default: 
+      return [mode, 1];
+  }
+}
+
+const selectModeReducer = function(prevState: SectionState[], action: SectionAction): SectionState[] {
+  if(!(action.type === 'CHANGE_MODE')) return prevState;
+
+  return prevState.map(section => {
+    if(section.title !== action.title) return section;
+
+    const newFetchArgs = getArgsByMode(section.title, action.mode);
+    let newFetchFunction = section.fetchFunction;
+
+    if(section.title === 'Popular'){
+      newFetchFunction = action.mode === 'TvShows' ? getTvShowList : getMovieLists;
+    }
+
+    return {
+      ...section,
+      curMode: action.mode,
+      fetchFunction: newFetchFunction,
+      fetchArgs: newFetchArgs
+    }
+    
+  })
+}
+
 export default function Home() {
+  const [sections, dispatchSection] = useReducer(selectModeReducer, defaultSections);
   const loaderData = useLoaderData<{top3NowPlaying: MediaSummary[]}>()
+
+  const handleToggleChange = function(title: string, mode: string) {
+    dispatchSection({ type: 'CHANGE_MODE', title, mode });
+  }
 
   return (
     <div className="home flex flex-col gap-10 pb-8">
       <Slider items={loaderData.top3NowPlaying} />
-      <MediaSection title="Trending" className="max-w-300 mx-auto mb-8">
-        <ToggleSwitch modes={['Today', 'This Week']} />
-        <MediaList fetchFunction={getTrending<MovieSummary>} fetchArgs={['all', 'day']} />
-      </MediaSection>
-      <MediaSection title="Top Rated" className="max-w-300 mx-auto mb-8">
-        <ToggleSwitch modes={['Movies', 'TvShows']} />
-        <MediaList fetchFunction={getMovieLists} fetchArgs={["top_rated", 1]} />
-      </MediaSection>
-      <MediaSection title="Popular" className="max-w-300 mx-auto mb-8">
-        <ToggleSwitch modes={['Movies', 'TvShows']} />
-        <MediaList fetchFunction={getTvShowList} fetchArgs={["popular", 1]} />
-      </MediaSection>
+      <div className="media-sections flex flex-col items-center gap-15 mb-20">
+        {sections.map((section) => {
+          return (
+            <MediaSection key={section.title} title={section.title} className="max-w-300">
+              <ToggleSwitch 
+                title={section.title}
+                modes={section.modes} 
+                onChange={handleToggleChange} 
+                activeMode={section.curMode} 
+              />
+              <LazyMediaRow
+                key={`${section.title}-${section.curMode}`}
+                fetchFunction={section.fetchFunction} 
+                fetchArgs={section.fetchArgs} 
+              />
+            </MediaSection>
+          )
+        })}
+      </div>
     </div>
   );
 }
