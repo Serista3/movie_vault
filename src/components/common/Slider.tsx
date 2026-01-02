@@ -12,7 +12,7 @@ export default function Slider({ progress, className = 'min-h-50', children }: S
       {children}
       <ProgressBar 
         progress={progress} 
-        progressBarClass="w-full h-1 bg-gray-dark absolute bottom-0 left-0 z-15" 
+        progressBarClass="h-1 absolute bottom-0 left-0 z-15" 
         progressBarFillClass="bg-main-light" />
     </div>
   );

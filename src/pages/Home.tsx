@@ -35,8 +35,8 @@ const defaultSections: SectionState[] = [
   },
   { 
     title: 'Tv Series', 
-    modes: ['Airing today', 'On the air'], 
-    curMode: 'Airing today', 
+    modes: ['Airing Today', 'On The Air'], 
+    curMode: 'Airing Today', 
     fetchFunction: getTvShowList, 
     fetchArgs: ["airing_today", 1] 
   },
@@ -61,7 +61,7 @@ function getArgsByMode(title: string, mode: string): any[] {
     case 'Trending': 
       return mode === 'Today' ? ['all', 'day'] : ['all', 'week'];
     case 'Tv Series': 
-      return mode === 'Airing today' ? ['airing_today', 1] : ['on_the_air', 1];
+      return mode === 'Airing Today' ? ['airing_today', 1] : ['on_the_air', 1];
     case 'Popular': 
       return mode === 'Movies' ? ['popular', 1] : ['popular', 1];
     case 'Movies': 

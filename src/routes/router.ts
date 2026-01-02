@@ -1,8 +1,10 @@
 import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '../components/layout/MainLayout';
 import Home, { loader as homeLoader } from '../pages/Home';
 import Movies from '../pages/Movies';
+import MediaDetail, { loader as mediaDetailLoader  } from '../pages/MediaDetail';
 import TvShows from '../pages/TvShows';
 import People from '../pages/People';
+import PersonDetail from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
 import WatchList from '../pages/WatchList';
 
@@ -17,10 +19,13 @@ const router = createBrowserRouter([
     action: mainLayoutAction,
     children: [
       { index: true, Component: Home, loader: homeLoader },
-      { path: 'movies', Component: Movies },
-      { path: 'tv-shows', Component: TvShows },
-      { path: 'people', Component: People },
-      { path: 'favorites', Component: Favorites },
+      { path: 'movie', Component: Movies },
+      { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
+      { path: 'tv', Component: TvShows },
+      { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },
+      { path: 'person', Component: People },
+      { path: 'person/:id', Component: PersonDetail },
+      { path: 'favorite', Component: Favorites },
       { path: 'watchlist', Component: WatchList },
     ],
   },

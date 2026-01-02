@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, Link } from "react-router";
 import { useModal } from "../store/ModalContext";
 import { useSlider } from "../hooks/useSlider";
 
 import type { MediaSummary } from "../types";
+import { getMediaType } from "../utils/helperMedia";
 
 import Slider from "./common/Slider";
 import Button from "../components/common/Button";
 import Image from "./common/Image";
 import Modal from "../components/common/Modal";
+import Iframe from "./common/Iframe";
 
 export default function MediaSlider() {
   const [selectTrailer, setSelectTrailer] = useState<MediaSummary | null>(null);
@@ -37,25 +39,25 @@ export default function MediaSlider() {
                   onClick={() => handleSelectTrailer(item)}>
                   Watch Trailer
                 </Button>
-                <Button className="bg-transparent text-white-light border-2 border-white-light hover:bg-back-dark rounded-xl px-4">
-                  more info
-                </Button>
+                <Link to={`/${getMediaType(item)}/${item.id}`}>
+                  <Button className="bg-transparent text-white-light border-2 border-white-light hover:bg-white-light hover:text-back-light rounded-xl px-4">
+                    more info
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       ))}
       {isOpen && (
-        <Modal className="flex justify-center items-center max-w-96 w-full bg-back-light border-2 border-main-light">
-          <div className="aspect-video w-full">
-            <iframe
-              key={selectTrailer ? selectTrailer.id : 'no-trailer'}
-              src={`https://www.youtube.com/embed/${selectTrailer && 'trailerKey' in selectTrailer ? selectTrailer.trailerKey : ''}?autoplay=1`} 
-              allowFullScreen
-              className="w-full h-full"
-              >
-            </iframe>
-          </div>
+        <Modal className="flex flex-col justify-center items-start max-w-96 w-full bg-back-dark">
+          <div className="text-white-light text-xl font-semibold py-4 px-4">Play Trailer</div>
+          <Iframe
+            title="Video Trailer"
+            key={selectTrailer ? selectTrailer.id : 'no-trailer'}
+            src={`${selectTrailer && 'trailerKey' in selectTrailer ? `https://www.youtube.com/embed/${selectTrailer.trailerKey}?autoplay=1` : null}`}
+          >
+          </Iframe>
         </Modal>
       )}
     </Slider>

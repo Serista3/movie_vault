@@ -26,17 +26,17 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
         <Auth />
         <ul className="flex flex-col gap-2 border-t border-gray-dark pt-8">
           <li>
-            <NavLink to="movies" className={activeNavLink}>
+            <NavLink to="movie" className={activeNavLink}>
               Movies
             </NavLink>
           </li>
           <li>
-            <NavLink to="tv-shows" className={activeNavLink}>
+            <NavLink to="tv" className={activeNavLink}>
               Tv Shows
             </NavLink>
           </li>
           <li>
-            <NavLink to="favorites" className={activeNavLink}>
+            <NavLink to="favorite" className={activeNavLink}>
               Favorites
             </NavLink>
           </li>

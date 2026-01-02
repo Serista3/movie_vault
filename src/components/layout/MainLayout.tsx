@@ -1,13 +1,25 @@
 import { Outlet, redirect } from 'react-router';
+import { usePageLoader } from '../../hooks/usePageLoader';
+
 import { getCurrentUser, createSession, deleteSession } from '../../services/auth.service';
 
 import ModalProvider from '../../store/ModalContext';
 import MainNavigation from './MainNavigation';
 import FooterNavigation from './FooterNavigation';
+import ProgressBar from '../common/progressbar';
 
 export default function MainLayout() {
+  const { progress } = usePageLoader();
+
   return (
     <ModalProvider>
+      {progress > 0 && (
+        <ProgressBar 
+          progress={progress} 
+          progressBarClass="h-[3px] fixed top-0 left-0 z-70" 
+          progressBarFillClass="bg-emerald-500 transition-all duration-300" 
+        />
+      )}
       <MainNavigation />
       <div className='main min-h-screen'>
         <Outlet />
