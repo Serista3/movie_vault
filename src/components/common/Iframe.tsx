@@ -29,7 +29,7 @@ export default function Iframe({ title = "Iframe", src, aspectRatio = "aspect-vi
       )}
       {!hasSrc && (
         <div className={`w-full h-full flex justify-center items-center bg-back-light text-gray-light ${className}`}>
-          No trailer available
+          No iframe available
         </div>
       )}
     </div>

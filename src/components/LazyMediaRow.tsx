@@ -3,6 +3,7 @@ import { useFetchData } from "../hooks/useFetchData"
 
 import MediaGrid from "./MediaGrid"
 import MediaListSkeleton from "./skeleton/MediaListSkeleton"
+import ErrorMessage from "./common/ErrorMessage"
 
 import type { MediaResponse, MediaSummary, AppError } from "../types"
 
@@ -34,10 +35,10 @@ export default function LazyMediaRow<P extends any[]>({ fetchFunction, fetchArgs
   }, [fetchData, data, isLoading, error]);
 
   return (
-    <div ref={containerRef} className="min-h-90 w-full flex flex-col justify-center">
+    <div ref={containerRef} className={`${error ? 'mt-4' : 'min-h-90'} w-full flex flex-col justify-start`}>
       {isLoading && !error && <MediaListSkeleton /> }
       {!isLoading && !error && data && 'results' in data && <MediaGrid variant="horizontal" mediaList={data.results} limit={10} />}
-      {error && <div>Error: {error.message}</div>}
+      {error && <ErrorMessage error={error} className="rounded-[10px]" />}
     </div>
   )
 }

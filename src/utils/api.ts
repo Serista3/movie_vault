@@ -17,13 +17,22 @@ export const tmdbFetch = async function<T>(endpoint: string, options: RequestIni
 
         if (!res.ok){
             const errorData: TmdbErrorResponse = await res.json().catch(() => {});
-            throw new Error(errorData?.status_message || 'tmdbFetch: Network response was not ok');
+            throw errorData || { isError: true, message: `something went wrong`, status_code: res.status };
         }
 
         return await res.json() as T;
 
     } catch (error) {
-        console.error('tmdbFetch error:', error);
-        return { isError: true, message: (error as Error).message }
+        if ('status_code' in (error as TmdbErrorResponse)) {
+            const tmdbError = error as TmdbErrorResponse;
+
+            console.error('tmdbFetch error:', tmdbError.status_message);
+            return { isError: !tmdbError.success, message: tmdbError.status_message, statusCode: tmdbError.status_code }
+        }
+
+        const appError = error as AppError;
+        
+        console.error('tmdbFetch unexpected error:', appError);
+        return appError;
     }
 }

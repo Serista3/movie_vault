@@ -13,6 +13,7 @@ export interface TmdbErrorResponse {
 export interface AppError {
     isError: boolean; 
     message: string;
+    statusCode: number;
 }
 
 export interface UserDataResponse {

@@ -9,7 +9,7 @@ interface ToggleSwitchProps {
 
 export default function ToggleSwitch({ title, modes, activeMode, onChange }: ToggleSwitchProps) {
     return (
-        <div className="rounded-full border-2 border-main-light self-start flex justify-center items-center overflow-hidden">
+        <div className="rounded-full border-2 border-main-light self-start flex justify-center items-center overflow-hidden shadow-xl">
             {modes.map(mode => {
                 return (
                     <Button 

@@ -7,6 +7,7 @@ import People from '../pages/People';
 import PersonDetail from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
 import WatchList from '../pages/WatchList';
+import RootErrorBoundary from '../components/layout/RootErrorBoundary';
 
 import { createBrowserRouter } from 'react-router';
 
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     id: 'root',
     loader: mainLayoutLoader,
     action: mainLayoutAction,
+    ErrorBoundary: RootErrorBoundary,
     children: [
       { index: true, Component: Home, loader: homeLoader },
       { path: 'movie', Component: Movies },

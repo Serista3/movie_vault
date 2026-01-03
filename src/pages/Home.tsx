@@ -127,11 +127,11 @@ export default function Home() {
   );
 }
 
-export const loader = async function() {
+export const loader = async function(): Promise<MediaSummary[] | AppError> {
   const nowPlayingMovies = await getMovieLists("now_playing", 1);
 
-  if(!nowPlayingMovies || !('results' in nowPlayingMovies) || 'isError' in nowPlayingMovies)
-    return { isError: true, message: 'Failed to load now playing movies' };
+  if('isError' in nowPlayingMovies)
+    return nowPlayingMovies;
 
   const top3NowPlaying = nowPlayingMovies.results.slice(0, 3);
   
@@ -151,5 +151,5 @@ export const loader = async function() {
     })
   )
 
-  return { top3NowPlaying: movieWithTrailers };
+  return movieWithTrailers;
 }

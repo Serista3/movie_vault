@@ -14,19 +14,19 @@ export function useFetchData<T, P extends any[]>(fetchFunction: (...args: P) => 
         const result: T = await fetchFunction(...params);
         
         if('isError' in (result as AppError) && (result as AppError).isError){
-          throw new Error((result as AppError).message);
+          throw result;
         }
 
         setData(result);
         return result;
       } catch (error) {
-        setError({ isError: true, message: (error as Error).message ?? 'Failed to fetch media.' });
+        setError(error as AppError);
         console.error("Failed to fetch media:", error);
       } finally {
         setIsLoading(false);
       }
   
-    }, [fetchFunction, JSON.stringify(params)])
+    }, [fetchFunction, params])
 
     return { data, isLoading, error, fetchData }
 }

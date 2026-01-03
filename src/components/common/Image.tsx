@@ -15,7 +15,7 @@ export default function Image({ className = 'w-full h-full', src, ...props }: Im
   const imageSrc = src ? `${IMAGE_BASE_URL}${src}` : noImage;
 
   return (
-    <div className="container-image overflow-hidden rounded-[10px] relative">
+    <div className="container-image overflow-hidden rounded-[10px] relative shadow-xl">
       {!isLoaded && <ImageSkeleton />}
       <img 
         className={`image ${className} object-cover transition-all duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0 absolute top-0 left-0'}`} 

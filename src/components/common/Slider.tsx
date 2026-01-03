@@ -8,7 +8,7 @@ interface SliderProps {
 
 export default function Slider({ progress, className = 'min-h-50', children }: SliderProps) {
   return (
-    <div className={`slider ${className} w-full overflow-hidden relative`}>
+    <div className={`slider ${className} w-full overflow-hidden relative shadow-xl`}>
       {children}
       <ProgressBar 
         progress={progress} 

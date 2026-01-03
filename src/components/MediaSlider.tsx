@@ -10,14 +10,13 @@ import Slider from "./common/Slider";
 import Button from "../components/common/Button";
 import Image from "./common/Image";
 import TrailerModal from "./TrailerModal";
+import ErrorMessage from "./common/ErrorMessage";
 
 export default function MediaSlider() {
   const { isOpen, openModal } = useModal();
-  const { top3NowPlaying } = useLoaderData<{top3NowPlaying: MediaSummary[] | AppError}>()
+  const data = useLoaderData<MediaSummary[] | AppError>()
   const [selectTrailer, setSelectTrailer] = useState<MediaSummary | null>(null);
-
-  const hasTop3NowPlaying = !('isError' in top3NowPlaying) && top3NowPlaying.length > 0;
-  const { currentSlide, progress } = useSlider({ items: hasTop3NowPlaying ? top3NowPlaying : [], isPaused: isOpen });
+  const { currentSlide, progress } = useSlider({ items: Array.isArray(data) ? data : [], isPaused: isOpen });
 
   const handleSelectTrailer = function(item: MediaSummary){
     setSelectTrailer(item);
@@ -26,20 +25,18 @@ export default function MediaSlider() {
 
   return (
     <>
-      {'isError' in top3NowPlaying && (
-        <div className="text-alert-light text-center py-10">
-          {top3NowPlaying.message}
-        </div>
+      {'isError' in data && (
+        <ErrorMessage error={data} />
       )}
-      {!('isError' in top3NowPlaying) && top3NowPlaying.length === 0 && (
-        <div className="text-white-dark text-center py-10">
+      {!('isError' in data) && data.length === 0 && (
+        <div className="text-white-dark text-center py-20">
           No now playing movies found.
         </div>
       )}
-      {hasTop3NowPlaying && (
+      {!('isError' in data) && data.length > 0 && (
         <>
           <Slider progress={progress}>
-            {top3NowPlaying.map((item, index) => (
+            {data.map((item, index) => (
               <div key={item.id} className={`slider-item absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'}`}>
                 <Image src={'backdrop_path' in item ? item.backdrop_path : null} alt={`Slide ${item.id}`} className="w-full min-h-50" />
                 <div className="slider__backdrop w-full h-full absolute top-0 left-0 backdrop-brightness-50">
