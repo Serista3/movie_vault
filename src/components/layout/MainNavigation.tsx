@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useLockDownScreen } from '../../hooks/useLockDownScreen';
 
 import Button from '../common/Button';
 import Logo from '../common/Logo';
@@ -10,19 +11,20 @@ import { IoIosSearch } from "react-icons/io";
 
 export default function MainNavigation() {
   const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false);
+  useLockDownScreen(isSideNavOpen);
   
-  const toggleSidenNav = function(): void {
+  const toggleSideNav = function(): void {
     setIsSideNavOpen(prev => !prev);
-  }
+  };
 
-  const onCloseSideNav = function(): void {
+  const onCloseSideNav = useCallback(function(): void {
     setIsSideNavOpen(false);
-  }
+  }, []);
 
   return (
     <>
       <header className='p-3 bg-main-light text-back-light flex items-center justify-between border-b border-gray-dark shadow-md sticky top-0 z-30'>
-        <Button className='rounded-full bg-back-light hover:bg-back-dark px-1.5' onClick={toggleSidenNav}>
+        <Button className='rounded-full bg-back-light hover:bg-back-dark px-1.5' onClick={toggleSideNav}>
           <IconContext.Provider value={{ className: 'text-xl text-main-light' }}>
             <AiOutlineMenu />
           </IconContext.Provider>

@@ -26,7 +26,7 @@ export function useSlider<T>({ items, isPaused = false, timeoutDuration = 15000,
     }, updateInterval)
 
     return () => clearInterval(intervalId);
-  }, [items.length, currentSlide, isPaused, timeoutDuration, updateInterval]);
+  }, [items.length, isPaused, timeoutDuration, updateInterval]);
 
   return { currentSlide, progress };
 }

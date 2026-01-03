@@ -17,7 +17,7 @@ export default function MainLayout() {
         <ProgressBar 
           progress={progress} 
           progressBarClass="h-[3px] fixed top-0 left-0 z-70" 
-          progressBarFillClass="bg-emerald-500 transition-all duration-300" 
+          progressBarFillClass="bg-emerald-500 transition-all duration-300 ease-in" 
         />
       )}
       <MainNavigation />

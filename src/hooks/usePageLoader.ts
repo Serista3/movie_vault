@@ -10,26 +10,33 @@ export function usePageLoader() {
     let timeOutId: number;
 
     if(navigation.state === 'loading') {
-      setProgress(5);
-
       intervalId = setInterval(() => {
-        setProgress(prev => prev < 90 ? prev + 5 : prev);
-      }, 100);
+        setProgress(prev => {
+          switch(true){
+            case (prev >= 90):
+              return prev;
+            case (prev === 0):
+              return 5;
+            default:
+              return prev + 5;
+          }
+        });
+      }, 300);
     } else {
-      if(progress > 0) {
-        setProgress(100);
+        if(progress > 0){
+          setProgress(100);
 
-        timeOutId = setTimeout(() => {
-          setProgress(0);
-        }, 500)
-      }
+          timeOutId = setTimeout(() => {
+            setProgress(0);
+          }, 600);
+        }
     }
 
     return () => {
       clearTimeout(timeOutId)
       clearInterval(intervalId);
     } 
-  }, [navigation.state]);
+  }, [navigation.state, progress]);
 
   return { progress };
 }

@@ -1,6 +1,8 @@
 import { createPortal } from "react-dom"
 
 import { useModal } from "../../store/ModalContext";
+import { useLockDownScreen } from "../../hooks/useLockDownScreen";
+
 import Button from "./Button";
 
 interface ModalProps {
@@ -9,7 +11,11 @@ interface ModalProps {
 }
 
 export default function Modal({ children, className = '' }: ModalProps) {
-  const { closeModal } = useModal()
+  const { isOpen, closeModal } = useModal();
+
+  useLockDownScreen(isOpen);
+
+  if(!isOpen) return null;
 
   const handleOverlayClick = function(e: React.MouseEvent<HTMLDivElement>) {
     if(e.target !== e.currentTarget) return;

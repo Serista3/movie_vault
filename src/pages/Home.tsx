@@ -130,8 +130,8 @@ export default function Home() {
 export const loader = async function() {
   const nowPlayingMovies = await getMovieLists("now_playing", 1);
 
-  if(!nowPlayingMovies || !('results' in nowPlayingMovies))
-    return { top3NowPlaying: [] };
+  if(!nowPlayingMovies || !('results' in nowPlayingMovies) || 'isError' in nowPlayingMovies)
+    return { isError: true, message: 'Failed to load now playing movies' };
 
   const top3NowPlaying = nowPlayingMovies.results.slice(0, 3);
   
