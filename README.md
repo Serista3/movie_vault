@@ -85,7 +85,7 @@ src/
 │   ├───layout/          # Component ที่เป็นโครงสร้างหลัก (เช่น Navbar, Sidebar, Footer)
 │   └───skeleton/        # Component สำหรับแสดงผลระหว่างรอโหลดข้อมูล (Loading State)
 ├───hooks/               # เก็บ Logic ที่ใช้ซ้ำ (Custom Hooks)
-├───pages/               # เก็บหน้าหลักของเว็บไซต์ (Views) ที่เชื่อมกับ Rout
+├───pages/               # เก็บหน้าหลักของเว็บไซต์ (Views)
 ├───routes/              # การตั้งค่าเส้นทางของเว็บไซต์ (Router Configuration)
 ├───services/            # เก็บฟังก์ชันสำหรับการเรียก API และเชื่อมต่อ Backend
 ├───store/               # การจัดการ Global State
