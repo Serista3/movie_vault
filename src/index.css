@@ -2,34 +2,34 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-main-light: #f5c518;
-  --color-main-dark: #dbb117;
-  --color-back-light: #242424;
-  --color-back-dark: #121212;
-  --color-white-light: #ffffff;
-  --color-white-dark: #c2c2c2;
-  --color-alert-light: #c70036;
-  --color-alert-dark: #a50036;
+  --color-primary-light: #f5c518;
+  --color-primary-dark: #dbb117;
+  --color-secondary-light: #242424;
+  --color-secondary-dark: #121212;
+  --color-tertiary-light: #ffffff;
+  --color-tertiary-dark: #c2c2c2;
+  --color-danger-light: #c70036;
+  --color-danger-dark: #a50036;
   --color-gray-light: #d7d7d7;
   --color-gray-dark: #3d3d3d;
 }
 
 :root {
-  --main-light: var(--color-main-light);
-  --main-dark: var(--color-main-dark);
-  --back-light: var(--color-back-light);
-  --back-dark: var(--color-back-dark);
-  --text-light: var(--color-white-light);
-  --text-dark: var(--color-white-dark);
-  --alert-light: var(--color-alert-light);
-  --alert-dark: var(--color-alert-dark);
+  --primary-light: var(--color-primary-light);
+  --primary-dark: var(--color-primary-dark);
+  --secondary-light: var(--color-secondary-light);
+  --secondary-dark: var(--color-secondary-dark);
+  --tertiary-light: var(--color-tertiary-light);
+  --tertiary-dark: var(--color-tertiary-dark);
+  --danger-light: var(--color-danger-light);
+  --danger-dark: var(--color-danger-dark);
   --gray-light: var(--color-gray-light);
   --gray-dark: var(--color-gray-dark);
 }
 
 body {
-  color: var(--text-light);
-  background-color: var(--back-light);
+  color: var(--tertiary-light);
+  background-color: var(--secondary-light);
   font-family: 'Kanit', sans-serif;
   line-height: 1.75;
 }
