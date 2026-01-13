@@ -23,18 +23,20 @@ export default function MainNavigation() {
 
   return (
     <>
-      <header className='p-3 bg-primary-light text-secondary-light flex items-center justify-between border-b border-gray-dark shadow-md sticky top-0 z-30'>
-        <Button variant="secondary" shape='circular' onClick={toggleSideNav}>
-          <IconContext.Provider value={{ className: 'text-xl text-primary-light' }}>
-            <AiOutlineMenu />
-          </IconContext.Provider>
-        </Button>
-        <Logo />
-        <Button variant="secondary" shape='circular'>
-          <IconContext.Provider value={{ className: 'text-xl text-primary-light' }}>
-            <IoIosSearch />
-          </IconContext.Provider>
-        </Button>
+      <header className='header-nav bg-primary-light text-secondary-light border-b border-gray-dark shadow-md sticky top-0 z-30'>
+        <nav className='max-w-300 mx-auto w-full flex items-center justify-between p-4'>
+          <Button variant="secondary" shape='circular' onClick={toggleSideNav}>
+            <IconContext.Provider value={{ className: 'text-xl text-primary-light' }}>
+              <AiOutlineMenu />
+            </IconContext.Provider>
+          </Button>
+          <Logo />
+          <Button variant="secondary" shape='circular'>
+            <IconContext.Provider value={{ className: 'text-xl text-primary-light' }}>
+              <IoIosSearch />
+            </IconContext.Provider>
+          </Button>
+        </nav>
       </header>
       <SideNavigation isOpen={isSideNavOpen} onClose={onCloseSideNav} />
     </>

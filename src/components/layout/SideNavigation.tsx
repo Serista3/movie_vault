@@ -48,6 +48,11 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
             </NavLink>
           </li>
           <li>
+            <NavLink to="person" end className={activeNavLink}>
+              People
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="favorite" className={activeNavLink}>
               Favorites
             </NavLink>

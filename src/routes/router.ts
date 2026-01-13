@@ -1,9 +1,10 @@
 import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '../components/layout/MainLayout';
-import Home, { loader as homeLoader } from '../pages/Home';
+import Home from '../pages/home/Home';
+import { loader as homeLoader } from '../pages/home/loader';
 import Movies from '../pages/Movies';
-import MediaDetail, { loader as mediaDetailLoader  } from '../pages/MediaDetail';
+import MediaDetail, { loader as mediaDetailLoader } from '../pages/MediaDetail';
 import TvShows from '../pages/TvShows';
-import People from '../pages/People';
+import People, { loader as peopleLoader } from '../pages/People';
 import PersonDetail from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
 import WatchList from '../pages/WatchList';
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
       { path: 'tv', Component: TvShows },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },
-      { path: 'person', Component: People },
+      { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail },
       { path: 'favorite', Component: Favorites },
       { path: 'watchlist', Component: WatchList },

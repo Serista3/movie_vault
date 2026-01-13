@@ -52,11 +52,11 @@ export default function MediaSlider() {
                       {'title' in item && item.title}
                     </h1>
                     <div className="slider__group-button flex justify-start gap-3 items-center mt-3">
-                      <Button variant="tertiary" onClick={() => handleSelectTrailer(item)}>
+                      <Button variant="secondary" onClick={() => handleSelectTrailer(item)}>
                         Watch Trailer
                       </Button>
                       <Link to={`/${getMediaType(item)}/${item.id}`}>
-                        <Button variant="secondary">
+                        <Button variant="secondary" className="border-tertiary-dark bg-transparent hover:bg-tertiary-light hover:text-secondary-light">
                           more info
                         </Button>
                       </Link>

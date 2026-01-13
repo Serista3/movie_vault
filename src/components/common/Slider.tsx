@@ -1,6 +1,6 @@
 import { cn } from "../../utils/helperClassName";
 
-import ProgressBar from "./progressbar";
+import ProgressBar from "./Progressbar";
 
 interface SliderProps {
   progress: number;

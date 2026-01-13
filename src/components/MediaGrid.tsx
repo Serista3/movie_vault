@@ -17,7 +17,7 @@ const HORIZONTAL_CLASS = `
   [&::-webkit-scrollbar-thumb]:bg-primary-light
   [&::-webkit-scrollbar-thumb]:rounded-full
 `
-const VERTICAL_CLASS = `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6`
+const VERTICAL_CLASS = `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 items-start`
 
 export default function MediaGrid({ 
   mediaList,
@@ -31,7 +31,7 @@ export default function MediaGrid({
   return (
     <div className={cn(layoutClass, className, "min-h-90 w-full py-4")}>
       {mediaList.length > 0 && mediaList.slice(0, minArrayLength).map((media) => (
-        <MediaCard key={media.id} media={media} className={variant === 'horizontal' ? 'flex-none' : ''} />
+        <MediaCard key={media.id} media={media} className={variant === 'horizontal' ? 'flex-none w-40' : 'w-full'} />
       ))}
       {mediaList.length === 0 && <div className="min-h-90 flex items-center justify-center text-tertiary-dark">No media available.</div>}
     </div>

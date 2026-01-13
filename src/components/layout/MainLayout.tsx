@@ -6,7 +6,7 @@ import { getCurrentUser, createSession, deleteSession } from '../../services/aut
 import ModalProvider from '../../store/ModalContext';
 import MainNavigation from './MainNavigation';
 import FooterNavigation from './FooterNavigation';
-import ProgressBar from '../common/progressbar';
+import ProgressBar from '../common/ProgressBar';
 
 export default function MainLayout() {
   const { progress } = usePageLoader();
