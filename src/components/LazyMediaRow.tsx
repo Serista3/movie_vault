@@ -7,12 +7,12 @@ import ErrorMessage from "./common/ErrorMessage"
 
 import type { MediaResponse, MediaSummary, AppError } from "../types"
 
-interface LazyMediaRowProps<P extends any[]> {
+interface LazyMediaRowProps<P extends unknown[]> {
   fetchFunction: (...args: P) => Promise<AppError | MediaResponse<MediaSummary>>; 
   fetchArgs: P; 
 }
 
-export default function LazyMediaRow<P extends any[]>({ fetchFunction, fetchArgs }: LazyMediaRowProps<P>){
+export default function LazyMediaRow<P extends unknown[]>({ fetchFunction, fetchArgs }: LazyMediaRowProps<P>){
   const { data, isLoading, error, fetchData } = useFetchData<AppError | MediaResponse<MediaSummary>, P>(fetchFunction, fetchArgs);
   const containerRef = useRef<HTMLDivElement>(null)
 
