@@ -9,8 +9,8 @@ export default memo(function TrailerModal({ selectTrailer }: { selectTrailer: Me
   const videoSrc = selectTrailer && 'trailerKey' in selectTrailer ? `https://www.youtube.com/embed/${selectTrailer.trailerKey}?autoplay=1` : null;
 
   return (
-    <Modal className="flex flex-col justify-center items-start max-w-96 w-full bg-back-dark">
-        <div className="text-white-light text-xl font-semibold py-4 px-4">Play Trailer</div>
+    <Modal className="flex flex-col justify-center items-start max-w-96 w-full bg-secondary-dark">
+        <div className="text-tertiary-light text-xl font-semibold py-4 px-4">Play Trailer</div>
         <Iframe
             title="Video Trailer"
             key={selectTrailer?.id ?? 'no-trailer'}

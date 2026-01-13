@@ -5,7 +5,7 @@ import { cn } from "../../utils/helperClassName";
 
 interface IframeProps {
   title?: string;
-  src?: string;
+  src: string | null;
   aspectRatio?: string;
   className?: string;
 }

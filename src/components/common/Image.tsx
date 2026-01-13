@@ -5,13 +5,15 @@ import ImageSkeleton from "../skeleton/ImageSkeleton";
 import noImage from '../../assets/images/no-image.jpg'
 import { IMAGE_BASE_URL } from "../../services/config"
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface ImageProps {
+  src: string | null;
+  alt?: string;
   className?: string;
 }
 
 const BASE_CLASS = "image w-full h-full object-cover transition-all duration-300";
 
-export default function Image({ className, src, alt = "Image", ...props }: ImageProps){
+export default function Image({ className, src, alt = "Image" }: ImageProps){
   const [isLoaded, setIsLoaded] = useState(false);
   const imageSrc = src ? `${IMAGE_BASE_URL}${src}` : noImage;
 
@@ -24,7 +26,6 @@ export default function Image({ className, src, alt = "Image", ...props }: Image
         src={imageSrc}
         alt={alt}
         loading="lazy"
-        {...props}
       />
     </div>
   );

@@ -1,5 +1,7 @@
 import Button from "./common/Button";
 
+import { cn } from "../utils/helperClassName";
+
 interface ToggleSwitchProps {
     title: string;
     modes: string[];
@@ -9,12 +11,15 @@ interface ToggleSwitchProps {
 
 export default function ToggleSwitch({ title, modes, activeMode, onChange }: ToggleSwitchProps) {
     return (
-        <div className="rounded-full border-2 border-main-light self-start flex justify-center items-center overflow-hidden shadow-xl">
+        <div className="rounded-full border-2 border-primary-light self-start flex justify-center items-center overflow-hidden shadow-xl">
             {modes.map(mode => {
                 return (
                     <Button 
-                        key={mode} 
-                        className={`px-4 ${activeMode === mode ? 'bg-main-light text-back-light' : 'text-white-light bg-transparent hover:bg-back-dark'}`}
+                        key={mode}
+                        className={cn(
+                            'text-tertiary-light bg-transparent hover:bg-secondary-dark rounded-none',
+                            {'bg-primary-light text-secondary-light hover:bg-primary-light cursor-default': activeMode === mode}
+                        )}
                         disabled={activeMode === mode}
                         onClick={() => onChange(title, mode)}>
                         {mode}

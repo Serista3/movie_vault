@@ -19,7 +19,7 @@ export default function UserAvatar({ userData, isAuthenticated }: UserAvatarProp
 
           return (
             <>
-              <div className='rounded-full bg-back-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>
+              <div className='rounded-full bg-secondary-light w-8 h-8 flex items-center justify-center overflow-hidden text-base'>
                 {avatarInitial}
               </div>
               <div>{username}</div>

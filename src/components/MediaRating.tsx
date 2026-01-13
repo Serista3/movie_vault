@@ -1,3 +1,5 @@
+import { cn } from "../utils/helperClassName";
+
 interface MediaRatingProps {
   rating: number | string;
   size?: number;
@@ -9,13 +11,15 @@ const calCuratedRatingColors = function(rating: number): string{
     case rating >= 70:
       return 'text-green-500';
     case rating >= 50:
-      return 'text-main-light';
+      return 'text-primary-light';
     case rating >= 30:
       return 'text-orange-400';
     default:
       return 'text-red-500';
   }
 }
+
+const BASE_CLASS = `font-semibold text-tertiary-light bg-secondary-light rounded-full flex justify-center items-center`
 
 export default function MediaRating({ 
   rating,
@@ -31,7 +35,7 @@ export default function MediaRating({
   return (
     <div 
       style={{ width: size, height: size }} 
-      className={`font-semibold ${className} text-white-light bg-back-light rounded-full flex justify-center items-center`}>
+      className={cn(className, BASE_CLASS)}>
       {rating}%
       <svg className="-rotate-90 size-full absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <circle 
