@@ -1,3 +1,5 @@
+import { cn } from "../../utils/helperClassName";
+
 import ProgressBar from "./progressbar";
 
 interface SliderProps {
@@ -6,14 +8,16 @@ interface SliderProps {
   children: React.ReactNode;
 }
 
-export default function Slider({ progress, className = 'min-h-50', children }: SliderProps) {
+const BASE_CLASS = "slider w-full min-h-50 overflow-hidden relative shadow-xl";
+
+export default function Slider({ progress, className, children }: SliderProps) {
   return (
-    <div className={`slider ${className} w-full overflow-hidden relative shadow-xl`}>
+    <div className={cn(BASE_CLASS, className)}>
       {children}
       <ProgressBar 
         progress={progress} 
         progressBarClass="h-1 absolute bottom-0 left-0 z-15" 
-        progressBarFillClass="bg-main-light" />
+        progressBarFillClass="bg-primary-light" />
     </div>
   );
 }

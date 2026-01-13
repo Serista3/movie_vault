@@ -11,13 +11,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
-const BASE = "button py-2 font-medium shadow-xl cursor-pointer transition-all duration-300";
+const BASE = "button py-2 font-medium shadow-xl cursor-pointer transition-all duration-300 border border-transparent";
 
 const VARIANTS: { [key in Variant]: string } = {
   primary: "text-secondary-light bg-primary-light hover:bg-primary-dark",
   secondary: "text-tertiary-light bg-secondary-light hover:bg-secondary-dark",
   tertiary: "text-secondary-light bg-tertiary-light hover:bg-tertiary-dark",
-  danger: "text-tertiary-light bg-danger-light hover:bg-danger-dark",
+  danger: "text-danger-light bg-secondary-light hover:bg-secondary-dark border-danger-light",
 }
 
 const SHAPES: { [key in Shape]: string } = {

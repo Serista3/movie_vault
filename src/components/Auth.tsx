@@ -37,7 +37,7 @@ export default function Auth() {
       {isAuthenticated && (
         <fetcher.Form method="post" action="/">
           <Button
-            className="rounded-[10px] px-4 text-alert-light bg-back-dark border border-alert-light hover:bg-gray-dark"
+            variant='danger'
             type="submit"
             name="type"
             value="logout"
