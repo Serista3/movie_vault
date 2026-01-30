@@ -1,29 +1,23 @@
-import { type LoaderFunctionArgs, useLoaderData, useSearchParams } from "react-router";
+import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import { getPeople } from "../services/people.service";
 import type { MediaResponse, PersonSummary, AppError } from "../types";
+import { usePagination } from "../hooks/usePagination";
 
 import ExplorerLayout from "../components/layout/ExplorerLayout";
-import MediaGrid from "../components/MediaGrid";
+import MediaGrid from "../components/media/MediaGrid";
 import ErrorMessage from "../components/common/ErrorMessage";
 import Pagination from "../components/common/Pagination";
 
 export default function People() {
   const peopleData = useLoaderData<MediaResponse<PersonSummary> | AppError>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const curPage = searchParams.get('page') ? Number(searchParams.get('page')) : 1;
-
-  const handlePageChange = function(newPage: number){
-    setSearchParams(searchParams => {
-      searchParams.set('page', newPage.toString());
-      return searchParams;
-    });
-  }
+  const peopleTotalPages = peopleData && 'total_pages' in peopleData ? peopleData.total_pages : 1;
+  const { curPage, totalPages, handlePageChange } = usePagination(peopleTotalPages);
 
   return (
     <ExplorerLayout title="People">
       {peopleData && 'results' in peopleData && <MediaGrid mediaList={peopleData.results} />}
       {peopleData && 'isError' in peopleData && <ErrorMessage error={peopleData} />}
-      <Pagination curPage={curPage} totalPages={5} onPageChange={handlePageChange} />
+      <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </ExplorerLayout>
   )
 }

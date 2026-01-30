@@ -1,6 +1,7 @@
 import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '../components/layout/MainLayout';
 import Home from '../pages/home/Home';
 import { loader as homeLoader } from '../pages/home/loader';
+import Search, { loader as searchLoader } from '../pages/Search';
 import Movies from '../pages/Movies';
 import MediaDetail, { loader as mediaDetailLoader } from '../pages/MediaDetail';
 import TvShows from '../pages/TvShows';
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
     ErrorBoundary: RootErrorBoundary,
     children: [
       { index: true, Component: Home, loader: homeLoader },
+      { path: 'search', Component: Search, loader: searchLoader, children: [
+        { path: 'movie', Component: Search },
+        { path: 'tv', Component: Search },
+        { path: 'person', Component: Search }
+      ] },
       { path: 'movie', Component: Movies },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
       { path: 'tv', Component: TvShows },

@@ -16,8 +16,8 @@ const getTotalShowPage = function(curPage: number, totalPages: number){
 
 export function computePagination(curPage: number, totalPages: number){
     const pagesToShow = getTotalShowPage(curPage, totalPages);
-    const isSecondFirstPage = !pagesToShow.includes(2);
-    const isSecondLastPage = !pagesToShow.includes(totalPages - 1);
+    const isSecondFirstPage = !pagesToShow.includes(2) && totalPages > MAX_PAGES_TO_SHOW;
+    const isSecondLastPage = !pagesToShow.includes(totalPages - 1) && totalPages > MAX_PAGES_TO_SHOW;
     const isFirstPage = curPage === 1;
     const isLastPage = curPage === totalPages;
 
