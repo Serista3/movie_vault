@@ -9,16 +9,17 @@ interface ImageProps {
   src: string | null;
   alt?: string;
   className?: string;
+  containerClassName?: string;
 }
 
-const BASE_CLASS = "image w-full h-full rounded-[10px] object-cover transition-all duration-300";
+const BASE_CLASS = "image w-full h-full object-cover transition-all duration-300";
 
-export default function Image({ className, src, alt = "Image" }: ImageProps){
+export default function Image({ className, containerClassName, src, alt = "Image" }: ImageProps){
   const [isLoaded, setIsLoaded] = useState(false);
   const imageSrc = src && src !== 'null' ? `${IMAGE_BASE_URL}${src}` : noImage;
 
   return (
-    <div className="container-image overflow-hidden w-full relative shadow-xl">
+    <div className={cn("container-image overflow-hidden w-full relative shadow-xl rounded-[10px]", containerClassName)}>
       {!isLoaded && <ImageSkeleton />}
       <img 
         className={cn(BASE_CLASS, className, isLoaded ? 'opacity-100' : 'opacity-0 absolute top-0 left-0')} 
