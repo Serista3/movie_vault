@@ -1,11 +1,11 @@
 import { useRef, useEffect } from "react"
-import { useFetchData } from "../hooks/useFetchData"
+import { useFetchData } from "../../hooks/useFetchData"
 
 import MediaGrid from "./MediaGrid"
-import MediaListSkeleton from "./skeleton/MediaListSkeleton"
-import ErrorMessage from "./common/ErrorMessage"
+import MediaListSkeleton from "../skeleton/MediaListSkeleton"
+import ErrorMessage from "../common/ErrorMessage"
 
-import type { MediaResponse, MediaSummary, AppError } from "../types"
+import type { MediaResponse, MediaSummary, AppError } from "../../types"
 
 interface LazyMediaRowProps<P extends unknown[]> {
   fetchFunction: (...args: P) => Promise<AppError | MediaResponse<MediaSummary>>; 

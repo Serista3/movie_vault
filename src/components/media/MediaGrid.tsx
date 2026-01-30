@@ -1,7 +1,7 @@
 import MediaCard from "./MediaCard"
 
-import type { MediaSummary } from "../types"
-import { cn } from "../utils/helperClassName";
+import type { MediaSummary } from "../../types"
+import { cn } from "../../utils/helperClassName";
 
 interface MediaGridProps {
   mediaList: MediaSummary[];
@@ -31,7 +31,7 @@ export default function MediaGrid({
   return (
     <div className={cn(layoutClass, className, "min-h-90 w-full py-4")}>
       {mediaList.length > 0 && mediaList.slice(0, minArrayLength).map((media) => (
-        <MediaCard key={media.id} media={media} className={variant === 'horizontal' ? 'flex-none w-40' : 'w-full'} />
+        <MediaCard key={media.id} media={media} className={variant === 'horizontal' ? 'flex-none' : 'w-full'} />
       ))}
       {mediaList.length === 0 && <div className="min-h-90 flex items-center justify-center text-tertiary-dark">No media available.</div>}
     </div>

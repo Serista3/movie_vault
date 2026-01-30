@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useLoaderData, Link } from "react-router";
-import { useModal } from "../store/ModalContext";
-import { useSlider } from "../hooks/useSlider";
+import { useModal } from "../../store/ModalContext";
+import { useSlider } from "../../hooks/useSlider";
 
-import type { MediaSummary, AppError } from "../types";
-import { getMediaType } from "../utils/helperMedia";
-import { cn } from "../utils/helperClassName";
+import type { MediaSummary, AppError } from "../../types";
+import { getMediaType } from "../../utils/helperMedia";
+import { cn } from "../../utils/helperClassName";
 
-import Slider from "./common/Slider";
-import Button from "../components/common/Button";
-import Image from "./common/Image";
-import TrailerModal from "./TrailerModal";
-import ErrorMessage from "./common/ErrorMessage";
+import Slider from "../common/Slider";
+import Button from "../../components/common/Button";
+import Image from "../common/Image";
+import TrailerModal from "../TrailerModal";
+import ErrorMessage from "../common/ErrorMessage";
 
 export default function MediaSlider() {
   const { isOpen, openModal } = useModal();

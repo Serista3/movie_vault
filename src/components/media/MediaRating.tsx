@@ -1,4 +1,4 @@
-import { cn } from "../utils/helperClassName";
+import { cn } from "../../utils/helperClassName";
 
 interface MediaRatingProps {
   rating: number | string;

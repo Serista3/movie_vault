@@ -1,5 +1,5 @@
 import { cn } from "../../utils/helperClassName";
-import { usePagination } from "../../hooks/usePagination";
+import { computePagination } from "../../utils/helperPagination";
 
 import Button from "./Button";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -22,7 +22,7 @@ export default function Pagination({ curPage, totalPages, onPageChange, classNam
     isSecondLastPage, 
     isFirstPage, 
     isLastPage 
-  } = usePagination(curPage, totalPages);
+  } = computePagination(curPage, totalPages);
 
   // Helper to create page button
   const pageBtn = function(page: number): React.ReactElement{

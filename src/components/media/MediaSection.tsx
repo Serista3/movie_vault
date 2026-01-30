@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { cn } from "../utils/helperClassName";
+import { cn } from "../../utils/helperClassName";
 
 interface MediaSectionProps {
     className?: string;

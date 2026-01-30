@@ -1,6 +1,6 @@
-import MediaSlider from "../../components/MediaSlider";
-import MediaSection from "../../components/MediaSection";
-import LazyMediaRow from "../../components/LazyMediaRow";
+import MediaSlider from "../../components/media/MediaSlider";
+import MediaSection from "../../components/media//MediaSection";
+import LazyMediaRow from "../../components/media/LazyMediaRow";
 import ToggleSwitch from "../../components/ToggleSwitch";
 
 import { useReducer } from "react";
