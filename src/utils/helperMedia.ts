@@ -6,6 +6,7 @@ export interface MediaSummaryData {
   mediaImg: string | null;
   mediaTitle: string;
   mediaSubtitle: string | MediaSummary[];
+  mediaOverview: string;
   mediaRating: number | 'N/A';
 }
 
@@ -15,6 +16,8 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
   const mediaTitle = 'title' in media ? media.title : 'original_name' in media ? media.original_name : media.name
   const mediaSubtitle = 'release_date' in media ? formatDateToReadable(media.release_date) : 'first_air_date' in media 
     ? formatDateToReadable(media.first_air_date) : media.known_for;
+  const mediaOverview = 'overview' in media ? media.overview : '';
+  
   const mediaRating = 'vote_average' in media ? Math.round(media.vote_average * 10) : 'N/A';
 
   return {
@@ -22,6 +25,7 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
     mediaImg,
     mediaTitle,
     mediaSubtitle,
+    mediaOverview,
     mediaRating,
   }
 }
