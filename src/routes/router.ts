@@ -22,11 +22,31 @@ const router = createBrowserRouter([
     action: mainLayoutAction,
     ErrorBoundary: RootErrorBoundary,
     children: [
-      { index: true, Component: Home, loader: homeLoader },
-      { path: 'search', Component: Search, loader: searchLoader, children: [
-        { path: 'movie', Component: Search },
-        { path: 'tv', Component: Search },
-        { path: 'person', Component: Search }
+      { 
+        index: true, 
+        Component: Home, 
+        loader: homeLoader 
+      },
+      { 
+        path: 'search', 
+        Component: Search, 
+        loader: searchLoader, 
+        shouldRevalidate: ({ currentUrl, nextUrl }) => {
+          return currentUrl.toString() !== nextUrl.toString();
+        },
+        children: [
+        { 
+          path: 'movie', 
+          Component: Search 
+        },
+        { 
+          path: 'tv', 
+          Component: Search 
+        },
+        { 
+          path: 'person', 
+          Component: Search 
+        }
       ] },
       { path: 'movie', Component: Movies },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },

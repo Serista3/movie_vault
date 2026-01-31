@@ -47,7 +47,7 @@ export const displayMediaSubtitle = function(subtitle: string | MediaSummary[]):
 export function getMediaType(media: MediaSummary): string {
   if ('title' in media) 
     return 'movie';
-  if ('name' in media) 
+  if ('first_air_date' in media) 
     return 'tv';
   if ('gender' in media)
     return 'person';

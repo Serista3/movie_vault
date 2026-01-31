@@ -3,9 +3,11 @@ import MediaCard from "./MediaCard"
 import type { MediaSummary } from "../../types"
 import { cn } from "../../utils/helperClassName";
 
+type Orientation = 'horizontal' | 'vertical';
+
 interface MediaGridProps {
   mediaList: MediaSummary[];
-  variant?: 'horizontal' | 'vertical';
+  variant?: Orientation;
   limit?: number;
   className?: string;
 } 
