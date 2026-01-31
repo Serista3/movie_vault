@@ -8,7 +8,7 @@ interface SliderProps {
   children: React.ReactNode;
 }
 
-const BASE_CLASS = "slider w-full min-h-50 overflow-hidden relative shadow-xl";
+const BASE_CLASS = "slider w-full min-h-50 overflow-hidden relative z-3 shadow-xl";
 
 export default function Slider({ progress, className, children }: SliderProps) {
   return (
