@@ -1,4 +1,5 @@
 import { cn } from "../utils/helperClassName";
+import Paragraph from "./common/Paragraph";
 
 interface WrapperInputProps {
     id: string;
@@ -18,7 +19,7 @@ export default function WrapperInput({ id, label, error, className, children }: 
             {label}
         </label>}
         {children}
-        {error && <p className="text-sm text-danger-light">{error}</p>}
+        {error && <Paragraph className="text-danger-light">{error}</Paragraph>}
     </div>
     )
 }

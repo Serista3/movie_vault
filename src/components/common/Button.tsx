@@ -11,7 +11,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
-const BASE = "button py-2 font-medium shadow-xl cursor-pointer transition-all duration-300 border border-transparent";
+const BASE = "button py-2 font-medium shadow-xl cursor-pointer transition-all duration-300 border border-transparent relative";
 
 const VARIANTS: { [key in Variant]: string } = {
   primary: "text-secondary-light bg-primary-light hover:bg-primary-dark",

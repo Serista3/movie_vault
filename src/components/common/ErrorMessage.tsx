@@ -1,6 +1,8 @@
 import type { AppError } from '../../types/api';
 import { cn } from '../../utils/helperClassName';
 
+import Paragraph from './Paragraph';
+
 interface ErrorMessageProps {
     error: AppError;
     className?: string;
@@ -14,7 +16,9 @@ export default function ErrorMessage({ error, className }: ErrorMessageProps){
             <div className='font-semibold text-lg mb-2'>
                 Error - {error.statusCode ? `Status Code: ${error.statusCode}` : 'Unknown Status Code'}
             </div>
-            <p className='font-light text-sm'>{error.message} Please try again later.</p>
+            <Paragraph>
+                {error.message} Please try again later.
+            </Paragraph>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import Logo from "../common/Logo";
 import FooterColumn from "./FooterColumn";
+import Paragraph from "../common/Paragraph";
 
 const GENRES = ['action', 'comedy', 'horror', 'history', 'romance', 'other'];
 
@@ -13,8 +14,8 @@ export default function FooterNavigation() {
         <FooterColumn title="People" items={['popular']} />
       </div>
       <div className="copy-right text-center">
-        <p className="font-semibold">Credit: Data provided by TMDB</p>
-        <p className="font-light text-sm">Copy right @2025 by Serista</p>
+        <Paragraph className="font-semibold text-base">Credit: Data provided by TMDB</Paragraph>
+        <Paragraph>Copy right @2025 by Serista</Paragraph>
       </div>
     </footer>
   );

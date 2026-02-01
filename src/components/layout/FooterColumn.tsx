@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 
 import { formatUppercaseFirstLetter } from "../../utils/formatters";
+import Heading from "../common/Heading";
 
 interface FooterColumnProps {
   title: string;
@@ -10,7 +11,7 @@ interface FooterColumnProps {
 export default function FooterColumn({ title, items }: FooterColumnProps){
   return (
     <div>
-      <h3 className="text-base font-semibold mb-3">{title}</h3>
+      <Heading level={3} className="mb-3">{title}</Heading>
       <ul className="flex flex-col">
         {items.map(item => {
           return (

@@ -1,16 +1,26 @@
 import { useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useLockDownScreen } from '../../hooks/useLockDownScreen';
+import type { MediaType } from '../../types';
 
 import Button from '../common/Button';
 import Logo from '../common/Logo';
 import SideNavigation from './SideNavigation';
+import Navigation from './Navigation';
 import SearchInput from '../SearchInput';
 
 import { IconContext } from 'react-icons';
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoIosSearch } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
+
+const LINKS = [
+  { to: "movie", label: "Movies", end: true },
+  { to: "tv", label: "Tv Shows", end: true },
+  { to: "person", label: "People", end: true },
+  { to: "favorite", label: "Favorites" },
+  { to: "watchlist", label: "Watch List" },
+]
 
 export default function MainNavigation() {
   const [isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false);
@@ -39,8 +49,9 @@ export default function MainNavigation() {
     if (query.trim().length === 0) 
       return;
 
-    const curPath = location.pathname.split('/').at(-1) || '';
-    navigate(`/search/${curPath}?query=${encodeURIComponent(query.trim())}`);
+    const curPath = location.pathname.split('/').at(-1);
+    const validPaths: MediaType[] = ['movie', 'tv', 'person'];
+    navigate(`/search/${validPaths.find(path => path === curPath) || 'movie'}?query=${encodeURIComponent(query.trim())}`);
     setIsSearchBarOpen(false);
   }
 

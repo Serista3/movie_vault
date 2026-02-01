@@ -2,6 +2,7 @@ import { Link } from "react-router";
 
 import Card from '../common/Card'
 import Image from "../common/Image"
+import Paragraph from "../common/Paragraph"
 import MediaRating from "./MediaRating"
 
 import { cn } from "../../utils/helperClassName";
@@ -27,11 +28,13 @@ export default function MediaCard({ media, className }: { media: MediaSummary, c
         >
           {mediaTitle}
         </Link>
-        <p className="text-sm font-light text-tertiary-dark line-clamp-2">
+        <Paragraph className="text-tertiary-dark line-clamp-2 leading-5">
           {displayMediaSubtitle(mediaSubtitle)}
-        </p>
+        </Paragraph>
       </div>
-      {mediaCategory !== 'person' && <MediaRating rating={mediaRating} className="absolute top-2 right-2 z-4" />}
+      {mediaCategory !== 'person' && (
+        <MediaRating rating={mediaRating} className="absolute top-2 right-2 z-4" />
+      )}
     </Card>
   )
 }

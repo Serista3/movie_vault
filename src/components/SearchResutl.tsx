@@ -15,18 +15,17 @@ export default function SearchResult({ countResults }: SearchResultProps) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const curPath = location.pathname.split('/').at(-1) || 'movie';
 
+  const curPath = location.pathname.split('/').at(-1) || 'movie';
   const query = searchParams.get('query') || '';
-  const page = searchParams.get('page') || '1';
 
   const onClickResultType = function(typeIndex: number): void {
     const mediaTypePath = MEDIA_TYPE_PATHS[typeIndex];
-    navigate(`/search/${mediaTypePath}?query=${query}&page=${page}`);
+    navigate(`/search/${mediaTypePath}?query=${query}&page=1`);
   }
 
   return (
-    <div className="search-result mb-4 w-full shadow-2xl">
+    <div className="mb-4 w-full shadow-2xl">
       <div className="font-semibold mb-2 bg-secondary-dark py-2 px-4 rounded-t-[10px]">Search Result</div>
       <Suspense fallback={<div>Loading counts...</div>}>
         <Await resolve={countResults}>
@@ -39,9 +38,9 @@ export default function SearchResult({ countResults }: SearchResultProps) {
 
                   return (
                     <li key={new Date().getTime() + index}>
-                      <Button 
+                      <Button
                         variant="tertiary" 
-                        className={`w-full flex justify-between items-center rounded-none 
+                        className={`w-full flex justify-between items-center rounded-none z-1
                           ${MEDIA_TYPE_PATHS[index] === curPath && 'bg-tertiary-dark'}`
                         }
                         onClick={() => onClickResultType(index)}
@@ -49,7 +48,10 @@ export default function SearchResult({ countResults }: SearchResultProps) {
                         <div className="font-semibold">
                           {mediaType}
                         </div>
-                        <div className="px-2 py-.5 rounded-[10px] bg-primary-light font-normal">
+                        <div 
+                          onClick={e => e.stopPropagation()} 
+                          className="px-2 py-.5 rounded-[10px] bg-primary-light font-normal z-3 cursor-text select-text"
+                        >
                           {count.toLocaleString()}
                         </div>
                       </Button>

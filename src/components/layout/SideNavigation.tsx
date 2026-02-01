@@ -1,19 +1,21 @@
 import { useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 
 import Auth from '../Auth';
+import Navigation from './Navigation';
 
 interface SideNavigationProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const BASE_LINK_CLASS = `font-light hover:text-primary-light transition-colors`;
-const activeNavLinkClass = BASE_LINK_CLASS + ' text-primary-light';
-
-const activeNavLink = function ({ isActive }: { isActive: boolean }): string {
-  return isActive ? activeNavLinkClass : BASE_LINK_CLASS;
-};
+const LINKS = [
+  { to: "movie", label: "Movies", end: true },
+  { to: "tv", label: "Tv Shows", end: true },
+  { to: "person", label: "People", end: true },
+  { to: "favorite", label: "Favorites" },
+  { to: "watchlist", label: "Watch List" },
+]
 
 export default function SideNavigation({ isOpen, onClose }: SideNavigationProps) {
   const location = useLocation();
@@ -30,9 +32,11 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
 
   return (
     <aside className={`fixed bg-[rgba(0,0,0,0.75)] h-screen w-full z-20 ${isOpen ? 'visible' : 'invisible'}`} onClick={handleClick}>
-      <nav
-        className={`flex flex-col gap-6 p-6 bg-secondary-dark text-tertiary-light w-3/4 h-screen fixed z-25 transition-all ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+      <Auth />
+      <Navigation items={LINKS} className={`w-3/4 h-screen fixed z-25 transition-all 
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}`} />
+      {/* <nav
+        className={`flex flex-col gap-6 p-6 bg-secondary-dark text-tertiary-light 
         }`}
       >
         <Auth />
@@ -63,7 +67,7 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
             </NavLink>
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </aside>
   );
 };

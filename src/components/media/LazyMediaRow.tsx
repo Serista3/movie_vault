@@ -37,7 +37,9 @@ export default function LazyMediaRow<P extends unknown[]>({ fetchFunction, fetch
   return (
     <div ref={containerRef} className={`${error ? 'mt-4' : 'min-h-90'} w-full flex flex-col justify-start`}>
       {isLoading && !error && <MediaListSkeleton /> }
-      {!isLoading && !error && data && 'results' in data && <MediaGrid variant="horizontal" mediaList={data.results} limit={10} />}
+      {!isLoading && !error && data && 'results' in data && (
+        <MediaGrid variant="horizontal" mediaList={data.results} limit={10} />
+      )}
       {error && <ErrorMessage error={error} className="rounded-[10px]" />}
     </div>
   )

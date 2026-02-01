@@ -8,3 +8,4 @@ export * from './company';
 export * from './review';
 export * from './tvShow';
 export * from './network';
+export * from './nav';

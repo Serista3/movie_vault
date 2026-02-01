@@ -9,16 +9,21 @@ import ErrorMessage from "../components/common/ErrorMessage";
 import SearchResult from "../components/SearchResutl";
 import Pagination from "../components/common/Pagination";
 
+interface SearchLoaderData {
+  searchData: MediaResponse<MediaSummary> | AppError;
+  countResults: (MediaResponse<MediaSummary> | AppError)[];
+}
+
 export default function Search(){
-  const { searchData, countResults } = useLoaderData<{ searchData: MediaResponse<MediaSummary> | AppError, countResults: (MediaResponse<MediaSummary> | AppError)[] }>();
-  const searchTotalPages = searchData && 'total_pages' in searchData ? searchData.total_pages : 1;
+  const { searchData, countResults } = useLoaderData<SearchLoaderData>();
+  const searchTotalPages = 'total_pages' in searchData ? searchData.total_pages : 1;
   const { curPage, totalPages, handlePageChange } = usePagination(searchTotalPages)
 
   return (
     <ExplorerLayout title="Search">
       <SearchResult countResults={countResults} />
       {searchData && 'results' in searchData && (
-        <div className="results flex flex-col mt-4 w-full gap-8">
+        <div className="results flex flex-col mt-4 w-full gap-4">
           {searchData.results.length > 0 && (
             searchData.results.map((media) => (
               <WideMediaCard key={media.id} media={media} className="mb-4" />
