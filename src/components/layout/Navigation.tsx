@@ -3,13 +3,8 @@ import { NavLink, Link } from "react-router"
 import { cn } from "../../utils/helperClassName";
 import type { NavItem } from "../../types/nav";
 
-const BASE_NAV_CLASS = `p-6 bg-secondary-dark text-tertiary-light`;
-const BASE_LINK_CLASS = `hover:text-primary-light transition-colors`;
-
-const variantClasses = {
-    primary: 'text-tertiary-light hover:text-primary-light',
-    secondary: 'text-secondary-light hover:text-secondary-dark',
-}
+const BASE_NAV_CLASS = `p-6 text-secondary-light`;
+const BASE_LINK_CLASS = `hover:text-secondary-dark transition-colors`;
 
 const directionClasses = {
     column: 'flex flex-col gap-4',
@@ -17,12 +12,11 @@ const directionClasses = {
 }
 
 const activeNavLink = function ({ isActive }: { isActive: boolean }): string {
-  return isActive ? BASE_LINK_CLASS + ' text-primary-light' : BASE_LINK_CLASS;
+  return isActive ? BASE_LINK_CLASS + ' text-secondary-dark font-semibold' : BASE_LINK_CLASS;
 };
 
 interface NavigationProps {
     items: NavItem[];
-    variant?: 'primary' | 'secondary';
     direction?: 'row' | 'column';
     isNavLink?: boolean;
     className?: string;
@@ -30,7 +24,6 @@ interface NavigationProps {
 
 export default function Navigation({ 
     items, 
-    variant = 'primary', 
     isNavLink = true, 
     direction = 'column', 
     className 
@@ -47,7 +40,7 @@ export default function Navigation({
                                     {link.label}
                                 </NavLink>
                             ) : (
-                                <Link to={link.to} className={variantClasses[variant]}>
+                                <Link to={link.to} className={BASE_LINK_CLASS}>
                                     {link.label}
                                 </Link>
                             )}

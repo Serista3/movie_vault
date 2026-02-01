@@ -28,11 +28,11 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
         ${isOpen ? 'visible' : 'invisible'}`} 
         onClick={handleClick}
       >
-      <aside className={`w-3/4 bg-secondary-dark h-screen fixed z-25 transition-all 
+      <aside className={`w-3/4 bg-primary-light h-screen fixed z-25 transition-all 
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        <Auth />
-        <Navigation items={LINKS}  />
+        <Auth className='border-b border-gray-dark pb-6' />
+        <Navigation items={LINKS} />
       </aside>
     </div>
   );
