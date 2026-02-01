@@ -1,7 +1,7 @@
 # 🎥 Movie Vault
 ![Status](https://img.shields.io/badge/Status-Work_in_Progress-orange?style=for-the-badge)
 
-![Project Banner](https://github.com/user-attachments/assets/dcec8c5e-98d5-49b2-87a4-6a8e9fa1da39)
+![Project Banner](https://github.com/user-attachments/assets/297e69f9-266e-436d-a8b6-3ea9e8b1251b)
 
 > **Web Application สำหรับค้นหาและสำรวจข้อมูลภาพยนตร์และซีรีส์** ช่วยให้คุณเข้าถึงรายละเอียดหนังเรื่องโปรด เรื่องย่อ รวมถึงประวัตินักแสดงได้อย่างครบถ้วน
 
