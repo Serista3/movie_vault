@@ -1,10 +1,15 @@
 import { NavLink, Link } from "react-router"
-import type { NavItem } from "../../types/nav";
+
 import { cn } from "../../utils/helperClassName";
+import type { NavItem } from "../../types/nav";
 
 const BASE_NAV_CLASS = `p-6 bg-secondary-dark text-tertiary-light`;
-const BASE_LINK_CLASS = `font-light hover:text-primary-light transition-colors`;
-const activeNavLinkClass = BASE_LINK_CLASS + ' text-primary-light';
+const BASE_LINK_CLASS = `hover:text-primary-light transition-colors`;
+
+const variantClasses = {
+    primary: 'text-tertiary-light hover:text-primary-light',
+    secondary: 'text-secondary-light hover:text-secondary-dark',
+}
 
 const directionClasses = {
     column: 'flex flex-col gap-4',
@@ -12,20 +17,28 @@ const directionClasses = {
 }
 
 const activeNavLink = function ({ isActive }: { isActive: boolean }): string {
-  return isActive ? activeNavLinkClass : BASE_LINK_CLASS;
+  return isActive ? BASE_LINK_CLASS + ' text-primary-light' : BASE_LINK_CLASS;
 };
 
 interface NavigationProps {
     items: NavItem[];
-    isNavLink?: boolean;
+    variant?: 'primary' | 'secondary';
     direction?: 'row' | 'column';
+    isNavLink?: boolean;
     className?: string;
 }
 
-export default function Navigation({ items, isNavLink = true, direction = 'column', className }: NavigationProps){
+export default function Navigation({ 
+    items, 
+    variant = 'primary', 
+    isNavLink = true, 
+    direction = 'column', 
+    className 
+}: NavigationProps){
+
     return (
         <nav className={cn(BASE_NAV_CLASS, className)}>
-            <ul className={cn(directionClasses[direction], "border-t border-gray-dark pt-8")}>
+            <ul className={cn(directionClasses[direction])}>
                 {items.map(link => {
                     return (
                         <li key={link.to}>
@@ -34,7 +47,7 @@ export default function Navigation({ items, isNavLink = true, direction = 'colum
                                     {link.label}
                                 </NavLink>
                             ) : (
-                                <Link to={link.to} className={BASE_LINK_CLASS}>
+                                <Link to={link.to} className={variantClasses[variant]}>
                                     {link.label}
                                 </Link>
                             )}
