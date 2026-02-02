@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useCloseOnNavigate } from '../../hooks/useCloseOnNavigate';
 import { LINKS } from './MainNavigation';
 
 import Auth from '../Auth';
@@ -11,17 +10,13 @@ interface SideNavigationProps {
 }
 
 export default function SideNavigation({ isOpen, onClose }: SideNavigationProps) {
-  const location = useLocation();
+  useCloseOnNavigate(onClose);
 
   const handleClick = function(e: React.MouseEvent<HTMLDivElement> ): void {
     if(!(e.target === e.currentTarget)) return;
 
     onClose();
   }
-
-  useEffect(() => {
-    onClose();
-  }, [location.key, onClose]);
 
   return (
     <div className={`fixed bg-[rgba(0,0,0,0.75)] h-screen w-full z-20 

@@ -1,16 +1,17 @@
-import { useFetcher, useRouteLoaderData } from 'react-router';
+import { useRouteLoaderData } from 'react-router';
 import { useFetchData } from '../hooks/useFetchData';
 
+import { cn } from '../utils/helperClassName';
 import { createRequestToken } from '../services/auth.service';
 import type { UserDataResponse, RequestToken, AppError } from '../types';
 
 import Button from './common/Button';
-import UserAvatar from './UserAvatar';
+import UserMenu from './user/UserMenu';
 
-export default function Auth() {
+export default function Auth({ className }: { className?: string }) {
   const { fetchData, isLoading, error } = useFetchData<RequestToken | AppError, []>(createRequestToken , []);
   const data = useRouteLoaderData('root') as UserDataResponse;
-  const fetcher = useFetcher();
+  
   const isAuthenticated = data?.isAuthenticated;
 
   const handleLogin = async function () {
@@ -23,28 +24,16 @@ export default function Auth() {
   };
 
   return (
-    <div className="user flex flex-col gap-4">
-      <div className="username font-semibold text-xl flex items-center gap-3 mb-1">
-        <UserAvatar userData={data?.userData} isAuthenticated={isAuthenticated} />
-      </div>
+    <div className={cn("mx-6 mt-6 mb-1", className)}>
       {!isAuthenticated && (
         <form>
-          <Button onClick={handleLogin} disabled={isLoading}>
+          <Button variant='secondary' onClick={handleLogin} disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Login With TMDB'}
           </Button>
         </form>
       )}
       {isAuthenticated && (
-        <fetcher.Form method="post" action="/">
-          <Button
-            variant='danger'
-            type="submit"
-            name="type"
-            value="logout"
-            disabled={fetcher.state === 'submitting'} >
-            {fetcher.state === 'submitting' ? 'Logging out...' : 'Logout'}
-          </Button>
-        </fetcher.Form>
+        <UserMenu userData={data?.userData} isAuthenticated={isAuthenticated} />
       )}
       {error?.isError && <div>{error.message}</div>}
     </div>

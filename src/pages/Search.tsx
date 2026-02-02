@@ -6,7 +6,7 @@ import { usePagination } from "../hooks/usePagination";
 import ExplorerLayout from "../components/layout/ExplorerLayout";
 import WideMediaCard from "../components/media/WideMediaCard";
 import ErrorMessage from "../components/common/ErrorMessage";
-import SearchResult from "../components/SearchResutl";
+import SearchResult from "../components/search/SearchResutl";
 import Pagination from "../components/common/Pagination";
 
 interface SearchLoaderData {

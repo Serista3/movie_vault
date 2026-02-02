@@ -8,7 +8,7 @@ import Button from '../common/Button';
 import Logo from '../common/Logo';
 import SideNavigation from './SideNavigation';
 import Navigation from './Navigation';
-import SearchInput from '../SearchInput';
+import SearchInput from '../search/SearchInput';
 import Auth from '../Auth';
 
 import { IconContext } from 'react-icons';
@@ -78,7 +78,7 @@ export default function MainNavigation() {
                 className='py-2 px-6' 
               />
             )}
-            {width >= BREAK_POINT && <Auth className='mt-0' />}
+            {width >= BREAK_POINT && <Auth className='mt-0 mb-0' />}
             <Button variant="secondary" shape='circular' onClick={toggleSearchBar}>
               <IconContext.Provider value={{ className: 'text-xl text-primary-light' }}>
                 {isSearchBarOpen ? <IoMdClose /> : <IoIosSearch />}

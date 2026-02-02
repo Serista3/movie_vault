@@ -1,6 +1,6 @@
 import { IconContext } from "react-icons"
 import { IoIosSearch } from "react-icons/io"
-import Input from "./common/Input"
+import Input from "../common/Input"
 
 import { useSearchParams } from "react-router"
 

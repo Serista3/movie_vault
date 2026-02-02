@@ -46,7 +46,7 @@ export default function MediaSlider() {
                   {'opacity-100 z-10 pointer-events-auto': index === currentSlide}
                 )}
               >
-                <Image src={'backdrop_path' in item ? item.backdrop_path : null} alt={`Slide ${item.id}`} className="w-full min-h-50" />
+                <Image src={'backdrop_path' in item ? item.backdrop_path : null} alt={`Slide ${item.id}`} containerClassName="h-full absolute top-0 left-0" />
                 <div className="slider__backdrop w-full h-full absolute top-0 left-0 backdrop-brightness-50">
                   <div className="slider__content max-w-300 h-full px-4 py-6 flex flex-col justify-end mx-auto">
                     <Heading level={3} className="line-clamp-1">

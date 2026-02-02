@@ -4,7 +4,7 @@ import { cn } from "../../utils/helperClassName";
 import type { NavItem } from "../../types/nav";
 
 const BASE_NAV_CLASS = `p-6 text-secondary-light`;
-const BASE_LINK_CLASS = `hover:text-secondary-dark transition-colors`;
+export const BASE_LINK_CLASS = `hover:text-secondary-dark transition-colors`;
 
 const directionClasses = {
     column: 'flex flex-col gap-4',

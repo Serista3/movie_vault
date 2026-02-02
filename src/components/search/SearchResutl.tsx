@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { Await, useNavigate, useSearchParams, useLocation } from "react-router";
-import type { AppError, MediaResponse, MediaSummary } from "../types";
+import type { AppError, MediaResponse, MediaSummary } from "../../types";
 
-import Button from "./common/Button";
+import Button from "../common/Button";
 
 const MEDIA_TYPES = ['Movies', 'Tv Shows', 'People'];
 const MEDIA_TYPE_PATHS = ['movie', 'tv', 'person'];
