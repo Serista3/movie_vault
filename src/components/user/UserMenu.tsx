@@ -6,7 +6,7 @@ import Button from '../common/Button';
 import DropdownMenu  from '../common/DropdownMenu';
 import UserAvatar from './UserAvatar';
 
-const BASE_LINK_CLASS = `text-tertiary-light hover:text-tertiary-dark transition-colors duration-300`;
+const BASE_LINK_CLASS = `inline-block w-full text-tertiary-light hover:text-primary-light transition-colors duration-300`;
 
 interface UserMenuProps {
   userData: User | AppError;
@@ -25,19 +25,20 @@ export default function UserMenu({ userData, isAuthenticated }: UserMenuProps) {
         </Suspense>
       }
     >
-      <li>
+      <li className='w-full'>
         <Link to="/favorite" className={BASE_LINK_CLASS}>
           Favorite
         </Link>
       </li>
-      <li>
+      <li className='w-full'>
         <Link to="/watchlist" className={BASE_LINK_CLASS}>
           Watchlist
         </Link>
       </li>
-      <li>
+      <li className='w-full'>
           <fetcher.Form method="post" action="/">
             <Button
+              className='w-full mt-4'
               variant='danger'
               type="submit"
               name="type"

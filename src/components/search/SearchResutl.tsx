@@ -26,7 +26,7 @@ export default function SearchResult({ countResults }: SearchResultProps) {
 
   return (
     <div className="mb-4 w-full shadow-2xl">
-      <div className="font-semibold mb-2 bg-secondary-dark py-2 px-4 rounded-t-[10px]">Search Result</div>
+      <div className="font-semibold bg-secondary-dark py-2 px-4 rounded-t-[10px]">Search Result</div>
       <Suspense fallback={<div>Loading counts...</div>}>
         <Await resolve={countResults}>
           {countResults => {

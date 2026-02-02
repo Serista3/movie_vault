@@ -6,7 +6,7 @@ import Movies from '../pages/Movies';
 import MediaDetail, { loader as mediaDetailLoader } from '../pages/MediaDetail';
 import TvShows from '../pages/TvShows';
 import People, { loader as peopleLoader } from '../pages/People';
-import PersonDetail from '../pages/PersonDetail';
+import PersonDetail, { loader as personDetailLoader } from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
 import WatchList from '../pages/WatchList';
 import RootErrorBoundary from '../components/layout/RootErrorBoundary';
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       { path: 'tv', Component: TvShows },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },
       { path: 'person', Component: People, loader: peopleLoader },
-      { path: 'person/:id', Component: PersonDetail },
+      { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },
       { path: 'favorite', Component: Favorites },
       { path: 'watchlist', Component: WatchList },
     ],

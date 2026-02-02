@@ -12,8 +12,8 @@ interface DropdownMenuProps {
 
 const BASE_MENU_TITLE_CLASS = `flex items-center gap-2 cursor-pointer text-secondary-light hover:text-secondary-dark
   transition-all duration-300`;
-const BASE_MENU_ITEMS_CLASS = `flex flex-col gap-4 absolute top-full left-0 mt-2 
-  bg-secondary-dark p-4 rounded-[10px] shadow-lg transition-all duration-300 z-20`;
+const BASE_MENU_ITEMS_CLASS = `flex flex-col items-start gap-4 absolute top-full left-0 mt-2 
+  bg-secondary-dark p-4 w-50 rounded-[10px] shadow-lg transition-all duration-300 z-20`;
 
 export default function DropdownMenu({ menuTrigger, children, className }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -32,6 +32,7 @@ export interface PersonMovieCredit extends MovieSummary {
 }
 
 export interface PersonTvCredit extends TvShowSummary {
+    character: string;
     credit_id: string;
     department: string;
     job: string;
