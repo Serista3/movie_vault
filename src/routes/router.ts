@@ -2,7 +2,7 @@ import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from
 import Home from '../pages/home/Home';
 import { loader as homeLoader } from '../pages/home/loader';
 import Search, { loader as searchLoader } from '../pages/Search';
-import Movies from '../pages/Movies';
+import Movies, { loader as moviesLoader } from '../pages/Movies';
 import MediaDetail, { loader as mediaDetailLoader } from '../pages/MediaDetail';
 import TvShows from '../pages/TvShows';
 import People, { loader as peopleLoader } from '../pages/People';
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
           Component: Search 
         }
       ] },
-      { path: 'movie', Component: Movies },
+      { path: 'movie', Component: Movies, loader: moviesLoader },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
       { path: 'tv', Component: TvShows },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },

@@ -36,7 +36,7 @@ export default function MediaRating({
     <div 
       style={{ width: size, height: size }} 
       className={cn(className, BASE_CLASS)}>
-      {rating}%
+      {rating}{rating !== 'N/A' && '%'}
       <svg className="-rotate-90 size-full absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <circle 
           cx="18" 

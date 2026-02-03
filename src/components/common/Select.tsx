@@ -1,0 +1,32 @@
+import { cn } from "../../utils/helperClassName";
+
+import { FaCaretDown } from "react-icons/fa";
+
+interface OptionItem {
+  label: string;
+  value: string;
+}
+
+interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+  items?: OptionItem[];
+  className?: string;
+}
+
+const BASE_CLASS = `w-full bg-secondary-light text-tertiary-light py-2 px-3 rounded-[10px]
+  border border-gray-dark hover:border-gray-light transition-all duration-300 cursor-pointer
+  appearance-none`;
+
+export default function Select({ name, defaultValue, items, className }: SelectProps) {
+  return (
+    <div className="w-full relative">
+      <select name={name} defaultValue={defaultValue} className={cn(BASE_CLASS, className)}>
+        {items && items.map(item => (
+          <option key={item.label} value={item.value}>
+            {item.label}
+          </option>
+        ))}
+      </select>
+      <FaCaretDown className="text-tertiary-light size-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+    </div>
+  );
+}

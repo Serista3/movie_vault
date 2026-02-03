@@ -15,10 +15,9 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
   const mediaImg = `${'poster_path' in media ? media.poster_path : media.profile_path}`;
   const mediaTitle = 'title' in media ? media.title : 'original_name' in media ? media.original_name : media.name
   const mediaSubtitle = 'release_date' in media ? formatDateToReadable(media.release_date) : 'first_air_date' in media 
-    ? formatDateToReadable(media.first_air_date) : media.known_for;
+    ? formatDateToReadable(media.first_air_date) : media.known_for ? media.known_for : 'no subtitle';
   const mediaOverview = 'overview' in media ? media.overview : '';
-  
-  const mediaRating = 'vote_average' in media ? Math.round(media.vote_average * 10) : 'N/A';
+  const mediaRating = 'vote_average' in media && media.vote_average !== 0 ? Math.round(media.vote_average * 10) : 'N/A';
 
   return {
     mediaCategory,
