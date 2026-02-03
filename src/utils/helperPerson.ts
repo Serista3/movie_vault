@@ -7,8 +7,19 @@ import type {
 } from "../types";
 import { formatDateToReadable } from "../utils/formatters";
 
-interface ActingInfo {
+export interface ActingInfo {
+  id: number;
   year: number;
+  credits: (PersonMovieCredit | PersonTvCredit)[];
+}
+
+export interface PersonInfo {
+  title: string;
+  value: string | number | string[];
+}
+
+export interface CrewInfo {
+  department: string;
   credits: (PersonMovieCredit | PersonTvCredit)[];
 }
 
@@ -30,23 +41,20 @@ export const getActingData = function(data: PersonDetail & PersonCombinedCredits
     if (credits) {
       const filteredCredits = data.cast.filter(credit => credit && findAllYears(credit) === year)
       return {
+        id: year,
         year,
         credits: filteredCredits
       }
     }
 
     return {
+      id: Math.random() * new Date().getTime(),
       year,
       credits: []
     }
   })
 
   return actingData;
-}
-
-interface PersonInfo {
-  title: string;
-  value: string | number | string[];
 }
 
 const REQUIRED_PERSON_INFO = [
@@ -64,12 +72,14 @@ export const getPersonInfo = function(data: PersonDetail & PersonCombinedCredits
       case 'Known For':
         return {
           title: infoTitle,
-          value: 'known_for_department' in data && data.known_for_department ? data.known_for_department : 'N/A'
+          value: 'known_for_department' in data && data.known_for_department 
+            ? data.known_for_department : 'N/A'
         };
       case 'Known Credits':
         return {
           title: infoTitle,
-          value: 'also_known_as' in data && data.cast.filter(c => findAllYears(c) !== undefined).length > 0 ? data.cast.length : 'N/A'
+          value: 'also_known_as' in data && data.cast.filter(c => findAllYears(c) !== undefined).length > 0 
+            ? data.cast.length : 'N/A'
         };
       case 'Gender':
         return {
@@ -79,17 +89,20 @@ export const getPersonInfo = function(data: PersonDetail & PersonCombinedCredits
       case 'Birthday':  
         return {
           title: infoTitle,
-          value: 'birthday' in data ? `${formatDateToReadable(data.birthday)} (${new Date().getFullYear() - new Date(data.birthday).getFullYear()} years old)` : 'N/A'
+          value: 'birthday' in data ? `${formatDateToReadable(data.birthday)} 
+            (${new Date().getFullYear() - new Date(data.birthday).getFullYear()} years old)` : 'N/A'
         };
       case 'Place of Birth':
         return {
           title: infoTitle,
-          value: 'place_of_birth' in data && data.place_of_birth ? data.place_of_birth : 'N/A'
+          value: 'place_of_birth' in data && data.place_of_birth 
+            ? data.place_of_birth : 'N/A'
         };
       case 'Also Known As':
         return {
           title: infoTitle,
-          value: 'also_known_as' in data && data.also_known_as.length > 0 ? data.also_known_as.join(', ') : 'N/A'
+          value: 'also_known_as' in data && data.also_known_as.length > 0 
+            ? data.also_known_as.join(', ') : 'N/A'
         };
       default:
         return {
@@ -99,4 +112,36 @@ export const getPersonInfo = function(data: PersonDetail & PersonCombinedCredits
     }
   });
   return newData;
+}
+
+export const getCrewData = function(data: PersonDetail & PersonCombinedCredits | AppError): CrewInfo[] {
+  if(!('crew' in data)) return [];
+
+  const crewDepartment = data.crew.map(credit => credit.department)
+  const uniqueDepartments = Array.from(new Set(crewDepartment))
+    .filter(dept => dept !== undefined)
+  
+  const crewData: CrewInfo[] = uniqueDepartments.map(dept => {
+    const credits: (PersonMovieCredit | PersonTvCredit)[] = data.crew.map(credit => {
+      if(credit.department === dept)
+        return {
+          ...credit,
+          year: findAllYears(credit)
+        };
+
+      return credit;
+    })
+
+    return {
+      department: dept,
+      credits: credits.filter(credit => credit.department === dept).sort((a, b) => {
+        const yearA = findAllYears(a) || 0;
+        const yearB = findAllYears(b) || 0;
+        return yearB - yearA;
+      })
+    }
+      
+  })
+
+  return crewData;
 }

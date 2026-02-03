@@ -29,6 +29,8 @@ export interface PersonMovieCredit extends MovieSummary {
     character: string;
     credit_id: string;
     order: number;
+    department: string;
+    job: string;
 }
 
 export interface PersonTvCredit extends TvShowSummary {
@@ -41,6 +43,7 @@ export interface PersonTvCredit extends TvShowSummary {
 export interface PersonCombinedCredits {
     id: number;
     cast: PersonMovieCredit[] | PersonTvCredit[];
+    crew: PersonMovieCredit[] | PersonTvCredit[];
 }
 
 export interface PersonImages {
@@ -51,11 +54,13 @@ export interface PersonImages {
 export interface PersonMovieCredits {
     id: number;
     cast: PersonMovieCredit[];
+    crew: PersonMovieCredit[];
 }
 
 export interface PersonTvCredits {
     id: number;
     cast: PersonTvCredit[];
+    crew: PersonTvCredit[];
 }
 
 export interface BaseCredit extends BasePerson {

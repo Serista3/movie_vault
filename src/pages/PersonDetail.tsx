@@ -1,7 +1,7 @@
-import { type LoaderFunctionArgs, useLoaderData, Link } from "react-router"
+import { type LoaderFunctionArgs, useLoaderData } from "react-router"
 import { getPerson, getPersonCombinedCredits } from "../services/people.service";
 import type { PersonDetail, PersonCombinedCredits, AppError } from "../types";
-import { getActingData } from "../utils/helperPerson";
+import { getActingData, getCrewData } from "../utils/helperPerson";
 
 import ExplorerLayout from "../components/layout/ExplorerLayout";
 import ErrorMessage from "../components/common/ErrorMessage";
@@ -10,10 +10,12 @@ import Heading from "../components/common/Heading";
 import Paragraph from "../components/common/Paragraph";
 import MediaGrid from "../components/media/MediaGrid";
 import PersonInfo from "../components/PersonInfo";
+import Filmography from "../components/Filmography";
 
 export default function PersonDetail(){
   const data = useLoaderData<PersonDetail & PersonCombinedCredits | AppError>();
   const actingData = getActingData(data);
+  const crewData = getCrewData(data);
 
   return (
     <>
@@ -38,43 +40,25 @@ export default function PersonDetail(){
                 </div>
                 <div className="acting flex flex-col gap-3">
                   <Heading level={3}>{data.known_for_department}</Heading>
-                  <div className="p-6 flex flex-col rounded-[10px] bg-tertiary-light text-secondary-light">
-                    {actingData.length > 0 && (
-                      actingData.map(acting => (
-                        <div 
-                          key={acting.year} 
-                          className="pb-6 mb-3 not-last:border-b border-gray-light last:mb-0 flex items-start gap-4"
-                        >
-                          <div className="flex items-center gap-4">
-                            <Heading level={4} className="font-normal">{acting.year}</Heading>
-                            <hr className="w-10 h-0.5 text-gray-dark" />
-                          </div>
-                          
-                          <div>
-                            {acting.credits.map(credit => (
-                              <div key={credit.credit_id}>                
-                                <Link 
-                                  to={`/${'title' in credit ? 'movie' : 'tv'}/${credit.id}`}
-                                  className="hover:text-primary-dark transition-all font-semibold line-clamp-1"
-                                >
-                                  { 'title' in credit ? credit.title : credit.name }
-                                </Link>
-                                <Paragraph className="mb-2">
-                                  as { 'character' in credit && credit.character ? credit.character : '-'}
-                                </Paragraph>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))
-                    )}
-                    {actingData.length === 0 && (
-                      <Paragraph>
-                        No {data.known_for_department} credits available.
-                      </Paragraph>
-                    )}
-                  </div>
+                  <Filmography data={actingData} />
+                  {actingData.length === 0 && (
+                    <Paragraph>
+                      No {data.known_for_department} credits available.
+                    </Paragraph>
+                  )}
                 </div>
+                {crewData.length > 0 && 
+                  crewData.map(crew => (
+                    <div key={crew.department} className="acting flex flex-col gap-3">
+                      <Heading level={3}>{crew.department}</Heading>
+                      <Filmography data={crew.credits} />
+                      {crew.credits.length === 0 && (
+                        <Paragraph>
+                          No {crew.department} credits available.
+                        </Paragraph>
+                      )}
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
