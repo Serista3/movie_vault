@@ -1,24 +1,31 @@
-export const SORT_BASE_OPTIONS = [
+import type { SortBy, Monetization } from "../types";
+
+interface SortOption {
+  label: string;
+  value: SortBy;
+}
+
+export const SORT_BASE_OPTIONS: SortOption[] = [
   { label: 'Popularity Descending', value: 'popularity.desc' },
   { label: 'Popularity Ascending', value: 'popularity.asc' },
   { label: 'Rating Descending', value: 'vote_average.desc' },
   { label: 'Rating Ascending', value: 'vote_average.asc' },
 ];
 
-export const SORT_MOVIE_OPTIONS = [ 
+export const SORT_MOVIE_OPTIONS: SortOption[] = [
   ...SORT_BASE_OPTIONS,
-  { label: 'Release Date Descending', value: 'release_date.desc' },
-  { label: 'Release Date Ascending', value: 'release_date.asc' },
-  { label: 'Title (Z-A)', value: 'original_title.desc' },
-  { label: 'Title (A-Z)', value: 'original_title.asc' },
+  { label: 'Release Date Descending', value: 'primary_release_date.desc' },
+  { label: 'Release Date Ascending', value: 'primary_release_date.asc' },
+  { label: 'Title (Z-A)', value: 'title.desc' },
+  { label: 'Title (A-Z)', value: 'title.asc' },
 ];
 
-export const SORT_TV_OPTIONS = [
+export const SORT_TV_OPTIONS: SortOption[] = [
   ...SORT_BASE_OPTIONS,
   { label: 'First Air Date Descending', value: 'first_air_date.desc' },
   { label: 'First Air Date Ascending', value: 'first_air_date.asc' },
-  { label: 'Name (Z-A)', value: 'original_name.desc' },
-  { label: 'Name (A-Z)', value: 'original_name.asc' },
+  { label: 'Name (Z-A)', value: 'name.desc' },
+  { label: 'Name (A-Z)', value: 'name.asc' },
 ]
 
 export const SELECT_ADULT_OPTIONS = [
@@ -26,7 +33,7 @@ export const SELECT_ADULT_OPTIONS = [
   { label: 'Exclude Adult', value: 'false' },
 ];
 
-export const AVAILABILITY_OPTIONS = [
+export const AVAILABILITY_OPTIONS: { label: string; value: Monetization }[] = [
   { label: 'Stream', value: 'flatrate' },
   { label: 'Free', value: 'free' },
   { label: 'Ads', value: 'ads' },

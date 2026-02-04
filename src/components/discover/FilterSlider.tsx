@@ -1,6 +1,9 @@
 // --- RADIX COMPONENTS ---
 import { Slider } from "radix-ui";
 
+// --- HELPERS ---
+import { cn } from "../../utils/helperClassName";
+
 // --- TYPES FOR FILTER SLIDER PROPS ---
 interface FilterSliderProps {
   value: number[];
@@ -29,13 +32,22 @@ export default function FilterSlider({
       <Slider.Track className="relative h-0.5 grow rounded-full bg-gray-dark">
         <Slider.Range className="absolute h-full rounded-full bg-tertiary-light" />
       </Slider.Track>
-      {value.map((_, index) => (
+      {value.map((val, index) => (
         <Slider.Thumb
           key={index}
           className="block size-4 rounded-[10px] bg-tertiary-light hover:bg-primary-light 
           focus:size-4.5 focus:bg-primary-light focus:outline-none cursor-grab active:cursor-grabbing"
           aria-label="Value"
-        />
+        >
+          {/* --- VALUE LABEL --- */}
+          <div className={cn(
+            "absolute -top-8 left-1/2 -translate-x-1/2",
+            "bg-secondary-dark text-tertiary-light text-sm py-1 px-2 rounded",
+            "min-w-8 text-center shadow-sm opacity-100 transition-opacity"
+          )}>
+            {val}
+          </div>
+        </Slider.Thumb>
       ))}
     </Slider.Root>
   )

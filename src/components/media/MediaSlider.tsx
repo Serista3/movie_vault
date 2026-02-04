@@ -64,7 +64,7 @@ export default function MediaSlider() {
                 <Image 
                   src={'backdrop_path' in item ? item.backdrop_path : null} 
                   alt={`Slide ${item.id}`} 
-                  containerClassName="h-full absolute top-0 left-0" 
+                  containerClassName="h-full absolute top-0 left-0 rounded-none" 
                 />
                 <div className="w-full h-full absolute top-0 left-0 backdrop-brightness-50">
                   <div className="max-w-300 h-full px-4 py-6 flex flex-col justify-end mx-auto">
