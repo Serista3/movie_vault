@@ -1,11 +1,14 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- TYPES FOR MEDIA RATING PROPS ---
 interface MediaRatingProps {
   rating: number | string;
   size?: number;
   className?: string;
 }
 
+// --- FUNCTION TO CALCULATE RATING COLORS ---
 const calCuratedRatingColors = function(rating: number): string{
   switch(true){
     case rating >= 70:
@@ -26,6 +29,7 @@ export default function MediaRating({
   size = 52,
   className = ''
 }: MediaRatingProps) {
+  // --- CIRCLE CALCULATIONS ---
   const strokeWidth = size / 20;
   const radius = 18 - (strokeWidth / 2);
   const circumference = 2 * Math.PI * radius;
@@ -35,8 +39,11 @@ export default function MediaRating({
   return (
     <div 
       style={{ width: size, height: size }} 
-      className={cn(className, BASE_CLASS)}>
+      className={cn(className, BASE_CLASS)}
+    >
       {rating}{rating !== 'N/A' && '%'}
+      
+      {/* --- SVG CIRCLE --- */}
       <svg className="-rotate-90 size-full absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <circle 
           cx="18" 

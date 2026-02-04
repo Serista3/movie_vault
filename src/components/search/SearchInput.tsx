@@ -1,9 +1,14 @@
+// --- ICONS ---
 import { IconContext } from "react-icons"
 import { IoIosSearch } from "react-icons/io"
+
+// --- COMPONENTS ---
 import Input from "../common/Input"
 
+// --- ROUTER ---
 import { useSearchParams } from "react-router"
 
+// --- TYPES FOR SEARCH INPUT PROPS ---
 interface SearchInputProps {
     onSubmitSearch: (event: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -16,6 +21,7 @@ export default function SearchInput({ onSubmitSearch }: SearchInputProps) {
 
     return (
         <form onSubmit={onSubmitSearch} className={DEFAULT_FORM_CLASS}>
+            {/* --- SEARCH INPUT --- */}
             <Input 
                 id="main-search-bar"
                 name="main-search-bar"
@@ -24,6 +30,8 @@ export default function SearchInput({ onSubmitSearch }: SearchInputProps) {
                 defaultValue={queryParam}
                 className="rounded-none px-0 pl-11 border-0 mx-auto" 
             >
+                
+                {/* --- SEARCH ICON --- */}
                 <IconContext.Provider 
                     value={{ className: 'text-xl text-primary-light absolute left-3 top-1/2 -translate-y-1/2' }}
                 >

@@ -1,13 +1,18 @@
+// --- HOOKS && REACT COMPONENT --- 
 import { Suspense } from 'react';
 import { Await, Link, useFetcher } from 'react-router';
+
+// --- TYPES ---
 import type { User, AppError } from '../../types';
 
+// --- COMPONENTS ---
 import Button from '../common/Button';
 import DropdownMenu  from '../common/DropdownMenu';
 import UserAvatar from './UserAvatar';
 
 const BASE_LINK_CLASS = `inline-block w-full text-tertiary-light hover:text-primary-light transition-colors duration-300`;
 
+// --- TYPES FOR USER MENU PROPS ---
 interface UserMenuProps {
   userData: User | AppError;
   isAuthenticated: boolean;
@@ -18,6 +23,7 @@ export default function UserMenu({ userData, isAuthenticated }: UserMenuProps) {
 
   return (
     <DropdownMenu className='user-menu' menuTrigger={
+      // --- USER AVATAR WITH USERNAME ---
         <Suspense fallback={<div>Anonymous</div>}>
           <Await resolve={userData} errorElement={<div>Error loading user</div>}>
             {data => <UserAvatar data={data} isAuthenticated={isAuthenticated} />} 
@@ -25,6 +31,8 @@ export default function UserMenu({ userData, isAuthenticated }: UserMenuProps) {
         </Suspense>
       }
     >
+
+      {/* --- DROPDOWN MENU ITEMS --- */}
       <li className='w-full'>
         <Link to="/favorite" className={BASE_LINK_CLASS}>
           Favorite
@@ -35,6 +43,8 @@ export default function UserMenu({ userData, isAuthenticated }: UserMenuProps) {
           Watchlist
         </Link>
       </li>
+
+      {/* --- LOGOUT BUTTON --- */}
       <li className='w-full'>
           <fetcher.Form method="post" action="/">
             <Button

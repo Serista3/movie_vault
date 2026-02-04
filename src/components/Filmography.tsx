@@ -1,11 +1,18 @@
+// --- ROUTER ---
 import { Link } from "react-router"
+
+// --- TYPES ---
 import type { PersonMovieCredit, PersonTvCredit } from "../types";
+
+// --- HELPERS ---
 import type { ActingInfo } from "../utils/helperPerson";
 import { cn } from "../utils/helperClassName";
 
+// --- COMPONENTS ---
 import Heading from "./common/Heading"
 import Paragraph from "./common/Paragraph"
 
+// --- TYPES FOR FILMOGRAPHY PROPS ---
 interface FilmographyProps {
   data: (ActingInfo | (PersonMovieCredit | PersonTvCredit))[];
   className?: string;
@@ -16,6 +23,7 @@ const BASE_CLASS = "p-4 flex flex-col rounded-[10px] bg-tertiary-light text-seco
 export default function Filmography({ data, className }: FilmographyProps) {
   return (
     <div className={cn(BASE_CLASS, className)}>
+    {/* --- FILMOGRAPHY LIST --- */}
     {data.length > 0 && (
       data.map(acting => (
         <div 
@@ -24,13 +32,16 @@ export default function Filmography({ data, className }: FilmographyProps) {
         >
           <div className="flex flex-col gap-2">
             {('credits' in acting ? acting.credits : [acting]).map(credit => (
-              <div key={credit.credit_id} className="flex items-start gap-4">           
+              <div key={credit.credit_id} className="flex items-start gap-4">
+                {/* --- CREDIT YEAR --- */}      
                 <div className="flex items-center gap-4">
                   <Heading level={4} className="font-normal">
                     {'year' in acting && acting.year ? acting.year : '-'}
                   </Heading>
                   <hr className="w-10 h-0.5 text-gray-dark" />
                 </div>
+
+                {/* --- CREDIT INFO --- */}
                 <div>
                   <Link 
                     to={`/${'title' in credit ? 'movie' : 'tv'}/${credit.id}`}
