@@ -19,10 +19,9 @@ export default function GenresProvider({ children }: {children: React.ReactNode}
 
   const fetchGenres = useCallback(async function() {
     const [movieGenres, tvGenres] = await Promise.all([getGenreMovieList(), getGenreTvList()]);
-    setMovieGenres(Array.isArray(movieGenres) ? movieGenres : []);
-    setTvGenres(Array.isArray(tvGenres) ? tvGenres : []);
+    setMovieGenres('genres' in movieGenres && Array.isArray(movieGenres.genres) ? movieGenres.genres : []);
+    setTvGenres('genres' in tvGenres && Array.isArray(tvGenres.genres) ? tvGenres.genres : []);
   }, []);
-
 
   useEffect(() => {
     fetchGenres();

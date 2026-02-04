@@ -16,12 +16,12 @@ const BASE_CLASS = `w-full bg-secondary-light text-tertiary-light py-2 px-3 roun
   border border-gray-dark hover:border-gray-light transition-all duration-300 cursor-pointer
   appearance-none`;
 
-export default function Select({ name, defaultValue, items, className }: SelectProps) {
+export default function Select({ items, className, ...props }: SelectProps) {
   return (
     <div className="w-full relative">
-      <select name={name} defaultValue={defaultValue} className={cn(BASE_CLASS, className)}>
+      <select {...props} className={cn(BASE_CLASS, className)}>
         {items && items.map(item => (
-          <option key={item.label} value={item.value}>
+          <option key={item.value} value={item.value}>
             {item.label}
           </option>
         ))}

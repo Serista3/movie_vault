@@ -8,7 +8,7 @@ import ExplorerLayout from "../components/layout/ExplorerLayout";
 import Pagination from "../components/common/Pagination";
 import MediaGrid from "../components/media/MediaGrid";
 import ErrorMessage from "../components/common/ErrorMessage";
-import DiscoverControls from "../components/DiscoverControls";
+import DiscoverControls from "../components/discover/DiscoverControls";
 
 export default function Movie() {
   const moviesData = useLoaderData<MediaResponse<MovieSummary> | AppError>();

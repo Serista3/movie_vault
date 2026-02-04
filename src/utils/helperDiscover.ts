@@ -21,29 +21,36 @@ export const SORT_TV_OPTIONS = [
   { label: 'Name (A-Z)', value: 'original_name.asc' },
 ]
 
-export const GENRES_OPTIONS = [
-  { label: 'Action', value: 28 },
-  { label: 'Adventure', value: 12 },
-  { label: 'Animation', value: 16 },
-  { label: 'Comedy', value: 35 },
-  { label: 'Crime', value: 80 },
-  { label: 'Documentary', value: 99 },
-  { label: 'Drama', value: 18 },
-  { label: 'Family', value: 10751 },
-  { label: 'Fantasy', value: 14 },
-  { label: 'History', value: 36 },
-  { label: 'Horror', value: 27 },
-  { label: 'Music', value: 10402 },
-  { label: 'Mystery', value: 9648 },
-  { label: 'Romance', value: 10749 },
-  { label: 'Science Fiction', value: 878 },
-  { label: 'TV Movie', value: 10770 },
-  { label: 'Thriller', value: 53 },
-  { label: 'War', value: 10752 },
-  { label: 'Western', value: 37 },
-];
-
 export const SELECT_ADULT_OPTIONS = [
   { label: 'Include Adult', value: 'true' },
   { label: 'Exclude Adult', value: 'false' },
 ];
+
+export const AVAILABILITY_OPTIONS = [
+  { label: 'Stream', value: 'flatrate' },
+  { label: 'Free', value: 'free' },
+  { label: 'Ads', value: 'ads' },
+  { label: 'Rent', value: 'rent' },
+  { label: 'Buy', value: 'buy' },
+];
+
+export const USER_SCORE_OPTION = { 
+  value: [0, 10],
+  min: 0, 
+  max: 10, 
+  step: 1 
+};
+
+export const MINIMUN_VOTES_OPTION = { 
+  value: [0], 
+  min: 0, 
+  max: 500, 
+  step: 50 
+};
+
+export const RUNNING_TIME_OPTION = { 
+  value: [0, 400],
+  min: 0, 
+  max: 400, 
+  step: 15 
+};
