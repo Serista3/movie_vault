@@ -10,3 +10,4 @@ export * from './tvShow';
 export * from './network';
 export * from './nav';
 export * from './discover';
+export * from './certification'

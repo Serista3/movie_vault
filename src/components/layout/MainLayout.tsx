@@ -4,6 +4,9 @@ import { usePageLoader } from '../../hooks/usePageLoader';
 import { getCurrentUser, createSession, deleteSession } from '../../services/auth.service';
 
 import ModalProvider from '../../store/ModalContext';
+import GenresProvider from '../../store/GenresContext';
+import ConfigProvider from '../../store/ConfigContext';
+
 import MainNavigation from './MainNavigation';
 import FooterNavigation from './FooterNavigation';
 import ProgressBar from '../common/ProgressBar';
@@ -13,18 +16,22 @@ export default function MainLayout() {
 
   return (
     <ModalProvider>
-      {progress > 0 && (
-        <ProgressBar 
-          progress={progress} 
-          progressBarClass="h-[3px] fixed top-0 left-0 z-70" 
-          progressBarFillClass="bg-emerald-500 transition-all duration-300 ease-in" 
-        />
-      )}
-      <MainNavigation />
-      <div className='main min-h-screen'>
-        <Outlet />
-      </div>
-      <FooterNavigation />
+      <GenresProvider>
+        <ConfigProvider>
+          {progress > 0 && (
+            <ProgressBar 
+              progress={progress} 
+              progressBarClass="h-[3px] fixed top-0 left-0 z-70" 
+              progressBarFillClass="bg-emerald-500 transition-all duration-300 ease-in" 
+            />
+          )}
+          <MainNavigation />
+          <div className='main min-h-screen'>
+            <Outlet />
+          </div>
+          <FooterNavigation />
+        </ConfigProvider>
+      </GenresProvider>
     </ModalProvider>
   );
 }
