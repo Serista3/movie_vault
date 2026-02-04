@@ -1,5 +1,7 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- TYPES FOR PARAGRAPH PROPS ---
 interface ParagraphProps {
     className?: string;
     children?: React.ReactNode;

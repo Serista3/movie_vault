@@ -1,5 +1,7 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- TYPES FOR CARD PROPS ---
 interface CardProps {
   className?: string;
   children?: React.ReactNode;
@@ -9,8 +11,7 @@ const BASE_CLASS = "card overflow-hidden rounded-[10px] snap-center relative tra
 
 export default function Card({ className, children }: CardProps) {
   return (
-    <div 
-      className={cn(BASE_CLASS, className)}>
+    <div className={cn(BASE_CLASS, className)}>
       {children}
     </div>
   );

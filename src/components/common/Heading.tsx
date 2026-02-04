@@ -1,12 +1,16 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- TYPES FOR HEADING PROPS ---
 interface HeadingProps {
     level?: 1 | 2 | 3 | 4 | 5 | 6;
     className?: string;
     children?: React.ReactNode;
 }
 
+// --- BASE AND LEVEL CLASS NAMES ---
 const BASE_CLASS = "font-semibold";
+
 const LEVEL_CLASSES = {
     1: "text-3xl",
     2: "text-2xl",
@@ -17,9 +21,14 @@ const LEVEL_CLASSES = {
 }
 
 export default function Heading({ level = 1, className, children }: HeadingProps) {
+    // --- COMPUTED CLASS NAMES ---
+    const headingClass = cn(BASE_CLASS, LEVEL_CLASSES[level], className);
+
+    // --- DYNAMIC TAG RENDERING ---
     const Tag = `h${level}` as React.ElementType;
+
     return (
-        <Tag className={cn(BASE_CLASS, LEVEL_CLASSES[level], className)}>
+        <Tag className={headingClass}>
             {children}
         </Tag>
     )

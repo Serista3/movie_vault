@@ -1,7 +1,10 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- ICONS ---
 import { FaCaretDown } from "react-icons/fa";
 
+// --- TYPES FOR SELECT PROPS ---
 interface OptionItem {
   label: string;
   value: string;
@@ -19,7 +22,10 @@ const BASE_CLASS = `w-full bg-secondary-light text-tertiary-light py-2 px-3 roun
 export default function Select({ items, className, ...props }: SelectProps) {
   return (
     <div className="w-full relative">
+      {/* --- SELECT CONTROL --- */}
       <select {...props} className={cn(BASE_CLASS, className)}>
+
+        {/* --- OPTIONS --- */}
         {items && items.map(item => (
           <option key={item.value} value={item.value}>
             {item.label}

@@ -1,5 +1,7 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- TYPES FOR PROGRESS BAR PROPS ---
 interface ProgressBarProps {
   progress: number;
   progressBarClass?: string;
@@ -12,7 +14,12 @@ const FILL_CLASS = "progress-bar-fill h-full";
 export default function ProgressBar({ progress, progressBarClass, progressBarFillClass }: ProgressBarProps) {
   return (
     <div className={cn(BASE_CLASS, progressBarClass)}>
-      <div className={cn(FILL_CLASS, progressBarFillClass)} style={{ width: `${progress}%` }}></div>
+      {/* --- PROGRESS BAR FILL --- */}
+      <div 
+        className={cn(FILL_CLASS, progressBarFillClass)} 
+        style={{ width: `${progress}%` }}
+      >
+      </div>
     </div>
   )
 }

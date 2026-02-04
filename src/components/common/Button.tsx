@@ -1,5 +1,7 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- TYPES FOR BUTTON PROPS ---
 type Variant = 'primary' | 'secondary' | 'tertiary' | 'danger';
 type Shape = 'rounded' | 'circular' | 'capsule';
 
@@ -7,12 +9,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   shape?: Shape;
   className?: string;
-  onClick?: () => void;
   children?: React.ReactNode;
 }
 
-const BASE = "button py-2 font-medium shadow-xl cursor-pointer transition-all duration-300 border border-transparent relative";
+const BASE_CLASS = "button py-2 font-medium shadow-xl cursor-pointer transition-all duration-300 border border-transparent relative";
 
+// --- VARIANTS AND SHAPES CLASS NAMES ---
 const VARIANTS: { [key in Variant]: string } = {
   primary: "text-secondary-light bg-primary-light hover:bg-primary-dark",
   secondary: "text-tertiary-light bg-secondary-light hover:bg-secondary-dark",
@@ -26,12 +28,23 @@ const SHAPES: { [key in Shape]: string } = {
   capsule: "rounded-full px-4"
 }
 
-export default function Button({ children, className, variant = 'primary', shape = 'rounded', ...props }: ButtonProps) {
+export default function Button({ 
+  variant = 'primary',
+  shape = 'rounded',
+  className, 
+  children, 
+  ...props 
+}: ButtonProps) {
+  // --- COMPUTED CLASS NAMES ---
+  const buttonClass = cn(
+    BASE_CLASS,
+    VARIANTS[variant],
+    SHAPES[shape],
+    className
+  )
+
   return (
-    <button 
-      className={cn(BASE, VARIANTS[variant], SHAPES[shape], className)} 
-      {...props}
-    >
+    <button className={buttonClass} {...props}>
       {children}
     </button>
   );
