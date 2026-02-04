@@ -1,9 +1,13 @@
+// --- HELPERS ---
 import { AVAILABILITY_OPTIONS } from "../../utils/helperDiscover"
 import { cn } from "../../utils/helperClassName"
+
+// --- COMPONENTS & RADIX ---
 import Paragraph from "../common/Paragraph"
 import { Checkbox } from "radix-ui";
 import { CheckIcon } from "@radix-ui/react-icons";
 
+// --- TYPES FOR AVAILABILITY FILTER PROPS ---
 interface AvailabilityFilterProps {
   onChange: (value: string) => void; 
   selected: string[];
@@ -13,7 +17,10 @@ interface AvailabilityFilterProps {
 export default function AvailabilityFilter({ onChange, selected, className }: AvailabilityFilterProps) {
   return (
     <div className={cn(className)}>
+      {/* --- AVAILABILITY FILTER --- */}
       <Paragraph className="text-base mb-4">Availabilities</Paragraph>
+      
+      {/* --- AVAILABILITY OPTIONS --- */}
       <div className="flex flex-col gap-4">
         {AVAILABILITY_OPTIONS.map(option => (
           <div key={option.value} className="flex items-center mb-1">

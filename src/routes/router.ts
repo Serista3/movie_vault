@@ -4,7 +4,7 @@ import { loader as homeLoader } from '../pages/home/loader';
 import Search, { loader as searchLoader } from '../pages/Search';
 import Movies, { loader as moviesLoader } from '../pages/Movies';
 import MediaDetail, { loader as mediaDetailLoader } from '../pages/MediaDetail';
-import TvShows from '../pages/TvShows';
+import TvShows, { loader as tvShowsLoader } from '../pages/TvShows';
 import People, { loader as peopleLoader } from '../pages/People';
 import PersonDetail, { loader as personDetailLoader } from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       ] },
       { path: 'movie', Component: Movies, loader: moviesLoader },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
-      { path: 'tv', Component: TvShows },
+      { path: 'tv', Component: TvShows, loader: tvShowsLoader },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },
       { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },

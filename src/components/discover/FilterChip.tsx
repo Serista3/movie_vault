@@ -1,7 +1,10 @@
+// --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
 
+// --- COMPONENTS ---
 import Button from "../common/Button";
 
+// --- TYPES FOR FILTER CHIP PROPS ---
 interface FilterChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   isSelected?: boolean;

@@ -1,5 +1,7 @@
+// --- RADIX COMPONENTS ---
 import { Slider } from "radix-ui";
 
+// --- TYPES FOR FILTER SLIDER PROPS ---
 interface FilterSliderProps {
   value: number[];
   min: number;

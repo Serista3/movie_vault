@@ -10,7 +10,7 @@ import MediaGrid from "../components/media/MediaGrid";
 import ErrorMessage from "../components/common/ErrorMessage";
 import DiscoverControls from "../components/discover/DiscoverControls";
 
-export default function Movie() {
+export default function Movies() {
   const moviesData = useLoaderData<MediaResponse<MovieSummary> | AppError>();
   const moviesTotalPages = moviesData && 'total_pages' in moviesData ? moviesData.total_pages : 1;
   const { curPage, totalPages, handlePageChange } = usePagination(moviesTotalPages);
