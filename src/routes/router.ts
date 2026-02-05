@@ -2,9 +2,8 @@ import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from
 import Home from '../pages/home/Home';
 import { loader as homeLoader } from '../pages/home/loader';
 import Search, { loader as searchLoader } from '../pages/Search';
-import Movies, { loader as moviesLoader } from '../pages/Movies';
+import Discover, { discoverMovieLoader, discoverTvShowLoader } from '../pages/discover';
 import MediaDetail, { loader as mediaDetailLoader } from '../pages/MediaDetail';
-import TvShows, { loader as tvShowsLoader } from '../pages/TvShows';
 import People, { loader as peopleLoader } from '../pages/People';
 import PersonDetail, { loader as personDetailLoader } from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
@@ -48,9 +47,9 @@ const router = createBrowserRouter([
           Component: Search 
         }
       ] },
-      { path: 'movie', Component: Movies, loader: moviesLoader },
+      { path: 'movie', Component: Discover, loader: discoverMovieLoader },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
-      { path: 'tv', Component: TvShows, loader: tvShowsLoader },
+      { path: 'tv', Component: Discover, loader: discoverTvShowLoader },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },
       { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },

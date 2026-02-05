@@ -32,7 +32,7 @@ interface DiscoverControlsProps {
 
 export default function DiscoverControls({ mediaType, className }: DiscoverControlsProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isAccordionOpen, setIsAccordionOpen] = useState({ sort: false, filters: false });
+  const [isAccordionOpen, setIsAccordionOpen] = useState({ sort: false, filters: true });
   
   // --- STORE DATA ---
   const { movieGenres, tvGenres } = useGenres();
