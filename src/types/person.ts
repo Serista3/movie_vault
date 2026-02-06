@@ -63,7 +63,7 @@ export interface PersonTvCredits {
     crew: PersonTvCredit[];
 }
 
-export interface BaseCredit extends BasePerson {
+export interface BaseCredit extends PersonSummary {
     original_name: string;
     credit_id: string;
 }

@@ -55,7 +55,7 @@ export const getTvShowRecommendations = async function(tvShowId: number, page: n
   return tmdbFetch<MediaResponse<TvShowSummary>>(`/tv/${tvShowId}/recommendations?language=en-US&page=${page}`);
 }
 
-export const getTvReviews = async function(tvShowId: number, page: number): Promise<MediaResponse<ReviewSummary> | AppError>{
+export const getTvShowReviews = async function(tvShowId: number, page: number): Promise<MediaResponse<ReviewSummary> | AppError>{
   return tmdbFetch<MediaResponse<ReviewSummary>>(`/tv/${tvShowId}/reviews?language=en-US&page=${page}`);
 }
 

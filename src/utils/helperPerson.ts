@@ -3,7 +3,11 @@ import type {
   PersonMovieCredit, 
   PersonTvCredit, 
   PersonDetail,
-  AppError
+  CreditCastMember,
+  CreditCrewMember,
+  MediaSummary,
+  AppError,
+  PersonSummary
 } from "../types";
 import { formatDateToReadable } from "../utils/formatters";
 
@@ -144,4 +148,23 @@ export const getCrewData = function(data: PersonDetail & PersonCombinedCredits |
   })
 
   return crewData;
+}
+
+export interface PersonSummaryData {
+  personImg: string | null;
+  personName: string;
+  personSubtitle: string | MediaSummary[];
+}
+
+export const getPersonSummaryData = function(person: PersonSummary | CreditCastMember | CreditCrewMember): PersonSummaryData {
+  const personImg = person.profile_path;
+  const personName = person.name;
+  const personSubtitle = 'known_for' in person && person.known_for 
+    ? person.known_for : 'character' in person ? person.character : 'job' in person ? person.job : 'no subtitle';
+
+  return {
+    personImg,
+    personName,
+    personSubtitle,
+  }
 }

@@ -42,7 +42,8 @@ export interface MovieAccountStates {
 
 export interface MovieCredits {
     id: number;
-    cast: CreditCastMember[] | CreditCrewMember[];
+    cast: CreditCastMember[];
+    crew: CreditCrewMember[];
 }
 
 export interface MovieExternalIds {

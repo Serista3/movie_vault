@@ -27,7 +27,7 @@ export default function Filmography({ data, className }: FilmographyProps) {
     {data.length > 0 && (
       data.map(acting => (
         <div 
-          key={'id' in acting ? acting.id : Math.random() * new Date().getTime()} 
+          key={'id' in acting ? acting.id : new Date().getTime()} 
           className="py-3 not-last:border-b border-gray-light"
         >
           <div className="flex flex-col gap-2">
@@ -61,6 +61,11 @@ export default function Filmography({ data, className }: FilmographyProps) {
           </div>
         </div>
       ))
+    )}
+    {data.length === 0 && (
+      <div className="text-secondary-dark text-center py-20">
+        No filmography data found.
+      </div>
     )}
   </div>
   )

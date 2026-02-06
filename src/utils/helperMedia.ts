@@ -1,8 +1,8 @@
 import { formatDateToReadable } from "./formatters";
-import type { MediaSummary } from "../types";
+import type { MediaSummary, MediaType } from "../types";
 
 export interface MediaSummaryData {
-  mediaCategory: 'movie' | 'tv' | 'person';
+  mediaCategory: MediaType;
   mediaImg: string | null;
   mediaTitle: string;
   mediaSubtitle: string | MediaSummary[];

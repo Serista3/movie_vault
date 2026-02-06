@@ -1,11 +1,14 @@
 // --- COMPONENTS ---
 import MediaCard from "./MediaCard"
+import PersonCard from "../PersonCard";
+import Paragraph from "../common/Paragraph";
 
 // --- TYPES ---
-import type { MediaSummary } from "../../types"
+import type { MediaSummary, PersonSummary } from "../../types"
 
 // --- HELPERS ---
 import { cn } from "../../utils/helperClassName";
+import { getMediaType } from "../../utils/helperMedia";
 
 // --- TYPES FOR MEDIA GRID PROPS ---
 type Orientation = 'horizontal' | 'vertical';
@@ -48,11 +51,13 @@ export default function MediaGrid({
 
   // --- LIMIT MEDIA LIST TO DISPLAY ---
   const minArrayLength = Math.min(mediaList.length, limit);
+  
+  const mediaType = mediaList.every(media => getMediaType(media) === 'person') ? 'person' : 'media';
 
   return (
     <div className={wrapperClass}>
       {/* --- MEDIA CARDS --- */}
-      {mediaList.length > 0 && mediaList.slice(0, minArrayLength).map((media) => (
+      {mediaType === 'media' && mediaList.length > 0 && mediaList.slice(0, minArrayLength).map((media) => (
         <MediaCard 
           key={media.id} 
           media={media} 
@@ -60,11 +65,20 @@ export default function MediaGrid({
         />
       ))}
 
+      {/* --- PERSON CARDS --- */}
+      {mediaType === 'person' && mediaList.length > 0 && mediaList.slice(0, minArrayLength).map((person) => (
+        <PersonCard 
+          key={person.id} 
+          person={person as PersonSummary} 
+          className={mediaCardClass}
+        />
+      ))}
+
       {/* --- NO MEDIA MESSAGE --- */}
       {mediaList.length === 0 && (
-        <div className="min-h-90 flex items-center justify-center text-tertiary-dark">
+        <Paragraph className="min-h-90 flex items-center justify-center">
           No media available.
-        </div>
+        </Paragraph>
       )}
     </div>
   )

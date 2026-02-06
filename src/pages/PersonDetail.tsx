@@ -39,11 +39,13 @@ export default function PersonDetail(){
                   <MediaGrid mediaList={data.cast} variant="horizontal" limit={10} />
                 </div>
                 <div className="acting flex flex-col gap-3">
-                  <Heading level={3}>{data.known_for_department}</Heading>
-                  <Filmography data={actingData} />
+                  <Heading level={3}>Acting</Heading>
+                  {actingData.length > 0 && (
+                    <Filmography data={actingData} />
+                  )}
                   {actingData.length === 0 && (
                     <Paragraph>
-                      No {data.known_for_department} credits available.
+                      No acting credits available.
                     </Paragraph>
                   )}
                 </div>
@@ -51,7 +53,9 @@ export default function PersonDetail(){
                   crewData.map(crew => (
                     <div key={crew.department} className="acting flex flex-col gap-3">
                       <Heading level={3}>{crew.department}</Heading>
-                      <Filmography data={crew.credits} />
+                      {crew.credits.length > 0 && (
+                        <Filmography data={crew.credits} />
+                      )}
                       {crew.credits.length === 0 && (
                         <Paragraph>
                           No {crew.department} credits available.

@@ -93,7 +93,9 @@ export interface TvShowContentRatings {
 }
 
 export interface TvShowCredits {
-  cast: CreditCastMember[] | CreditCrewMember[];
+  id: number;
+  cast: CreditCastMember[];
+  crew: CreditCrewMember[];
 }
 
 export interface TvShowEpisodeGroups {

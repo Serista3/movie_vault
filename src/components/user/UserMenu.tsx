@@ -24,7 +24,7 @@ export default function UserMenu({ userData, isAuthenticated }: UserMenuProps) {
   return (
     <DropdownMenu className='user-menu' menuTrigger={
       // --- USER AVATAR WITH USERNAME ---
-        <Suspense fallback={<div>Anonymous</div>}>
+        <Suspense fallback={<div>Loading user...</div>}>
           <Await resolve={userData} errorElement={<div>Error loading user</div>}>
             {data => <UserAvatar data={data} isAuthenticated={isAuthenticated} />} 
           </Await>

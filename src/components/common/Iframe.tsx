@@ -1,5 +1,5 @@
 // --- COMPONENTS ---
-import IframeSkeleton from "../skeleton/IframeSkeleton";
+import LoadingSpin from "../skeleton/LoadingSpin";
 
 // --- HOOKS ---
 import { useState } from "react";
@@ -40,7 +40,7 @@ export default function Iframe({ title = "Iframe", src, aspectRatio = "aspect-vi
   return (
     <div className={wrapperClass}>
       {/* --- IFRAME SKELETON --- */}
-      {hasSrc && !isLoaded && <IframeSkeleton />}
+      {hasSrc && !isLoaded && <LoadingSpin />}
 
       {/* --- IFRAME CONTENT --- */}
       {hasSrc && (
