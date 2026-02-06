@@ -3,6 +3,7 @@ import type {
   TvShowSummary, 
   TvShowDetail, 
   TvShowAccountStates, 
+  TvShowAggregateCredits,
   TvShowContentRatings, 
   TvShowCredits,
   TvShowEpisodeGroups,
@@ -11,7 +12,7 @@ import type {
   TvShowKeywords,
   TvShowVideos,
   ReviewSummary,
-  AppError
+  AppError,
 } from "../types";
 import { tmdbFetch } from "../utils/api";
 
@@ -25,6 +26,10 @@ export const getTvShow = async function(tvShowId: number): Promise<TvShowDetail 
 
 export const getTvShowAccountStates = async function(tvShowId: number, sessionId: string): Promise<TvShowAccountStates | AppError>{
   return tmdbFetch<TvShowAccountStates>(`/tv/${tvShowId}/account_states?session_id=${sessionId}`);
+}
+
+export const getTvShowAggregateCredits = async function(tvShowId: number): Promise<TvShowAggregateCredits | AppError>{
+  return tmdbFetch<TvShowAggregateCredits>(`/tv/${tvShowId}/aggregate_credits`);
 }
 
 export const getTvShowContentRatings = async function(tvShowId: number): Promise<TvShowContentRatings | AppError>{

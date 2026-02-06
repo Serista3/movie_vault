@@ -1,5 +1,5 @@
 import type { Media, MediaGenre, MediaLanguage, MediaCountry, MediaImage, MediaKeyword, MediaVideo } from "./media"
-import type { CreditCastMember, CreditCrewMember } from "./person";
+import type { CreditCastMember, CreditCrewMember, AggregateCreditsCastMember, AggregateCreditsCrewMember } from "./person";
 import type { CompanySummary } from "./company";
 import type { NetworkSummary } from "./network";
 
@@ -82,6 +82,12 @@ export interface TvShowAccountStates {
     value: number;
   };
   watchlist: boolean;
+}
+
+export interface TvShowAggregateCredits {
+  id: number;
+  cast: AggregateCreditsCastMember[];
+  crew: AggregateCreditsCrewMember[];
 }
 
 export interface TvShowContentRatings {

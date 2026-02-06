@@ -5,9 +5,10 @@ import type {
   PersonDetail,
   CreditCastMember,
   CreditCrewMember,
-  MediaSummary,
+  AggregateCreditsCastMember,
+  AggregateCreditsCrewMember,
   AppError,
-  PersonSummary
+  PersonSummary,
 } from "../types";
 import { formatDateToReadable } from "../utils/formatters";
 
@@ -153,14 +154,56 @@ export const getCrewData = function(data: PersonDetail & PersonCombinedCredits |
 export interface PersonSummaryData {
   personImg: string | null;
   personName: string;
-  personSubtitle: string | MediaSummary[];
+  personSubtitle: string;
 }
 
-export const getPersonSummaryData = function(person: PersonSummary | CreditCastMember | CreditCrewMember): PersonSummaryData {
+function isAggregateCast(p: any): p is AggregateCreditsCastMember {
+  return 'roles' in p && Array.isArray(p.roles);
+}
+
+function isAggregateCrew(p: any): p is AggregateCreditsCrewMember {
+  return 'jobs' in p && Array.isArray(p.jobs);
+}
+
+function isCast(p: any): p is CreditCastMember {
+  return 'character' in p;
+}
+
+function isCrew(p: any): p is CreditCrewMember {
+  return 'job' in p;
+}
+
+function isPersonSummary(p: any): p is PersonSummary {
+  return 'known_for' in p;
+}
+
+export const getPersonSummaryData = function(person: PersonSummary | CreditCastMember 
+  | CreditCrewMember | AggregateCreditsCastMember | AggregateCreditsCrewMember): PersonSummaryData {
   const personImg = person.profile_path;
   const personName = person.name;
-  const personSubtitle = 'known_for' in person && person.known_for 
-    ? person.known_for : 'character' in person ? person.character : 'job' in person ? person.job : 'no subtitle';
+  let personSubtitle = 'no subtitle';
+
+  if(isPersonSummary(person)) {
+    personSubtitle = person.known_for.map(item => 'title' in item ? item.title : item.original_name).join(', ');
+  }
+
+  if(isAggregateCast(person)) {
+    const roles = person.roles[0]?.character || 'No Role Info';
+    personSubtitle = roles
+  }
+
+  if(isAggregateCrew(person)) {
+    const jobs = person.jobs[0]?.job || 'No Job Info';
+    personSubtitle = jobs;
+  }
+
+  if(isCast(person)) {
+    personSubtitle = person.character;
+  }
+
+  if(isCrew(person)) {
+    personSubtitle = person.job;
+  }
 
   return {
     personImg,

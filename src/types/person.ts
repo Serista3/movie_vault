@@ -79,3 +79,25 @@ export interface CreditCrewMember extends BaseCredit {
     department: string;
     job: string;
 }
+
+export interface AggregateCreditsCastMember extends BaseCredit {
+    original_name: string;
+    roles: {
+        credit_id: string;
+        character: string;
+        episode_count: number;
+    }[];
+    total_episode_count: number;
+    order?: number;
+}
+
+export interface AggregateCreditsCrewMember extends BaseCredit {
+    original_name: string;
+    jobs: {
+        credit_id: string;
+        job: string;
+        episode_count: number;
+    }[];
+    department: string;
+    total_episode_count: number;
+}
