@@ -7,6 +7,7 @@ import type { AppError, MediaResponse, MediaSummary } from "../../types";
 
 // --- COMPONENTS ---
 import Button from "../common/Button";
+import LoadingSpin from "../skeleton/LoadingSpin";
 
 // --- CONSTANTS ---
 const MEDIA_TYPES = ['Movies', 'Tv Shows', 'People'];
@@ -38,7 +39,7 @@ export default function SearchResult({ countResults }: SearchResultProps) {
         Search Result
       </div>
       {/* --- SEARCH RESULT COUNTS --- */}
-      <Suspense fallback={<div>Loading counts...</div>}>
+      <Suspense fallback={<LoadingSpin />}>
         <Await resolve={countResults}>
           {countResults => {
             return (
