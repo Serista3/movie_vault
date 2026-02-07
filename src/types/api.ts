@@ -2,6 +2,8 @@ import type { User } from './auth';
 
 export interface TmdbSuccessResponse {
     success: boolean;
+    status_code?: number;
+    status_message?: string;
 }
 
 export interface TmdbErrorResponse {
