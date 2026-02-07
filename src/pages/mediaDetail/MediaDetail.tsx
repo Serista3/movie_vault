@@ -2,8 +2,9 @@
 import { useSelectTrailer } from "../../hooks/useSelectTrailer";
 import { useLoaderData,useLocation, useRouteLoaderData, Link } from "react-router"
 
-// --- LOADER DATA TYPES ---
+// --- TYPES ---
 import type { MediaDetailLoaderData } from "../../pages/mediaDetail/loader";
+import type { UserDataResponse } from "../../types";
 
 // --- HELPERS ---
 import { formatDateToReadable } from "../../utils/formatters";
@@ -24,6 +25,8 @@ import MediaSection from "../../components/media/MediaSection";
 
 // --- ICONS ---
 import { FaPlay } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { FaList } from "react-icons/fa";
 
 export default function MediaDetail(){
   const { 
@@ -33,10 +36,12 @@ export default function MediaDetail(){
     mediaReviews, 
     mediaRecommendations,
     mediaKeywords,
+    mediaAccountStates,
   } = useLoaderData<MediaDetailLoaderData>();
   const location = useLocation();
   const mediaType = location.pathname.split('/')[1] === 'movie' ? 'movie' : 'tv';
   const { handleSelectTrailer } = useSelectTrailer();
+  const { isAuthenticated, sessionId } = useRouteLoaderData('root') as UserDataResponse;
 
   return (
     <>
@@ -49,7 +54,7 @@ export default function MediaDetail(){
           <Image 
             src={mediaDetail.backdrop_path} 
             alt={'title' in mediaDetail ? mediaDetail.title : mediaDetail.name}
-            containerClassName="rounded-none brightness-50"
+            containerClassName="rounded-none brightness-50 h-60"
           />
 
           {/* --- MEDIA DETAIL --- */}
@@ -65,9 +70,49 @@ export default function MediaDetail(){
               <div className="flex flex-col gap-15">
                 <div className="flex flex-col gap-6">
                   <div>
-                    <Heading>
-                      {'title' in mediaDetail ? mediaDetail.title : mediaDetail.name}
-                    </Heading>
+                    {/* --- MEDIA TITLE --- */}
+                    <div className="flex items-start justify-between gap-2">
+                      <Heading>
+                        {'title' in mediaDetail ? mediaDetail.title : mediaDetail.name}
+                      </Heading>
+
+                      {/* --- MEDIA ACTION BUTTONS --- */}
+                      <AsyncBoundary resolve={mediaAccountStates} errorElement={<div>Error loading account states.</div>}>
+                        {accountStatesData => {
+                          if ('isError' in accountStatesData) 
+                            return <ErrorMessage error={accountStatesData} />
+
+                          return (
+                            <>
+                              {isAuthenticated && sessionId && (
+                                <div className="flex items-center gap-1.5">
+                                  {/* --- FAVORITE BUTTON --- */}
+                                  <Button 
+                                    variant="secondary" 
+                                    shape="circular" 
+                                    className={`bg-secondary-dark hover:bg-gray-dark p-3 ${accountStatesData.favorite ? 'text-primary-light' : ''}`}
+                                  >
+                                    <FaHeart />
+                                  </Button>
+
+                                  {/* --- LIST BUTTON --- */}
+                                  <Button 
+                                    variant="secondary" 
+                                    shape="circular" 
+                                    className={`bg-secondary-dark hover:bg-gray-dark p-3 ${accountStatesData.watchlist ? 'text-primary-light' : ''}`}
+                                  >
+                                    <FaList />
+                                  </Button>
+                                </div>
+                              )} 
+                            </>
+                          )
+                        }}
+                      </AsyncBoundary>
+                      
+                    </div>
+
+                    {/* --- MEDIA SUBTITLE --- */}
                     <div className="flex items-center gap-2 flex-wrap">
                       {'release_date' in mediaDetail && mediaDetail.release_date && (
                         <Paragraph>
@@ -169,7 +214,7 @@ export default function MediaDetail(){
                         ? creditsData.crew.slice(0, 10) : [];
 
                       return (
-                        <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0">
+                        <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path="/" seeAllText="All Casts">
                           <MediaGrid mediaList={displayItems} variant="horizontal" limit={10} />
                         </MediaSection>
                       )
@@ -177,21 +222,13 @@ export default function MediaDetail(){
                 </AsyncBoundary>
 
                 {/* --- MEDIA LATEST SEASON --- */}
-                {/* {'seasons' in mediaDetail && mediaDetail.seasons.length > 0 && (
-                  <div>
-                    <Heading level={2} className="mb-2">Latest Season</Heading>
+                {'seasons' in mediaDetail && mediaDetail.seasons.length > 0 && (
+                  <MediaSection title="Latest Season" className="px-0" path="/" seeAllText="See All Seasons">
                     <WideMediaCard
-                      media={mediaDetail.seasons[0]}
-              
+                      media={mediaDetail.last_episode_to_air}
                     />
-                    <Link 
-                      to="/" 
-                      className="text-primary-light hover:text-primary-dark transition-all duration-300 ml-auto inline-block mt-4"
-                    >
-                      Read All Reviews
-                    </Link>
-                  </div>
-                )} */}
+                  </MediaSection>
+                )}
                 
                 {/* --- MEDIA REVIEW --- */}
                 <AsyncBoundary resolve={mediaReviews} errorElement={<div>Error loading reviews.</div>}>
@@ -200,30 +237,42 @@ export default function MediaDetail(){
                         return <ErrorMessage error={reviewsData} />
 
                       return (
-                        <MediaSection title={`Reviews`} className="px-0">
+                        <MediaSection title={`Reviews`} className="px-0" path="/" seeAllText="Read All Reviews">
                           {reviewsData.results.length === 0 && (
                             <Paragraph>No reviews found.</Paragraph>
                           )}
                           {reviewsData.results.length > 0 && (
-                            <div className="flex flex-col">
+                            <>
                               {reviewsData.results.slice(0, 1).map(review => (
                                 <ReviewCard key={review.id} review={review} />
                               ))}
-                              <Link 
-                                to="/" 
-                                className="text-primary-light hover:text-primary-dark transition-all duration-300 ml-auto inline-block mt-4"
-                              >
-                                Read All Reviews
-                              </Link>
-                            </div>
+                           </>
                           )}
                         </MediaSection>
                       )
                     }}
                 </AsyncBoundary>
 
+                {/* --- MEDIA RECOMMENDATIONS --- */}
+                <AsyncBoundary resolve={mediaRecommendations} errorElement={<div>Error loading recommendations.</div>}>
+                  {recommendationsData => {
+                    if ('isError' in recommendationsData) 
+                      return <ErrorMessage error={recommendationsData} />
+                    
+                    return (
+                      <>
+                        {recommendationsData.results.length !== 0 && (
+                          <MediaSection title="You Might Also Like" className="px-0">
+                            <MediaGrid mediaList={recommendationsData.results} variant="horizontal" limit={10} />
+                          </MediaSection>
+                        )}
+                      </>
+                    )
+                  }}
+                </AsyncBoundary>
+
                 {/* --- MEDIA SUP INFO --- */}
-                <div>
+                <div className="border border-gray-dark rounded-[10px] p-4">
                   <ul className="flex flex-col gap-4">
                     {'original_title' in mediaDetail && (
                       <li>
@@ -323,24 +372,6 @@ export default function MediaDetail(){
                     </AsyncBoundary>
                   </ul>
                 </div>
-
-                {/* --- MEDIA RECOMMENDATIONS --- */}
-                <AsyncBoundary resolve={mediaRecommendations} errorElement={<div>Error loading recommendations.</div>}>
-                  {recommendationsData => {
-                    if ('isError' in recommendationsData) 
-                      return <ErrorMessage error={recommendationsData} />
-                    
-                    return (
-                      <>
-                        {recommendationsData.results.length !== 0 && (
-                          <MediaSection title="You Might Also Like" className="px-0">
-                            <MediaGrid mediaList={recommendationsData.results} variant="horizontal" limit={10} />
-                          </MediaSection>
-                        )}
-                      </>
-                    )
-                  }}
-                </AsyncBoundary>
               </div>
             </div>
 

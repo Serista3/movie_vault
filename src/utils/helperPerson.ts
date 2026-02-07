@@ -157,23 +157,23 @@ export interface PersonSummaryData {
   personSubtitle: string;
 }
 
-function isAggregateCast(p: any): p is AggregateCreditsCastMember {
+export function isAggregateCast(p: any): p is AggregateCreditsCastMember {
   return 'roles' in p && Array.isArray(p.roles);
 }
 
-function isAggregateCrew(p: any): p is AggregateCreditsCrewMember {
+export function isAggregateCrew(p: any): p is AggregateCreditsCrewMember {
   return 'jobs' in p && Array.isArray(p.jobs);
 }
 
-function isCast(p: any): p is CreditCastMember {
+export function isCast(p: any): p is CreditCastMember {
   return 'character' in p;
 }
 
-function isCrew(p: any): p is CreditCrewMember {
+export function isCrew(p: any): p is CreditCrewMember {
   return 'job' in p;
 }
 
-function isPersonSummary(p: any): p is PersonSummary {
+export function isPersonSummary(p: any): p is PersonSummary {
   return 'known_for' in p;
 }
 

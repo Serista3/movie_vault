@@ -12,6 +12,8 @@ import type {
   ReviewSummary,
   MovieKeywords,
   TvShowKeywords,
+  MovieAccountStates,
+  TvShowAccountStates,
   MovieSummary,
   TvShowSummary,
   MediaResponse,
@@ -26,6 +28,7 @@ import {
   getMovieReviews,
   getMovieRecommendations,
   getMovieKeywords,
+  getMovieAccountStates,
 } from "../../services/movie.service";
 import { 
   getTvShow, 
@@ -34,6 +37,7 @@ import {
   getTvShowReviews,
   getTvShowRecommendations,
   getTvShowKeywords,
+  getTvShowAccountStates,
 } from "../../services/tv.service";
 
 // --- TYPES FOR LOADER DATA ---
@@ -44,6 +48,7 @@ export interface MediaDetailLoaderData {
   mediaReviews: Promise<MediaResponse<ReviewSummary> | AppError>;
   mediaRecommendations: Promise<MediaResponse<MovieSummary | TvShowSummary> | AppError>;
   mediaKeywords: Promise<MovieKeywords | TvShowKeywords | AppError>;
+  mediaAccountStates: Promise<MovieAccountStates | TvShowAccountStates | AppError>;
 }
 
 // --- LOADER ---
@@ -81,6 +86,10 @@ export const mediaDetailLoader = async function({ request, params }: LoaderFunct
     ? getMovieKeywords(mediaId)
     : getTvShowKeywords(mediaId);
 
+  const mediaAccountStates = mediaType === 'movie'
+    ? getMovieAccountStates(mediaId, localStorage.getItem('session_id') || '')
+    : getTvShowAccountStates(mediaId, localStorage.getItem('session_id') || '');
+
   return {
     mediaDetail,
     mediaVideos,
@@ -88,5 +97,6 @@ export const mediaDetailLoader = async function({ request, params }: LoaderFunct
     mediaReviews,
     mediaRecommendations,
     mediaKeywords,
+    mediaAccountStates,
   }
 }

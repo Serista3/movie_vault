@@ -16,7 +16,7 @@ import type { MediaSummary } from "../../types"
 
 export default function MediaCard({ media, className }: { media: MediaSummary, className?: string }) {
   // --- EXTRACT MEDIA DATA ---
-  const { mediaTitle, mediaSubtitle, mediaImg, mediaCategory, mediaRating } = getMediaSummaryData(media);
+  const { mediaTitle, mediaSubtitle, mediaDetailPath, mediaImg, mediaCategory, mediaRating } = getMediaSummaryData(media);
 
   // --- COMPUTED CLASS NAME ---
   const wrapperClass = cn("flex flex-col justify-center gap-2 items-start w-40", className);
@@ -24,7 +24,7 @@ export default function MediaCard({ media, className }: { media: MediaSummary, c
   return (
     <Card className={wrapperClass}>
       {/* --- MEDIA IMAGE --- */}
-      <Link to={`/${mediaCategory}/${media.id}`} className="w-full">
+      <Link to={mediaDetailPath} className="w-full">
         <Image 
           className="hover:scale-120"
           containerClassName="h-60"
@@ -35,7 +35,7 @@ export default function MediaCard({ media, className }: { media: MediaSummary, c
       {/* --- MEDIA INFO --- */}
       <div className="flex flex-col gap-1">
         <Link 
-          to={`/${mediaCategory}/${media.id}`} 
+          to={mediaDetailPath}
           className="text-base font-semibold line-clamp-1 hover:text-primary-light transition-colors duration-300"
         >
           {mediaTitle}

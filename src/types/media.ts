@@ -1,9 +1,9 @@
 import type { MovieSummary } from './movie';
-import type { TvShowSummary } from './tvShow';
+import type { TvShowSummary, TvShowLastEpisodeToAir } from './tvShow';
 import type { PersonSummary } from './person';
 
 export type MediaType = 'movie' | 'tv' | 'person';
-export type MediaSummary = MovieSummary | TvShowSummary | PersonSummary;
+export type MediaSummary = MovieSummary | TvShowSummary | PersonSummary | TvShowLastEpisodeToAir;
 
 export interface Media {
     id: number;

@@ -16,7 +16,7 @@ import type { MediaSummary } from "../../types"
 
 export default function WideMediaCard({ media, className }: { media: MediaSummary, className?: string }) {
     // --- EXTRACT MEDIA DATA ---
-    const { mediaTitle, mediaSubtitle, mediaImg, mediaCategory, mediaOverview } = getMediaSummaryData(media);
+    const { mediaTitle, mediaSubtitle, mediaDetailPath, mediaImg, mediaCategory, mediaOverview } = getMediaSummaryData(media);
 
     // --- COMPUTED CLASS NAMES ---
     const wrapperClass = cn(
@@ -27,7 +27,7 @@ export default function WideMediaCard({ media, className }: { media: MediaSummar
     return (
         <Card className={wrapperClass}>
             {/* --- LINK OVERLAY --- */}
-            <Link to={`/${mediaCategory}/${media.id}`} className="w-full h-full absolute top-0 left-0 z-5" />
+            <Link to={mediaDetailPath} className="w-full h-full absolute top-0 left-0 z-5" />
 
             {/* --- MEDIA IMAGE --- */}
             <Image

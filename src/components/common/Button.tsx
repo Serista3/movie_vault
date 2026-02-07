@@ -17,7 +17,7 @@ const BASE_CLASS = "button py-2 font-medium shadow-xl cursor-pointer transition-
 // --- VARIANTS AND SHAPES CLASS NAMES ---
 const VARIANTS: { [key in Variant]: string } = {
   primary: "text-secondary-light bg-primary-light hover:bg-primary-dark",
-  secondary: "text-tertiary-light bg-secondary-light hover:bg-secondary-dark",
+  secondary: "text-tertiary-light bg-secondary-light hover:bg-secondary-dark border-gray-dark",
   tertiary: "text-secondary-light bg-tertiary-light hover:bg-tertiary-dark",
   danger: "text-danger-light bg-secondary-light hover:bg-secondary-dark border-danger-light",
 }
