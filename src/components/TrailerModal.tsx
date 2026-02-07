@@ -7,11 +7,11 @@ import Iframe from "./common/Iframe";
 import Heading from "./common/Heading";
 
 // --- TYPES ---
-import type { MediaSummary } from "../types/media";
+import type { MediaVideo } from "../types/media";
 
-export default memo(function TrailerModal({ selectTrailer }: { selectTrailer: MediaSummary | null }) {
+export default memo(function TrailerModal({ selectTrailer }: { selectTrailer: MediaVideo }) {
   // --- VIDEO SOURCE URL ---
-  const videoSrc = selectTrailer && 'trailerKey' in selectTrailer ? `https://www.youtube.com/embed/${selectTrailer.trailerKey}?autoplay=1` : null;
+  const videoSrc = selectTrailer ? `https://www.youtube.com/embed/${selectTrailer.key}?autoplay=1` : null;
 
   return (
     <Modal className="flex flex-col justify-center items-start max-w-96 w-full bg-secondary-dark">

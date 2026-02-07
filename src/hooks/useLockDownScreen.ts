@@ -10,7 +10,7 @@ export function useLockDownScreen(isLocked: boolean){
 
         if(isLocked){
             document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = `${windowScrollBarWidth}px`;
+            // document.body.style.paddingRight = `${windowScrollBarWidth}px`;
         } else {
             document.body.style.overflow = '';
             document.body.style.paddingRight = '';

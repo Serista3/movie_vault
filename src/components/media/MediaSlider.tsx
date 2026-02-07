@@ -1,11 +1,11 @@
 // --- HOOKS & CUSTOM HOOKS ---
-import { useState } from "react";
 import { useLoaderData, Link } from "react-router";
 import { useModal } from "../../store/ModalContext";
 import { useSlider } from "../../hooks/useSlider";
+import { useSelectTrailer } from "../../hooks/useSelectTrailer";
 
 // --- TYPES & HELPERS ---
-import type { MediaSummary, AppError } from "../../types";
+import type { MediaSummary, MediaVideo, AppError } from "../../types";
 import { getMediaType } from "../../utils/helperMedia";
 import { cn } from "../../utils/helperClassName";
 
@@ -18,19 +18,13 @@ import ErrorMessage from "../common/ErrorMessage";
 import Heading from "../common/Heading";
 
 export default function MediaSlider() {
-  // --- MODAL CONTEXT & LOADER DATA ---
-  const { isOpen, openModal } = useModal();
+  // --- CONTEXT & LOADER DATA ---
+  const { isOpen } = useModal();
+  const { selectTrailer, handleSelectTrailer } = useSelectTrailer();
   const data = useLoaderData<MediaSummary[] | AppError>()
 
   // --- SLIDER STATE ---
-  const [selectTrailer, setSelectTrailer] = useState<MediaSummary | null>(null);
   const { currentSlide, progress } = useSlider({ items: Array.isArray(data) ? data : [], isPaused: isOpen });
-
-  // --- SELECTED TRAILER ---
-  const handleSelectTrailer = function(item: MediaSummary){
-    setSelectTrailer(item);
-    openModal();
-  }
 
   return (
     <>
@@ -91,7 +85,9 @@ export default function MediaSlider() {
           </Slider>
 
           {/* --- TRAILER MODAL --- */}
-          <TrailerModal selectTrailer={selectTrailer} />
+          {selectTrailer && 'trailer' in selectTrailer && (
+            <TrailerModal selectTrailer={selectTrailer.trailer as MediaVideo } />
+          )}
         </>
       )}
     </>

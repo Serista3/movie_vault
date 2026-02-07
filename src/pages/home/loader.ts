@@ -17,7 +17,7 @@ export const loader = async function(): Promise<MediaSummary[] | AppError> {
         const trailer = movieVideos.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
         return {
           ...movie,
-          trailerKey: trailer ? trailer.key : undefined
+          trailer: trailer ? trailer : undefined
         }
       }
 
