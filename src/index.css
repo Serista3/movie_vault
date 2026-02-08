@@ -38,4 +38,25 @@
     font-family: 'Kanit', sans-serif;
     line-height: 1.75;
   }
+
+  html::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: var(--gray-dark);
+  }
+
+  html.dark::-webkit-scrollbar-track {
+    background: var(--gray-light);
+  }
+  
+  html::-webkit-scrollbar-thumb {
+    background: var(--tertiary-light);
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: var(--tertiary-dark);
+  }
 }

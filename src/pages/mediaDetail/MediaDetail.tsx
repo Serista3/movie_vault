@@ -187,7 +187,7 @@ export default function MediaDetail(){
                       return (
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                           {crewToDisplay.map((crewMember) => (
-                            <div key={crewMember.id}>
+                            <div key={crewMember.credit_id}>
                               <Link 
                                 to={`/person/${crewMember.id}`} 
                                 className="underline hover:text-primary-light transition-all duration-300"
@@ -272,7 +272,7 @@ export default function MediaDetail(){
                 </AsyncBoundary>
 
                 {/* --- MEDIA SUP INFO --- */}
-                <div className="border border-gray-dark rounded-[10px] p-4">
+                <div className="bg-gray-dark rounded-[10px] p-4">
                   <ul className="flex flex-col gap-4">
                     {'original_title' in mediaDetail && (
                       <li>

@@ -1,22 +1,23 @@
+// --- CONTEXT ---
+import { useGenres } from "../../store/GenresContext";
+
 // --- COMPONENTS ---
 import Logo from "../common/Logo";
 import FooterColumn from "./FooterColumn";
 import Paragraph from "../common/Paragraph";
 
-// --- CONSTANT ---
-const GENRES = ['action', 'comedy', 'horror', 'history', 'romance', 'other'];
-
 const BASE_CLASS = "text-secondary-light bg-primary-light py-6 px-4 border-t border-gray-dark flex flex-col items-center gap-6";
 
 export default function FooterNavigation() {
+  const { tvGenres, movieGenres } = useGenres();
+
   return (
     <footer className={BASE_CLASS}>
       <Logo />
       {/* --- FOOTER COLUMNS --- */}
-      <div className="flex justify-center w-full gap-14 border-b border-secondary-light pb-6">
-        <FooterColumn title="Movies" items={GENRES} />
-        <FooterColumn title="TV Shows" items={GENRES} />
-        <FooterColumn title="People" items={['popular']} />
+      <div className="flex justify-center w-full gap-8 border-b border-secondary-light pb-6">
+        <FooterColumn title="Movies" mediaType="movie" items={movieGenres.slice(0, 6)} />
+        <FooterColumn title="TV Shows" mediaType="tv" items={tvGenres.slice(0, 6)} />
       </div>
 
       {/* --- COPY RIGHT --- */}
