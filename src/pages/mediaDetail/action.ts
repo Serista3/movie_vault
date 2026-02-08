@@ -3,7 +3,7 @@ import type { MediaType } from "../../types";
 
 import { toggleFavorite, toggleWatchlist } from "../../services/account.service";
 
-export const action = async function({ request }: ActionFunctionArgs) {
+export const mediaDetailAction = async function({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
 
     const mediaId = formData.get("mediaId");

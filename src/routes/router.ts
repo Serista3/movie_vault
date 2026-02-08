@@ -5,6 +5,7 @@ import Search, { loader as searchLoader } from '../pages/Search';
 import Discover, { discoverMovieLoader, discoverTvShowLoader } from '../pages/discover';
 import MediaDetail from '../pages/mediaDetail/MediaDetail';
 import { mediaDetailLoader } from '../pages/mediaDetail/loader';
+import { mediaDetailAction } from '../pages/mediaDetail/action';
 import People, { loader as peopleLoader } from '../pages/People';
 import PersonDetail, { loader as personDetailLoader } from '../pages/PersonDetail';
 import Favorites from '../pages/Favorites';
@@ -49,9 +50,9 @@ const router = createBrowserRouter([
         }
       ] },
       { path: 'movie', Component: Discover, loader: discoverMovieLoader },
-      { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader },
+      { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader, action: mediaDetailAction },
       { path: 'tv', Component: Discover, loader: discoverTvShowLoader },
-      { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader },
+      { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader, action: mediaDetailAction },
       { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },
       { path: 'favorite', Component: Favorites },
