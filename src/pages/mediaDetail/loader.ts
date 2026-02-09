@@ -1,7 +1,5 @@
-// --- ROUTER ---
+// --- IMPORTS ---
 import type { LoaderFunctionArgs } from "react-router";
-
-// --- TYPES ---
 import type { 
   MovieDetail, 
   TvShowDetail, 
@@ -10,44 +8,35 @@ import type {
   MovieCredits,
   TvShowAggregateCredits,
   ReviewSummary,
-  MovieKeywords,
-  TvShowKeywords,
   MovieAccountStates,
   TvShowAccountStates,
   MovieSummary,
   TvShowSummary,
   MediaResponse,
   AppError,
-} from "../../types";
-
-// --- SERVICES ---
+} from "@/@types";
 import { 
   getMovie, 
   getMovieVideos, 
   getMovieCredits,
   getMovieReviews,
   getMovieRecommendations,
-  getMovieKeywords,
   getMovieAccountStates,
-} from "../../services/movie.service";
-import { 
   getTvShow, 
   getTvShowVideos, 
   getTvShowAggregateCredits,
   getTvShowReviews,
   getTvShowRecommendations,
-  getTvShowKeywords,
   getTvShowAccountStates,
-} from "../../services/tv.service";
+} from "@/services";
 
-// --- TYPES FOR LOADER DATA ---
+// --- TYPE DEFINATIONS ---
 export interface MediaDetailLoaderData {
   mediaDetail: MovieDetail | TvShowDetail | AppError;
   mediaVideos: Promise<MovieVideos | TvShowVideos | AppError>;
   mediaCredits: Promise<MovieCredits | TvShowAggregateCredits | AppError>;
   mediaReviews: Promise<MediaResponse<ReviewSummary> | AppError>;
   mediaRecommendations: Promise<MediaResponse<MovieSummary | TvShowSummary> | AppError>;
-  mediaKeywords: Promise<MovieKeywords | TvShowKeywords | AppError>;
   mediaAccountStates: Promise<MovieAccountStates | TvShowAccountStates | AppError>;
 }
 
@@ -82,10 +71,6 @@ export const mediaDetailLoader = async function({ request, params }: LoaderFunct
     ? getMovieRecommendations(mediaId, 1)
     : getTvShowRecommendations(mediaId, 1);
 
-  const mediaKeywords = mediaType === 'movie'
-    ? getMovieKeywords(mediaId)
-    : getTvShowKeywords(mediaId);
-
   const mediaAccountStates = mediaType === 'movie'
     ? getMovieAccountStates(mediaId, localStorage.getItem('session_id') || '')
     : getTvShowAccountStates(mediaId, localStorage.getItem('session_id') || '');
@@ -96,7 +81,6 @@ export const mediaDetailLoader = async function({ request, params }: LoaderFunct
     mediaCredits,
     mediaReviews,
     mediaRecommendations,
-    mediaKeywords,
     mediaAccountStates,
   }
 }

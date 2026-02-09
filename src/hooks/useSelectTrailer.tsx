@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useModal } from "../store/ModalContext";
+import { useModal } from "@/store";
 import { useLockDownScreen } from "./useLockDownScreen";
-
-import type { MediaSummary } from "../types/media";
+import type { MediaSummary } from "@/@types";
 
 export function useSelectTrailer() {
     const { isOpen, openModal } = useModal();

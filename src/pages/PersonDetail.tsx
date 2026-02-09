@@ -1,16 +1,11 @@
 import { type LoaderFunctionArgs, useLoaderData } from "react-router"
-import { getPerson, getPersonCombinedCredits } from "../services/people.service";
-import type { PersonDetail, PersonCombinedCredits, AppError } from "../types";
-import { getActingData, getCrewData } from "../utils/helperPerson";
-
-import ExplorerLayout from "../components/layout/ExplorerLayout";
-import ErrorMessage from "../components/common/ErrorMessage";
-import Image from "../components/common/Image";
-import Heading from "../components/common/Heading";
-import Paragraph from "../components/common/Paragraph";
-import MediaGrid from "../components/media/MediaGrid";
-import PersonInfo from "../components/PersonInfo";
-import Filmography from "../components/Filmography";
+import { getPerson, getPersonCombinedCredits } from "@/services";
+import type { PersonDetail, PersonCombinedCredits, AppError } from "@/@types";
+import { getActingData, getCrewData } from "@/utils/helper";
+import { ExplorerLayout } from '@/components/layout';
+import { ErrorMessage, Image, Heading, Paragraph } from "@/components/common";
+import { MediaGrid } from "@/features/media";
+import { PersonInfo, Filmography } from "@/features/person";
 
 export default function PersonDetail(){
   const data = useLoaderData<PersonDetail & PersonCombinedCredits | AppError>();

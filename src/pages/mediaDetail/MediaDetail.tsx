@@ -1,33 +1,11 @@
-// --- ROUTER && HOOKS ---
-import { useSelectTrailer } from "../../hooks/useSelectTrailer";
+// --- IMPORTS ---
+import { useSelectTrailer } from "@/hooks";
 import { useLoaderData,useLocation, useRouteLoaderData } from "react-router"
-
-// --- TYPES ---
-import type { MediaDetailLoaderData } from "../../pages/mediaDetail/loader";
-import type { UserDataResponse } from "../../types";
-
-// --- HELPERS ---
-import { formatDateToReadable } from "../../utils/formatters";
-
-// --- COMPONENTS ---
-import Image from "../../components/common/Image";
-import Heading from "../../components/common/Heading";
-import Paragraph from "../../components/common/Paragraph";
-import Button from "../../components/common/Button";
-import ErrorMessage from "../../components/common/ErrorMessage";
-import MediaRating from "../../components/media/MediaRating";
-import MediaGrid from "../../components/media/MediaGrid";
-import TrailerModal from "../../components/TrailerModal";
-import WideMediaCard from "../../components/media/WideMediaCard";
-import AsyncBoundary from "../../components/AsyncBoundary";
-import MediaSection from "../../components/media/MediaSection";
-import MediaUserAction from "./MediaUserAction";
-import MediaCrew from "./MediaCrew";
-import MediaReview from "./MediaReview";
-import MediaRecommendation from "./MediaRecommendation";
-import MediaStats from "./MediaStats";
-
-// --- ICONS ---
+import type { MediaDetailLoaderData } from "@/pages/mediaDetail/loader";
+import type { UserDataResponse } from "@/@types";
+import { formatDateToReadable } from "@/utils/formatters";
+import { Image, Heading, Paragraph, Button, ErrorMessage, AsyncBoundary } from "@/components/common";
+import { MediaRating, MediaGrid, TrailerModal, WideMediaCard, MediaSection, MediaUserAction, MediaCrew, MediaReview, MediaRecommendation, MediaStats } from "@/features/media";
 import { FaPlay } from "react-icons/fa";
 
 export default function MediaDetail(){
@@ -37,7 +15,6 @@ export default function MediaDetail(){
     mediaCredits, 
     mediaReviews, 
     mediaRecommendations,
-    mediaKeywords,
     mediaAccountStates,
   } = useLoaderData<MediaDetailLoaderData>();
   const location = useLocation();
@@ -166,7 +143,7 @@ export default function MediaDetail(){
                         ? creditsData.crew.slice(0, 10) : [];
 
                       return (
-                        <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path="/" seeAllText="All Casts">
+                        <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path={`${location.pathname}/cast`} seeAllText="All Casts">
                           <MediaGrid mediaList={displayItems} variant="horizontal" limit={10} />
                         </MediaSection>
                       )
@@ -175,19 +152,19 @@ export default function MediaDetail(){
 
                 {/* --- MEDIA LATEST SEASON --- */}
                 {'seasons' in mediaDetail && mediaDetail.seasons.length > 0 && (
-                  <MediaSection title="Latest Season" className="px-0" path="/" seeAllText="See All Seasons">
+                  <MediaSection title="Latest Season" className="px-0" path={`${location.pathname}/seasons`} seeAllText="See All Seasons">
                     <WideMediaCard media={mediaDetail.last_episode_to_air} />
                   </MediaSection>
                 )}
                 
                 {/* --- MEDIA REVIEW --- */}
-                <MediaReview mediaReviews={mediaReviews} />
+                <MediaReview mediaReviews={mediaReviews} path={location.pathname} />
 
                 {/* --- MEDIA RECOMMENDATIONS --- */}
                 <MediaRecommendation mediaRecommendations={mediaRecommendations} />
 
                 {/* --- MEDIA SUP INFO --- */}
-                <MediaStats mediaDetail={mediaDetail} mediaKeywords={mediaKeywords}/>
+                <MediaStats mediaDetail={mediaDetail}/>
               </div>
             </div>
 

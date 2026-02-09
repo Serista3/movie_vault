@@ -5,8 +5,8 @@ import type {
   TvShowSummary,
   MovieDiscoverQueryParams,
   TvShowDiscoverQueryParams
-} from "../types";
-import { tmdbFetch } from "../utils/api";
+} from "@/@types";
+import { tmdbFetch } from "@/utils/api";
 
 const defaultParams = {
   language: 'en-US',

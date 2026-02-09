@@ -1,6 +1,5 @@
 import { useState, useCallback } from "react"
-
-import type { AppError } from "../types"
+import type { AppError } from "@/@types"
 
 export function useFetchData<T, P extends unknown[]>(fetchFunction: (...args: P) => Promise<T>, params: P) {
     const [data, setData] = useState<T | null>(null)

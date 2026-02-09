@@ -1,16 +1,15 @@
-// --- HELPERS ---
-import { cn } from "../../utils/helperClassName";
+// --- IMPORTS ---
+import { cn } from "@/utils/helper";
+import { Heading } from "@/components/common";
 
-// --- COMPONENTS ---
-import Heading from "../common/Heading";
-
-// --- TYPES FOR EXPLORER LAYOUT PROPS ---
+// --- TYPE DEFINATIONS ---
 interface ExplorerLayoutProps {
   title: string;
   className?: string;
   children?: React.ReactNode;
 }
 
+// --- CONSTANTS ---
 const BASE_CLASS = "explorer-layout max-w-300 mx-auto w-full flex flex-col gap-5 pt-8 px-4 pb-14";
 
 export default function ExplorerLayout({ title, className, children }: ExplorerLayoutProps) {

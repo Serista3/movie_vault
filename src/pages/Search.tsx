@@ -1,13 +1,11 @@
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
-import type { MediaResponse, MediaSummary, AppError } from "../types";
-import { getSearchMovieResults, getSearchTvResults, getSearchPersonResults } from "../services/search.service";
-import { usePagination } from "../hooks/usePagination";
-
-import ExplorerLayout from "../components/layout/ExplorerLayout";
-import WideMediaCard from "../components/media/WideMediaCard";
-import ErrorMessage from "../components/common/ErrorMessage";
-import SearchResult from "../components/search/SearchResutl";
-import Pagination from "../components/common/Pagination";
+import type { MediaResponse, MediaSummary, AppError } from "@/@types";
+import { getSearchMovieResults, getSearchTvResults, getSearchPersonResults } from "@/services";
+import { usePagination } from "@/hooks";
+import { ExplorerLayout } from "@/components/layout";
+import { WideMediaCard } from "@/features/media";
+import { ErrorMessage, Pagination } from "@/components/common";
+import { SearchResult } from "@/features/search";
 
 interface SearchLoaderData {
   searchData: MediaResponse<MediaSummary> | AppError;

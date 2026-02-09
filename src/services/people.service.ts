@@ -7,8 +7,8 @@ import type {
   PersonMovieCredits, 
   PersonTvCredits,
   AppError
-} from "../types"
-import { tmdbFetch } from "../utils/api"
+} from "@/@types"
+import { tmdbFetch } from "@/utils/api"
 
 export const getPeople = async function(page: number): Promise<MediaResponse<PersonSummary> | AppError>{
   return tmdbFetch<MediaResponse<PersonSummary>>(`/person/popular?language=en-US&page=${page}`);

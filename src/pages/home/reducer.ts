@@ -1,8 +1,5 @@
-import { getMovieLists } from "../../services/movie.service";
-import { getTvShowList } from "../../services/tv.service";
-import { getTrending } from "../../services/trending.service";
-
-import type { MediaResponse, MediaSummary, AppError, TrendingType, TimeWindow } from "../../types";
+import { getMovieLists, getTvShowList, getTrending } from "@/services";
+import type { MediaResponse, MediaSummary, AppError, TrendingType, TimeWindow } from "@/@types";
 
 type TrendingParams = [TrendingType, TimeWindow];
 type MediaListParams = [string, number];

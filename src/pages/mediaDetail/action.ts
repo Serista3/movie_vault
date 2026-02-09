@@ -1,7 +1,6 @@
 import type { ActionFunctionArgs } from "react-router"
-import type { MediaType } from "../../types";
-
-import { toggleFavorite, toggleWatchlist } from "../../services/account.service";
+import type { MediaType } from "@/@types";
+import { toggleFavorite, toggleWatchlist } from "@/services";
 
 export const mediaDetailAction = async function({ request }: ActionFunctionArgs) {
     const formData = await request.formData();

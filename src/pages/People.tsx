@@ -1,12 +1,10 @@
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
-import { getPeople } from "../services/people.service";
-import type { MediaResponse, PersonSummary, AppError } from "../types";
-import { usePagination } from "../hooks/usePagination";
-
-import ExplorerLayout from "../components/layout/ExplorerLayout";
-import MediaGrid from "../components/media/MediaGrid";
-import ErrorMessage from "../components/common/ErrorMessage";
-import Pagination from "../components/common/Pagination";
+import { getPeople } from "@/services";
+import type { MediaResponse, PersonSummary, AppError } from "@/@types";
+import { usePagination } from "@/hooks";
+import { ExplorerLayout } from "@/components/layout";
+import { MediaGrid } from "@/features/media";
+import { ErrorMessage, Pagination } from "@/components/common";
 
 export default function People() {
   const peopleData = useLoaderData<MediaResponse<PersonSummary> | AppError>();

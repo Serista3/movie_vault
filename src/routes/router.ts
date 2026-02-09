@@ -1,16 +1,19 @@
-import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '../components/layout/MainLayout';
-import Home from '../pages/home/Home';
-import { loader as homeLoader } from '../pages/home/loader';
-import Search, { loader as searchLoader } from '../pages/Search';
-import Discover, { discoverMovieLoader, discoverTvShowLoader } from '../pages/discover';
-import MediaDetail from '../pages/mediaDetail/MediaDetail';
-import { mediaDetailLoader } from '../pages/mediaDetail/loader';
-import { mediaDetailAction } from '../pages/mediaDetail/action';
-import People, { loader as peopleLoader } from '../pages/People';
-import PersonDetail, { loader as personDetailLoader } from '../pages/PersonDetail';
-import Favorites from '../pages/Favorites';
-import WatchList from '../pages/WatchList';
-import RootErrorBoundary from '../components/layout/RootErrorBoundary';
+import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '@/components/layout/MainLayout';
+import Home from '@/pages/home/Home';
+import { loader as homeLoader } from '@/pages/home/loader';
+import Search, { loader as searchLoader } from '@/pages/Search';
+import Discover, { discoverMovieLoader, discoverTvShowLoader } from '@/pages/Discover';
+import MediaDetail from '@/pages/mediaDetail/MediaDetail';
+import { mediaDetailLoader } from '@/pages/mediaDetail/loader';
+import { mediaDetailAction } from '@/pages/mediaDetail/action';
+import MediaDetailCast, { loader as mediaDetailCastLoader } from '@/pages/MediaDetailCast';
+import MediaDetailReview from '@/pages/MediaDetailReview';
+import MediaDetailSeason from '@/pages/MediaDetailSeason';
+import People, { loader as peopleLoader } from '@/pages/People';
+import PersonDetail, { loader as personDetailLoader } from '@/pages/PersonDetail';
+import Favorites from '@/pages/Favorites';
+import WatchList from '@/pages/WatchList';
+import RootErrorBoundary from '@/components/layout/boundary/RootErrorBoundary';
 
 import { createBrowserRouter } from 'react-router';
 
@@ -51,8 +54,13 @@ const router = createBrowserRouter([
       ] },
       { path: 'movie', Component: Discover, loader: discoverMovieLoader },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader, action: mediaDetailAction },
+      { path: 'movie/:id/cast', Component: MediaDetailCast, loader: mediaDetailCastLoader },
+      { path: 'movie/:id/reviews', Component: MediaDetailReview },
       { path: 'tv', Component: Discover, loader: discoverTvShowLoader },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader, action: mediaDetailAction },
+      { path: 'tv/:id/cast', Component: MediaDetailCast, loader: mediaDetailCastLoader },
+      { path: 'tv/:id/reviews', Component: MediaDetailReview },
+      { path: 'tv/:id/seasons', Component: MediaDetailSeason },
       { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },
       { path: 'favorite', Component: Favorites },

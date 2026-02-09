@@ -1,4 +1,4 @@
-import { tmdbFetch } from "../utils/api";
+import { tmdbFetch } from "@/utils/api";
 
 import { optionMethodPost } from "./config";
 import type { 
@@ -9,7 +9,7 @@ import type {
     SortBy,
     TmdbSuccessResponse,
     AppError 
-} from "../types";
+} from "../@types";
 
 interface MaskRequest {
     media_type: MediaType;

@@ -13,8 +13,8 @@ import type {
   TvShowVideos,
   ReviewSummary,
   AppError,
-} from "../types";
-import { tmdbFetch } from "../utils/api";
+} from "@/@types";
+import { tmdbFetch } from "@/utils/api";
 
 export const getTvShowList = async function(category: string, page: number): Promise<MediaResponse<TvShowSummary> | AppError>{
   return tmdbFetch<MediaResponse<TvShowSummary>>(`/tv/${category}?language=en-US&page=${page}`);

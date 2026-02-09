@@ -1,5 +1,5 @@
-import type { CertificationSummary, MediaCountry, MediaLanguage, AppError } from "../types";
-import { tmdbFetch } from "../utils/api";
+import type { CertificationSummary, MediaCountry, MediaLanguage, AppError } from "@/@types";
+import { tmdbFetch } from "@/utils/api";
 
 export const getLanguages = async function(): Promise<MediaLanguage[] | AppError> {
   return tmdbFetch<MediaLanguage[]>(`/configuration/languages`);

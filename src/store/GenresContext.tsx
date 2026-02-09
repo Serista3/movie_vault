@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useCallback, useContext } from "react";
 
-import type { MediaGenre } from "../types";
-import { getGenreMovieList, getGenreTvList } from "../services/genre.service";
+import type { MediaGenre } from "@/@types";
+import { getGenreMovieList, getGenreTvList } from "@/services";
 
 interface GenresContextType {
   movieGenres: MediaGenre[];

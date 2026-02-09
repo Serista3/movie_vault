@@ -9,13 +9,13 @@ import type {
   MediaLanguage, 
   MediaCountry, 
   CertificationSummary 
-} from "../types";
+} from "@/@types";
 import { 
   getLanguages, 
   getCountries, 
   getCertificationMovieList, 
   getCertificationTvList 
-} from "../services/config.service";
+} from "@/services";
 
 interface ConfigContextType {
   languages: MediaLanguage[];

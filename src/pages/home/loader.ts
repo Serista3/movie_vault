@@ -1,5 +1,5 @@
-import type { MediaSummary, AppError } from "../../types";
-import { getMovieLists, getMovieVideos } from "../../services/movie.service";
+import type { MediaSummary, AppError } from "@/@types";
+import { getMovieLists, getMovieVideos } from "@/services";
 
 export const loader = async function(): Promise<MediaSummary[] | AppError> {
   const nowPlayingMovies = await getMovieLists("now_playing", 1);

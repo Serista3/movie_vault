@@ -1,5 +1,5 @@
-import { BASE_URL, API_READ_ACCESS_TOKEN } from "../services/config";
-import type { TmdbErrorResponse, AppError } from "../types/api";
+import { BASE_URL, API_READ_ACCESS_TOKEN } from "@/services";
+import type { TmdbErrorResponse, AppError } from "@/@types";
 
 export const tmdbFetch = async function<T>(endpoint: string, options: RequestInit = {}): Promise<T | AppError> {
     const url = BASE_URL + endpoint;

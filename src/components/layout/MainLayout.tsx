@@ -1,19 +1,10 @@
-// --- HOOKS & CUSTOM HOOKS ---
+// --- IMPORTS ---
 import { Outlet, redirect } from 'react-router';
-import { usePageLoader } from '../../hooks/usePageLoader';
-
-// --- SERVICES ---
-import { getCurrentUser, createSession, deleteSession } from '../../services/auth.service';
-
-// --- CONTEXT PROVIDERS ---
-import ModalProvider from '../../store/ModalContext';
-import GenresProvider from '../../store/GenresContext';
-import ConfigProvider from '../../store/ConfigContext';
-
-// --- COMPONENTS ---
-import MainNavigation from './MainNavigation';
-import FooterNavigation from './FooterNavigation';
-import ProgressBar from '../common/ProgressBar';
+import { usePageLoader } from '@/hooks';
+import { getCurrentUser, createSession, deleteSession } from '@/services';
+import { ModalProvider, GenresProvider, ConfigProvider }from '@/store';
+import { MainNavigation, FooterNavigation } from '@/components/layout';
+import { Progressbar } from '@/components/common';
 
 export default function MainLayout() {
   const { progress } = usePageLoader();
@@ -23,7 +14,7 @@ export default function MainLayout() {
       <GenresProvider>
         <ConfigProvider>
           {progress > 0 && (
-            <ProgressBar 
+            <Progressbar 
               progress={progress} 
               progressBarClass="h-[3px] fixed top-0 left-0 z-70" 
               progressBarFillClass="bg-emerald-500 transition-all duration-300 ease-in" 

@@ -10,8 +10,8 @@ import type {
     MovieVideos,
     ReviewSummary,
     AppError
-} from "../types";
-import { tmdbFetch } from "../utils/api";
+} from "@/@types";
+import { tmdbFetch } from "@/utils/api";
 
 export const getMovieLists = async function(category: string, page: number): Promise<MediaResponse<MovieSummary> | AppError>{
     return tmdbFetch<MediaResponse<MovieSummary>>(`/movie/${category}?language=en-US&page=${page}`);

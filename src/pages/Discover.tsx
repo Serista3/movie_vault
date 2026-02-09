@@ -1,8 +1,6 @@
-// --- CUSTOM HOOKS & HOOKS & ROUTER ---
+// --- IMPORTS ---
 import { type LoaderFunctionArgs, useLoaderData, useLocation } from "react-router";
-import { usePagination } from "../hooks/usePagination";
-
-// --- TYPES ---
+import { usePagination } from "@/hooks";
 import type { 
   MovieDiscoverQueryParams, 
   TvShowDiscoverQueryParams,  
@@ -10,17 +8,12 @@ import type {
   MovieSummary, 
   TvShowSummary,
   AppError 
-} from "../types";
-
-// --- SERVICES ---
-import { getDiscoverMovies, getDiscoverTvShows } from "../services/discover.service";
-
-// --- COMPONENTS ---
-import ExplorerLayout from "../components/layout/ExplorerLayout";
-import Pagination from "../components/common/Pagination";
-import MediaGrid from "../components/media/MediaGrid";
-import ErrorMessage from "../components/common/ErrorMessage";
-import DiscoverControls from "../components/discover/DiscoverControls";
+} from "@/@types";
+import { getDiscoverMovies, getDiscoverTvShows } from "@/services";
+import { ExplorerLayout } from "@/components/layout";
+import { Pagination, ErrorMessage } from "@/components/common";
+import { MediaGrid } from "@/features/media";
+import { DiscoverControls } from "@/features/discover";
 
 export default function Discover() {
   const location = useLocation();

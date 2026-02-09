@@ -1,5 +1,5 @@
-import type { MediaResponse, AppError, MovieSummary, TvShowSummary, PersonSummary } from "../types";
-import { tmdbFetch } from "../utils/api";
+import type { MediaResponse, AppError, MovieSummary, TvShowSummary, PersonSummary } from "@/@types";
+import { tmdbFetch } from "@/utils/api";
 
 interface SearchOptions {
   query: string;
