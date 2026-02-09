@@ -1,13 +1,14 @@
 import { formatDateToReadable } from "@/utils";
-import type { 
-  MediaSummary, 
-  MediaType, 
-  MovieSummary, 
-  TvShowSummary,
-  TvShowLastEpisodeToAir,
-} from "@/@types";
-
-import { isPersonSummary } from "./helperPerson";
+import type { MediaSummary, MediaType, } from "@/@types";
+import { 
+  isMovieSummary, 
+  isTvShowSummary, 
+  isPersonSummary, 
+  isBasePerson, 
+  isTvShowLastEpisodeToAir,
+  isTvShowSeason,
+  isEpisode,
+} from "@/guards";
 
 export interface MediaSummaryData {
   mediaCategory: MediaType;
@@ -19,18 +20,6 @@ export interface MediaSummaryData {
   mediaRating: number | 'N/A';
 }
 
-export const isMovieSummary = function(media: any): media is MovieSummary {
-  return 'title' in media;
-}
-
-export const isTvShowSummary = function(media: any): media is TvShowSummary {
-  return 'first_air_date' in media;
-}
-
-export const isTvShowLastEpisodeToAir = function(media: any): media is TvShowLastEpisodeToAir {
-  return 'episode_number' in media && 'season_number' in media;
-}
-
 export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryData {
   let mediaCategory: MediaType = 'movie';
   let mediaDetailPath: string = '';
@@ -39,6 +28,8 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
   let mediaSubtitle: string | MediaSummary[] = 'No Subtitle';
   let mediaOverview: string = 'No Overview Available';
   let mediaRating: number | 'N/A' = 'N/A';
+
+  const pathName = location.pathname
 
   if(isMovieSummary(media)) {
     mediaCategory = 'movie';
@@ -69,13 +60,33 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
     mediaOverview = '';
     mediaRating = 'N/A';
   }
+
+  else if (isEpisode(media)) {
+    mediaCategory = 'tv';
+    mediaDetailPath = `${pathName.includes('seasons') ? pathName.replace('seasons', 'season') : pathName}/${media.season_number}`;
+    mediaImg = media.still_path;
+    mediaTitle = `${media.episode_number}. ${media.name}`;
+    mediaSubtitle = `${formatDateToReadable(media.air_date)} • ${media.runtime}m`;
+    mediaOverview = media.overview;
+    mediaRating = media.vote_average !== 0 ? Math.round(media.vote_average * 10) : 'N/A';
+  }
+
+  else if (isTvShowSeason(media)) {
+    mediaCategory = 'tv';
+    mediaDetailPath = `${pathName.includes('seasons') ? location.pathname.replace('seasons', 'season') : location.pathname + '/season' }/${media.season_number}`;
+    mediaImg = media.poster_path;
+    mediaTitle = media.name;
+    mediaSubtitle = `${formatDateToReadable(media.air_date)} • Episodes ${media.episode_count}`;
+    mediaOverview = media.overview;
+    mediaRating = media.vote_average !== 0 ? Math.round(media.vote_average * 10) : 'N/A';
+  }
   
   else if (isTvShowLastEpisodeToAir(media)) {
     mediaCategory = 'tv';
-    mediaDetailPath = `/tv/${media.id}/season/${media.season_number}/episode/${media.episode_number}`;
+    mediaDetailPath = `tv/${media.id}/seasons/${media.season_number}`;
     mediaImg = media.still_path;
-    mediaTitle = media.name;
-    mediaSubtitle = `S${media.season_number} E${media.episode_number} • ${formatDateToReadable(media.air_date)}`;
+    mediaTitle = `${media.name} ${media.season_number}`;
+    mediaSubtitle = `${formatDateToReadable(media.air_date)} • Episodes ${media.episode_number}`;
     mediaOverview = media.overview;
     mediaRating = media.vote_average !== 0 ? Math.round(media.vote_average * 10) : 'N/A';
   }
@@ -108,6 +119,14 @@ export const displayMediaSubtitle = function(subtitle: string | MediaSummary[]):
     if(isTvShowLastEpisodeToAir(item)){
       content = item.name;
     }
+
+    if(isTvShowSeason(item)){
+      content = item.name
+    }
+
+    if(isEpisode(item)){
+      content = item.name
+    }
     
     return content;
   })
@@ -116,14 +135,18 @@ export const displayMediaSubtitle = function(subtitle: string | MediaSummary[]):
 }
 
 export function getMediaType(media: MediaSummary): string {
-  if ('title' in media) 
+  if (isMovieSummary(media)) 
     return 'movie';
-  if ('first_air_date' in media) 
+  if (isTvShowSummary(media))
     return 'tv';
-  if ('gender' in media)
+  if (isBasePerson(media))
     return 'person';
-  if ('episode_number' in media && 'season_number' in media)
+  if (isTvShowLastEpisodeToAir(media))
     return 'tv';
+  if (isTvShowSeason(media))
+    return 'tv'
+  if (isEpisode(media))
+    return 'tv'
 
   return 'unknown';
 }

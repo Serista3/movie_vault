@@ -1,6 +1,7 @@
 import { type LoaderFunctionArgs, useLoaderData } from "react-router"
 import { getPerson, getPersonCombinedCredits } from "@/services";
 import type { PersonDetail, PersonCombinedCredits, AppError } from "@/@types";
+import { isAppError } from "@/guards";
 import { getActingData, getCrewData } from "@/utils/helper";
 import { ExplorerLayout } from '@/components/layout';
 import { ErrorMessage, Image, Heading, Paragraph } from "@/components/common";
@@ -14,7 +15,7 @@ export default function PersonDetail(){
 
   return (
     <>
-      {'isError' in data && <ErrorMessage error={data} />}
+      {isAppError(data) && <ErrorMessage error={data} />}
       {'id' in data && (
         <ExplorerLayout title={data.name}>
           <div className="mt-4 flex flex-col items-center justify-center gap-13">
@@ -46,7 +47,7 @@ export default function PersonDetail(){
                 </div>
                 {crewData.length > 0 && 
                   crewData.map(crew => (
-                    <div key={crew.department} className="acting flex flex-col gap-3">
+                    <div key={`${crew.department}-${crew.credits.reduce((d,c) => d + c.credit_id, '')}`} className="acting flex flex-col gap-3">
                       <Heading level={3}>{crew.department}</Heading>
                       {crew.credits.length > 0 && (
                         <Filmography data={crew.credits} />

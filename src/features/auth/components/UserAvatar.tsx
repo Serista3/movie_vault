@@ -1,5 +1,6 @@
 // --- IMPORTS ---
 import type { User, AppError } from '@/@types';
+import { isUser } from '@/guards';
 import { BASE_USER_AVATAR_CLASS, GUEST_USERNAME, GUEST_AVATAR_INITIAL } from '../constants';
 
 // --- TYPE DEFINATIONS ---
@@ -10,7 +11,7 @@ interface UserAvatarProps {
 
 export default function UserAvatar({ data, isAuthenticated }: UserAvatarProps) {
   // --- DETERMINE USERNAME & AVATAR INITIAL ---
-  const isValidData = isAuthenticated && data && 'username' in data;
+  const isValidData = isAuthenticated && data && isUser(data);
   const username = isValidData ? data.username : GUEST_USERNAME;
   const avatarInitial = isValidData ? username.charAt(0).toUpperCase() : GUEST_AVATAR_INITIAL;
 

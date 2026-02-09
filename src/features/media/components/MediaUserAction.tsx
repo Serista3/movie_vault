@@ -1,9 +1,8 @@
 import { useFetcher } from 'react-router'
-import type { User, MovieAccountStates, TvShowAccountStates, AppError } from '../../../@types'
+import type { User, MovieAccountStates, TvShowAccountStates, AppError } from '@/@types'
+import { isAppError } from '@/guards'
 import { FaHeart, FaList } from 'react-icons/fa6'
-import AsyncBoundary from '../../../components/common/feedback/AsyncBoundary'
-import ErrorMessage from '../../../components/common/feedback/ErrorMessage'
-import Button from '../../../components/common/form/Button'
+import { AsyncBoundary, ErrorMessage, Button } from '@/components/common'
 
 interface MediaUserActionProps {
   isAuthenticated: boolean;
@@ -36,12 +35,12 @@ export default function MediaUserAction({
       errorElement={<div>Error loading account states.</div>}
     >
       {accountStatesData => {
-        if ('isError' in accountStatesData) return <ErrorMessage error={accountStatesData} />
+        if (isAppError(accountStatesData)) return <ErrorMessage error={accountStatesData} />
 
         return (
           <AsyncBoundary resolve={userDataPromise} errorElement={<div>Error loading user data.</div>}>
             {userData => {
-              if ('isError' in userData) return <ErrorMessage error={userData} />
+              if (isAppError(userData)) return <ErrorMessage error={userData} />
 
               const userId = userData.id;
 

@@ -1,7 +1,6 @@
 // --- IMPORTS ---
-import { Link } from "react-router";
 import { cn } from "@/utils/helper";
-import { Heading } from "@/components/common";
+import { Heading, Anchor } from "@/components/common";
 
 // --- TYPE DEFINATIONS ---
 interface MediaSectionProps {
@@ -21,12 +20,9 @@ export default function MediaSection({ title, path, seeAllText = "See All", chil
 
             {/* --- SEE ALL LINK --- */}
             {path && (
-                <Link 
-                    to={path} 
-                    className="text-base text-right text-primary-light hover:text-primary-dark ml-auto mt-4 inline-block transition-all duration-300"
-                >
+                <Anchor to={path} className="mt-4 self-end w-fit">
                     {seeAllText}
-                </Link>
+                </Anchor> 
             )}
         </div>
     )

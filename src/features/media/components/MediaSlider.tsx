@@ -3,6 +3,7 @@ import { useLoaderData, Link } from "react-router";
 import { useModal } from "@/store";
 import { useSlider, useSelectTrailer } from "@/hooks";
 import type { MediaSummary, MediaVideo, AppError } from "@/@types";
+import { isAppError } from "@/guards";
 import { getMediaType, cn } from "@/utils/helper";
 import { Slider, Button, Image, ErrorMessage, Heading } from "@/components/common";
 import { TrailerModal } from "@/features/media";
@@ -19,19 +20,19 @@ export default function MediaSlider() {
   return (
     <>
       {/* --- ERROR MESSAGE --- */}
-      {'isError' in data && (
+      {isAppError(data) && (
         <ErrorMessage error={data} />
       )}
 
       {/* --- NO DATA MESSAGE --- */}
-      {!('isError' in data) && data.length === 0 && (
+      {!(isAppError(data)) && data.length === 0 && (
         <div className="text-tertiary-dark text-center py-20">
           No now playing movies found.
         </div>
       )}
 
       {/* --- MEDIA SLIDES --- */}
-      {!('isError' in data) && data.length > 0 && (
+      {!(isAppError(data)) && data.length > 0 && (
         <>
 
           {/* --- SLIDER --- */}

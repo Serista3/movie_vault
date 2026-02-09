@@ -1,5 +1,6 @@
 import type { 
-  MediaResponse, 
+  MediaResponse,
+  TvShowSeasonDetail,
   TvShowSummary, 
   TvShowDetail, 
   TvShowAccountStates, 
@@ -15,6 +16,10 @@ import type {
   AppError,
 } from "@/@types";
 import { tmdbFetch } from "@/utils/api";
+
+export const getTvShowSeason = async function(tvShowId: number, seasonNumber: number): Promise<TvShowSeasonDetail | AppError>{
+  return tmdbFetch<TvShowSeasonDetail>(`/tv/${tvShowId}/season/${seasonNumber}?language=en-US`);
+}
 
 export const getTvShowList = async function(category: string, page: number): Promise<MediaResponse<TvShowSummary> | AppError>{
   return tmdbFetch<MediaResponse<TvShowSummary>>(`/tv/${category}?language=en-US&page=${page}`);

@@ -1,7 +1,10 @@
 // --- IMPORTS ---
 import type {
   CreatedBy,
+  Episode,
+  Season,
   TvShowSeason,
+  TvShowSeasonDetail,
   TvShowLastEpisodeToAir,
   TvShowSummary,
   TvShowDetail,
@@ -22,9 +25,24 @@ export const isCreatedBy = function(data: unknown): data is CreatedBy {
   return 'credit_id' in data && 'profile_path' in data && 'name' in data;
 }
 
+export const isEpisode = function(data: unknown): data is Episode {
+  if(typeof data !== 'object' || data === null) return false
+  return 'episode_type' in data && 'episode_number' in data;
+}
+
+export const isSeason = function(data: unknown): data is Season {
+  if(typeof data !== 'object' || data === null) return false
+  return 'air_date' in data && 'season_number' in data;
+}
+
 export const isTvShowSeason = function(data: unknown): data is TvShowSeason {
   if(typeof data !== 'object' || data === null) return false
-  return 'air_date' in data && 'overview' in data && 'season_number' in data;
+  return 'episode_count' in data;
+}
+
+export const isTvShowSeasonDetail = function(data: unknown): data is TvShowSeasonDetail {
+  if(typeof data !== 'object' || data === null) return false
+  return 'episodes' in data && Array.isArray(data.episodes) && 'networks' in data && Array.isArray(data.networks);
 }
 
 export const isTvShowLastEpisodeToAir = function(data: unknown): data is TvShowLastEpisodeToAir {

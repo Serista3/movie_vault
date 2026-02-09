@@ -6,9 +6,10 @@ import Discover, { discoverMovieLoader, discoverTvShowLoader } from '@/pages/Dis
 import MediaDetail from '@/pages/mediaDetail/MediaDetail';
 import { mediaDetailLoader } from '@/pages/mediaDetail/loader';
 import { mediaDetailAction } from '@/pages/mediaDetail/action';
-import MediaDetailCast, { loader as mediaDetailCastLoader } from '@/pages/MediaDetailCast';
-import MediaDetailReview from '@/pages/MediaDetailReview';
-import MediaDetailSeason from '@/pages/MediaDetailSeason';
+import Credits, { loader as creditsLoader } from '@/pages/Credits';
+import Reviews, { loader as reviewsLoader } from '@/pages/Reviews';
+import Seasons, { loader as seasonsLoader  } from '@/pages/Seasons';
+import SeasonDetail, { loader as seasonDetailLoader } from '@/pages/SeasonDetail';
 import People, { loader as peopleLoader } from '@/pages/People';
 import PersonDetail, { loader as personDetailLoader } from '@/pages/PersonDetail';
 import Favorites from '@/pages/Favorites';
@@ -54,13 +55,14 @@ const router = createBrowserRouter([
       ] },
       { path: 'movie', Component: Discover, loader: discoverMovieLoader },
       { path: 'movie/:id', Component: MediaDetail, loader: mediaDetailLoader, action: mediaDetailAction },
-      { path: 'movie/:id/cast', Component: MediaDetailCast, loader: mediaDetailCastLoader },
-      { path: 'movie/:id/reviews', Component: MediaDetailReview },
+      { path: 'movie/:id/cast', Component: Credits, loader: creditsLoader },
+      { path: 'movie/:id/reviews', Component: Reviews, loader: reviewsLoader },
       { path: 'tv', Component: Discover, loader: discoverTvShowLoader },
       { path: 'tv/:id', Component: MediaDetail, loader: mediaDetailLoader, action: mediaDetailAction },
-      { path: 'tv/:id/cast', Component: MediaDetailCast, loader: mediaDetailCastLoader },
-      { path: 'tv/:id/reviews', Component: MediaDetailReview },
-      { path: 'tv/:id/seasons', Component: MediaDetailSeason },
+      { path: 'tv/:id/cast', Component: Credits, loader: creditsLoader },
+      { path: 'tv/:id/reviews', Component: Reviews, loader: reviewsLoader },
+      { path: 'tv/:id/seasons', Component: Seasons, loader: seasonsLoader },
+      { path: 'tv/:id/season/:seasonNumber', Component: SeasonDetail, loader: seasonDetailLoader },
       { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },
       { path: 'favorite', Component: Favorites },

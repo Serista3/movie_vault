@@ -10,6 +10,13 @@ import type {
   AppError,
   PersonSummary,
 } from "@/@types";
+import { 
+  isPersonSummary, 
+  isAggregateCreditsCastMember, 
+  isAggregateCreditsCrewMember, 
+  isCreditCastMember, 
+  isCreditCrewMember 
+} from "@/guards";
 import { formatDateToReadable } from "@/utils";
 
 export interface ActingInfo {
@@ -157,26 +164,6 @@ export interface PersonSummaryData {
   personSubtitle: string;
 }
 
-export function isAggregateCast(p: any): p is AggregateCreditsCastMember {
-  return 'roles' in p && Array.isArray(p.roles);
-}
-
-export function isAggregateCrew(p: any): p is AggregateCreditsCrewMember {
-  return 'jobs' in p && Array.isArray(p.jobs);
-}
-
-export function isCast(p: any): p is CreditCastMember {
-  return 'character' in p;
-}
-
-export function isCrew(p: any): p is CreditCrewMember {
-  return 'job' in p;
-}
-
-export function isPersonSummary(p: any): p is PersonSummary {
-  return 'known_for' in p;
-}
-
 export const getPersonSummaryData = function(person: PersonSummary | CreditCastMember 
   | CreditCrewMember | AggregateCreditsCastMember | AggregateCreditsCrewMember): PersonSummaryData {
   const personImg = person.profile_path;
@@ -187,21 +174,21 @@ export const getPersonSummaryData = function(person: PersonSummary | CreditCastM
     personSubtitle = person.known_for.map(item => 'title' in item ? item.title : item.original_name).join(', ');
   }
 
-  if(isAggregateCast(person)) {
+  if(isAggregateCreditsCastMember(person)) {
     const roles = person.roles[0]?.character || 'No Role Info';
     personSubtitle = roles
   }
 
-  if(isAggregateCrew(person)) {
+  if(isAggregateCreditsCrewMember(person)) {
     const jobs = person.jobs[0]?.job || 'No Job Info';
     personSubtitle = jobs;
   }
 
-  if(isCast(person)) {
+  if(isCreditCastMember(person)) {
     personSubtitle = person.character;
   }
 
-  if(isCrew(person)) {
+  if(isCreditCrewMember(person)) {
     personSubtitle = person.job;
   }
 
@@ -210,4 +197,18 @@ export const getPersonSummaryData = function(person: PersonSummary | CreditCastM
     personName,
     personSubtitle,
   }
+}
+
+export const getMediaCrews = function(crews: (CreditCrewMember | AggregateCreditsCrewMember)[]){
+  const uniqueDepartments = Array.from(new Set(crews.map(crew => crew.department)));
+  
+  const crewData = uniqueDepartments.map(dept => {
+    const newCrews = crews.filter(credit => credit.department === dept)
+    return {
+      department: dept,
+      crews: newCrews
+    }
+  })
+
+  return crewData
 }

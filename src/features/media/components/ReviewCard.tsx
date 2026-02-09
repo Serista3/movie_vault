@@ -53,7 +53,7 @@ export default function ReviewCard({ review, className }: ReviewCardProps) {
             </div>
 
             {/* --- REVIEW CONTENT --- */}
-            <Paragraph className="line-clamp-5">{content}</Paragraph>
+            <Paragraph>{content}</Paragraph>
         </div>
     )
 }

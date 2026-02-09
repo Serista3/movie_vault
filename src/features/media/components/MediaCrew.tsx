@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import type { MovieCredits, TvShowAggregateCredits, AppError } from '@/@types'
+import { isAppError } from '@/guards';
 import { AsyncBoundary, ErrorMessage, Paragraph } from '@/components/common'
 
 interface MediaCrewProps {
@@ -10,7 +11,7 @@ export default function MediaCrew({ mediaCredits }: MediaCrewProps) {
   return (
     <AsyncBoundary resolve={mediaCredits} errorElement={<div>Error loading crew.</div>}>
       {creditsData => {
-        if ('isError' in creditsData) 
+        if (isAppError(creditsData)) 
           return <ErrorMessage error={creditsData} />
         
         const crewToDisplay = creditsData.crew.slice(0, 5);

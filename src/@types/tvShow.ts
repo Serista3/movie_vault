@@ -1,5 +1,18 @@
-import type { Media, MediaGenre, MediaLanguage, MediaCountry, MediaImage, MediaKeyword, MediaVideo } from "./media"
-import type { CreditCastMember, CreditCrewMember, AggregateCreditsCastMember, AggregateCreditsCrewMember } from "./person";
+import type { 
+  Media, 
+  MediaGenre, 
+  MediaLanguage, 
+  MediaCountry, 
+  MediaImage, 
+  MediaKeyword, 
+  MediaVideo 
+} from "./media"
+import type { 
+  CreditCastMember, 
+  CreditCrewMember, 
+  AggregateCreditsCastMember, 
+  AggregateCreditsCrewMember 
+} from "./person";
 import type { CompanySummary } from "./company";
 import type { NetworkSummary } from "./network";
 
@@ -11,15 +24,42 @@ export interface CreatedBy {
   profile_path: string;
 }
 
-export interface TvShowSeason {
+export interface Episode {
   air_date: string;
-  episode_count: number;
+  episode_number: number;
+  episode_type: string;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string | null;
+  vote_average: number;
+  vote_count: number;
+  crew: CreditCrewMember[]
+  guest_stars: CreditCastMember[]
+}
+
+export interface Season {
+  air_date: string;
   id: number;
   name: string;
   overview: string;
   poster_path: string;
   season_number: number;
   vote_average: number;
+}
+
+export interface TvShowSeason extends Season {
+  episode_count: number;
+}
+
+export interface TvShowSeasonDetail extends Season {
+  _id: string;
+  episodes: Episode[]
+  networks: NetworkSummary[]
 }
 
 export interface TvShowLastEpisodeToAir {

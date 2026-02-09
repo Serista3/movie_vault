@@ -10,7 +10,7 @@ interface ErrorMessageProps {
 }
 
 // --- CONSTANTS ---
-const BASE_CLASS = "w-full h-auto bg-danger-light p-4 shadow-xl";
+const BASE_CLASS = "w-full h-auto bg-danger-light shadow-xl";
 
 export default function ErrorMessage({ error, className }: ErrorMessageProps){
     // --- COMPUTED CLASS NAMES ---
@@ -21,15 +21,17 @@ export default function ErrorMessage({ error, className }: ErrorMessageProps){
 
     return (
         <div className={errorClass}>
-            {/* --- Error Header --- */}
-            <div className='font-semibold text-lg mb-2'>
-                {errorHeader}
-            </div>
+            <div className='max-w-300 mx-auto p-4'>
+                {/* --- Error Header --- */}
+                <div className='font-semibold text-lg mb-2'>
+                    {errorHeader}
+                </div>
 
-            {/* --- Error Message --- */}
-            <Paragraph>
-                {error.message} Please try again later.
-            </Paragraph>
+                {/* --- Error Message --- */}
+                <Paragraph>
+                    {error.message} Please try again later.
+                </Paragraph>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import { getPeople } from "@/services";
 import type { MediaResponse, PersonSummary, AppError } from "@/@types";
+import { isAppError, isMediaResponse } from "@/guards";
 import { usePagination } from "@/hooks";
 import { ExplorerLayout } from "@/components/layout";
 import { MediaGrid } from "@/features/media";
@@ -8,13 +9,13 @@ import { ErrorMessage, Pagination } from "@/components/common";
 
 export default function People() {
   const peopleData = useLoaderData<MediaResponse<PersonSummary> | AppError>();
-  const peopleTotalPages = peopleData && 'total_pages' in peopleData ? peopleData.total_pages : 1;
+  const peopleTotalPages = peopleData && isMediaResponse(peopleData) ? peopleData.total_pages : 1;
   const { curPage, totalPages, handlePageChange } = usePagination(peopleTotalPages);
 
   return (
     <ExplorerLayout title="People">
-      {peopleData && 'results' in peopleData && <MediaGrid mediaList={peopleData.results} />}
-      {peopleData && 'isError' in peopleData && <ErrorMessage error={peopleData} />}
+      {isMediaResponse(peopleData) && <MediaGrid mediaList={peopleData.results} />}
+      {isAppError(peopleData) && <ErrorMessage error={peopleData} />}
       <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </ExplorerLayout>
   )

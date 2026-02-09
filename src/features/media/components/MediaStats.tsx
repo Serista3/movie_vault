@@ -1,8 +1,6 @@
-import type { MovieDetail, TvShowDetail } from "../../../@types"
-
-import Heading from "../../../components/common/typography/Heading"
-import Paragraph from "../../../components/common/typography/Paragraph"
-import Image from "../../../components/common/display/Image"
+import type { MovieDetail, TvShowDetail } from "@/@types"
+import { isMovieDetail, isTvShowDetail } from "@/guards";
+import { Heading, Paragraph, Image }from "@/components/common"
 
 interface MediaStatsProps {
   mediaDetail: MovieDetail | TvShowDetail;
@@ -12,7 +10,7 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
   return (
     <div className="bg-gray-dark rounded-[10px] p-4">
       <ul className="flex flex-col gap-4">
-        {'original_title' in mediaDetail && (
+        {isMovieDetail(mediaDetail) && (
           <li>
             <div>
               <Heading level={4} className="mb-1">Original Title</Heading>
@@ -20,7 +18,7 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
-        {'original_name' in mediaDetail && (
+        {isTvShowDetail(mediaDetail) && (
           <li>
             <div>
               <Heading level={4} className="mb-1">Original Name</Heading>
@@ -34,7 +32,7 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             <Paragraph>{mediaDetail.status}</Paragraph>
           </div>
         </li>
-        {'networks' in mediaDetail && (
+        {isTvShowDetail(mediaDetail) && (
           <li>
             <div>
               <Heading level={4} className="mb-1">Networks</Heading>
@@ -51,7 +49,7 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
-        {'budget' in mediaDetail && (
+        {isMovieDetail(mediaDetail) && (
           <li>
             <div>
               <Heading level={4} className="mb-1">Budget</Heading>
@@ -59,7 +57,7 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
-        {'revenue' in mediaDetail && (
+        {isMovieDetail(mediaDetail) && (
           <li>
             <div>
               <Heading level={4} className="mb-1">Revenue</Heading>
@@ -67,7 +65,7 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
-        {'type' in mediaDetail && (
+        {isTvShowDetail(mediaDetail) && (
           <li>
             <div>
               <Heading level={4} className="mb-1">Type</Heading>

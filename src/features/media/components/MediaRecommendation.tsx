@@ -1,9 +1,7 @@
-import type { MovieSummary, TvShowSummary, MediaResponse, AppError } from "../../../@types"
-
-import AsyncBoundary from "../../../components/common/feedback/AsyncBoundary"
-import ErrorMessage from "../../../components/common/feedback/ErrorMessage"
-import MediaSection from "./MediaSection"
-import MediaGrid from "./MediaGrid"
+import type { MovieSummary, TvShowSummary, MediaResponse, AppError } from "@/@types"
+import { isAppError } from "@/guards";
+import { AsyncBoundary, ErrorMessage } from "@/components/common"
+import { MediaSection, MediaGrid } from "@/features/media"
 
 interface MediaRecommendationProps {
   mediaRecommendations: Promise<MediaResponse<MovieSummary | TvShowSummary> | AppError>;
@@ -13,7 +11,7 @@ export default function MediaRecommendation({ mediaRecommendations }: MediaRecom
   return (
     <AsyncBoundary resolve={mediaRecommendations} errorElement={<div>Error loading recommendations.</div>}>
       {recommendationsData => {
-        if ('isError' in recommendationsData) 
+        if (isAppError(recommendationsData)) 
           return <ErrorMessage error={recommendationsData} />
         
         return (

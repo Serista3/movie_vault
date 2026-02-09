@@ -9,6 +9,7 @@ import type {
   TvShowSummary,
   AppError 
 } from "@/@types";
+import { isAppError, isMediaResponse } from "@/guards";
 import { getDiscoverMovies, getDiscoverTvShows } from "@/services";
 import { ExplorerLayout } from "@/components/layout";
 import { Pagination, ErrorMessage } from "@/components/common";
@@ -21,15 +22,15 @@ export default function Discover() {
 
   // --- COMPUTED MEDIA DATA ---
   const mediaData = useLoaderData<MediaResponse<MovieSummary | TvShowSummary> | AppError>();
-  const mediaTotalPages = mediaData && 'total_pages' in mediaData ? mediaData.total_pages : 1;
+  const mediaTotalPages = mediaData && isMediaResponse(mediaData) ? mediaData.total_pages : 1;
 
   const { curPage, totalPages, handlePageChange } = usePagination(mediaTotalPages);
 
   return (
     <ExplorerLayout title={discoverType === "movie" ? "Movies" : "TV Shows"}>
       <DiscoverControls key={location.key} mediaType={discoverType} className="mb-4" />
-      {'results' in mediaData && <MediaGrid mediaList={mediaData.results} />}
-      {'isError' in mediaData && <ErrorMessage error={mediaData} />}
+      {isMediaResponse(mediaData) && <MediaGrid mediaList={mediaData.results} />}
+      {isAppError(mediaData) && <ErrorMessage error={mediaData} />}
       <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </ExplorerLayout>
   );

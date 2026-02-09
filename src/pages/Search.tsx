@@ -1,5 +1,6 @@
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import type { MediaResponse, MediaSummary, AppError } from "@/@types";
+import { isAppError, isMediaResponse } from "@/guards";
 import { getSearchMovieResults, getSearchTvResults, getSearchPersonResults } from "@/services";
 import { usePagination } from "@/hooks";
 import { ExplorerLayout } from "@/components/layout";
@@ -14,13 +15,13 @@ interface SearchLoaderData {
 
 export default function Search(){
   const { searchData, countResults } = useLoaderData<SearchLoaderData>();
-  const searchTotalPages = 'total_pages' in searchData ? searchData.total_pages : 1;
+  const searchTotalPages = isMediaResponse(searchData) ? searchData.total_pages : 1;
   const { curPage, totalPages, handlePageChange } = usePagination(searchTotalPages)
 
   return (
     <ExplorerLayout title="Search">
       <SearchResult countResults={countResults} />
-      {searchData && 'results' in searchData && (
+      {searchData && isMediaResponse(searchData) && (
         <div className="results flex flex-col mt-4 w-full gap-4">
           {searchData.results.length > 0 && (
             searchData.results.map((media) => (
@@ -34,7 +35,7 @@ export default function Search(){
           )}
         </div>
       )}
-      {searchData && 'isError' in searchData && <ErrorMessage error={searchData} />}
+      {searchData && isAppError(searchData) && <ErrorMessage error={searchData} />}
       <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} className="mt-8" />
     </ExplorerLayout>
   );

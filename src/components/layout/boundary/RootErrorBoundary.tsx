@@ -17,7 +17,7 @@ function ErrorComponent({ error }: { error: ErrorResponse | Error | unknown }) {
 
       {/* --- ERROR STACK TRACE --- */}
       {error instanceof Error && (
-        <div className="mt-2 pt-6 border-t border-gray-light">
+        <div className="mt-2 pt-6 border-t border-gray-light overflow-x-auto">
           <Heading level={2}>The stack trace is:</Heading>
           <pre>{error.stack}</pre>
         </div>
