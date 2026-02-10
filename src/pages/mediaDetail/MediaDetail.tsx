@@ -146,7 +146,7 @@ export default function MediaDetail(){
                     ? creditsData.crew.slice(0, 10) : [];
 
                   return (
-                    <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path="cast" seeAllText="All Casts">
+                    <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path="cast" seeAllText="All Cast & Crew">
                       <MediaGrid mediaList={displayItems} variant="horizontal" limit={10} />
                     </MediaSection>
                   )

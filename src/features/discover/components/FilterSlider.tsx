@@ -26,6 +26,7 @@ export default function FilterSlider({
       min={min}
       max={max}
       step={step}
+      minStepsBetweenThumbs={1}
     >
       <Slider.Track className="relative h-0.5 grow rounded-full bg-gray-dark">
         <Slider.Range className="absolute h-full rounded-full bg-tertiary-light" />

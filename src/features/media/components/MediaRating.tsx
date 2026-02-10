@@ -42,7 +42,7 @@ export default function MediaRating({
       style={{ width: size, height: size }} 
       className={cn(className, BASE_CLASS)}
     >
-      {rating}{rating !== 'N/A' && '%'}
+      {typeof rating === 'number' ? rating.toFixed(0) : rating}{rating !== 'N/A' && '%'}
       
       {/* --- SVG CIRCLE --- */}
       <svg className="-rotate-90 absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
