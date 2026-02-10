@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { 
   MediaResponse,
   TvShowSeasonDetail,
@@ -17,6 +18,7 @@ import type {
 } from "@/@types";
 import { tmdbFetch } from "@/utils/api";
 
+// --- SERVICES ---
 export const getTvShowSeason = async function(tvShowId: number, seasonNumber: number): Promise<TvShowSeasonDetail | AppError>{
   return tmdbFetch<TvShowSeasonDetail>(`/tv/${tvShowId}/season/${seasonNumber}?language=en-US`);
 }

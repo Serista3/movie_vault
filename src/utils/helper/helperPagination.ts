@@ -1,5 +1,7 @@
+// --- CONSTANTS ---
 const MAX_PAGES_TO_SHOW = 5;
 
+// --- HELPERS ---
 const getTotalShowPage = function(curPage: number, totalPages: number){
     // Determine which page numbers to show in the pagination component
     switch (true){

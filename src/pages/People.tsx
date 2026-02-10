@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import { getPeople } from "@/services";
 import type { MediaResponse, PersonSummary, AppError } from "@/@types";
@@ -14,6 +15,7 @@ export default function People() {
 
   return (
     <ExplorerLayout title="People">
+      {/* --- PEOPLE --- */}
       {isMediaResponse(peopleData) && <MediaGrid mediaList={peopleData.results} />}
       {isAppError(peopleData) && <ErrorMessage error={peopleData} />}
       <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} />
@@ -21,6 +23,7 @@ export default function People() {
   )
 }
 
+// --- LOADER ---
 export const loader = async function({ request }: LoaderFunctionArgs): Promise<MediaResponse<PersonSummary> | AppError> {
   const url = new URL(request.url);
   const pageParam = url.searchParams.get('page');

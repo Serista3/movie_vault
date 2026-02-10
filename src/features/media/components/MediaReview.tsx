@@ -1,8 +1,10 @@
+// --- IMPORTS ---
 import type { ReviewSummary, MediaResponse, AppError } from "@/@types"
 import { isAppError } from "@/guards";
 import { AsyncBoundary, ErrorMessage, Paragraph, Anchor } from "@/components/common"
 import { MediaSection, ReviewCard } from "@/features/media"
 
+// --- TYPE DEFINATIONS ---
 interface MediaReviewProps {
   mediaReviews: Promise<MediaResponse<ReviewSummary> | AppError>;
   path: string;
@@ -22,6 +24,7 @@ export default function MediaReview({ mediaReviews, path }: MediaReviewProps) {
             )}
             {reviewsData.results.length > 0 && (
               <>
+                {/* --- REVIEW LIST --- */}
                 {reviewsData.results.slice(0, 1).map(review => (
                   <ReviewCard key={review.id} review={review} />
                 ))}

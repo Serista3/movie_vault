@@ -1,5 +1,7 @@
+// --- IMPORTS ---
 import type { User } from './auth';
 
+// --- TYPE DEFINATIONS ---
 export interface TmdbSuccessResponse {
     success: boolean;
     status_code?: number;

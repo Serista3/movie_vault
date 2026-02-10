@@ -1,7 +1,9 @@
+// --- IMPORTS ---
 import { optionMethodPost } from "./config";
 import { tmdbFetch } from "@/utils/api";
 import type { User, RequestToken, CreateSession, DeleteSession, AppError } from "@/@types";
 
+// --- SERVICES ---
 export const getCurrentUser = async function(sessionId: string): Promise<User | AppError>{
   return tmdbFetch<User>(`/account/22551364?session_id=${sessionId}`);
 }

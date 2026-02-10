@@ -1,5 +1,5 @@
+// --- IMPORTS ---
 import { tmdbFetch } from "@/utils/api";
-
 import { optionMethodPost } from "./config";
 import type { 
     MediaType,
@@ -10,6 +10,7 @@ import type {
     AppError 
 } from "../@types";
 
+// --- TYPE DEFINATIONS ---
 interface MaskRequest {
     media_type: MediaType;
     media_id: number;
@@ -29,6 +30,7 @@ interface AccountMediaParams {
     sortBy: 'created_at.asc' | 'created_at.desc';
 }
 
+// --- SERVICES ---
 export const toggleFavorite = async function(favoriteRequest: FavoriteRequest, accountId: number): Promise<TmdbSuccessResponse | AppError>{
     const sessionId = localStorage.getItem('session_id');
     return tmdbFetch<TmdbSuccessResponse>(`/account/${accountId}/favorite?session_id=${sessionId}`, {

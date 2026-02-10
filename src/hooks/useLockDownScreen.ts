@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { useNavigation } from "react-router";
 import { useEffect, useMemo } from "react";
 
@@ -5,6 +6,7 @@ export function useLockDownScreen(isLocked: boolean){
     const navigation = useNavigation();
     const windowScrollBarWidth = useMemo(() => window.innerWidth - document.documentElement.clientWidth, []);
 
+    // --- AUTO LOCKDOWN SCREEN ---
     useEffect(() => {
         if(navigation.state === 'loading') return;
 

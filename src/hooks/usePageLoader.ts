@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { useEffect, useState } from "react";
 import { useNavigation } from "react-router";
 
@@ -5,6 +6,7 @@ export function usePageLoader() {
   const navigation = useNavigation();
   const [progress, setProgress] = useState(0);
 
+  // --- LOGIC TIMEOUT PROGRESS ---
   useEffect(() => {
     let intervalId: number;
     let timeOutId: number;

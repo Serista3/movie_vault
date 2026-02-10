@@ -1,3 +1,4 @@
+// --- TYPE DEFINATIONS ---
 export interface NetworkSummary {
   id: number;
   logo_path: string;

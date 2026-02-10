@@ -1,6 +1,8 @@
+// --- IMPORTS ---
 import { getMovieLists, getTvShowList, getTrending } from "@/services";
 import type { MediaResponse, MediaSummary, AppError, TrendingType, TimeWindow } from "@/@types";
 
+// --- TYPE DEFINATIONS ---
 type TrendingParams = [TrendingType, TimeWindow];
 type MediaListParams = [string, number];
 
@@ -29,6 +31,7 @@ interface CommonMediaSection extends BaseSection {
 
 type SectionState = TrendingSection | CommonMediaSection;
 
+// --- CONSTANTS ---
 export const defaultSections: SectionState[] = [
   { 
     title: 'Trending', 
@@ -60,6 +63,7 @@ export const defaultSections: SectionState[] = [
   },
 ];
 
+// --- HELPERS ---
 function getArgsByMode(title: string, mode: string): [string, number | string] {
   switch (title) {
     case 'Trending': 

@@ -1,5 +1,7 @@
+// --- IMPORTS ---
 import { useEffect, useState } from "react";
 
+// --- TYPE DEFINATIONS ---
 interface UseSliderParams<T> {
   items: T[];
   isPaused?: boolean;

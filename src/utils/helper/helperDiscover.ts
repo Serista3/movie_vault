@@ -1,10 +1,13 @@
+// --- IMPORTS ---
 import type { SortBy, Monetization } from "@/@types";
 
+// --- TYPE DEFINATIONS ---
 interface SortOption {
   label: string;
   value: SortBy;
 }
 
+// --- HELPERS ---
 export const SORT_BASE_OPTIONS: SortOption[] = [
   { label: 'Popularity Descending', value: 'popularity.desc' },
   { label: 'Popularity Ascending', value: 'popularity.asc' },

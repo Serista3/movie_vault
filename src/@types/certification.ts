@@ -1,3 +1,4 @@
+// --- TYPE DEFINATIONS ---
 export interface CertificationSummary {
   certifications: Record<string, CertificationDetail[]>;
 }

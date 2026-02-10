@@ -1,3 +1,4 @@
+// --- TYPE DEFINATIONS ---
 export type Monetization = 'flatrate' | 'free' | 'ads' | 'rent' | 'buy';
 
 export type WithStatus = 0 | 1 | 2 | 3 | 4 | 5

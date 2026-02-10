@@ -1,11 +1,14 @@
+// --- IMPORTS ---
 import type { MediaResponse, AppError, MovieSummary, TvShowSummary, PersonSummary } from "@/@types";
 import { tmdbFetch } from "@/utils/api";
 
+// --- TYPE DEFINATIONS ---
 interface SearchOptions {
   query: string;
   page?: number;
 }
 
+// --- SERVICES ---
 export const getSearchCompanyResults = async function<T>({ query, page = 1 }: SearchOptions): Promise<MediaResponse<T> | AppError>{
   return tmdbFetch<MediaResponse<T>>(`/search/company?query=${query}&page=${page}`);
 }

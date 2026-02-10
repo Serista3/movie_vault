@@ -36,6 +36,7 @@ export default function Discover() {
   );
 }
 
+// --- HELPERS ---
 const getAllQueryParams = function(url: URL): TvShowDiscoverQueryParams | MovieDiscoverQueryParams {
   return Array.from(url.searchParams.entries()).map(([key, value]) => {
     return {

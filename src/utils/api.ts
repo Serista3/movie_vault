@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { BASE_URL, API_READ_ACCESS_TOKEN } from "@/services";
 import type { TmdbErrorResponse, AppError } from "@/@types";
 

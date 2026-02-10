@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { ActionFunctionArgs } from "react-router"
 import type { MediaType } from "@/@types";
 import { toggleFavorite, toggleWatchlist } from "@/services";
@@ -17,6 +18,7 @@ export const mediaDetailAction = async function({ request }: ActionFunctionArgs)
         media_type: mediaType.toString() as MediaType,
     }
 
+    // --- PROCESS FLOW BASE ON ACTION TYPE ---
     if(actionType === 'toggleFavorite'){
         const isFavorite = formData.get("isFavorite");
 

@@ -1,5 +1,7 @@
+// --- IMPORTS ---
 import { useState, useEffect, useCallback } from "react";
 
+// --- TYPE DEFINATIONS ---
 interface WindowResize {
     width: number;
     height: number;

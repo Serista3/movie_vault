@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { 
   MediaResponse, 
   AppError, 
@@ -8,6 +9,7 @@ import type {
 } from "@/@types";
 import { tmdbFetch } from "@/utils/api";
 
+// --- CONSTANTS ---
 const defaultParams = {
   language: 'en-US',
   sort_by: 'popularity.desc',
@@ -25,6 +27,7 @@ const defaultTvParams = {
   include_null_first_air_dates: false,
 }
 
+// --- HELPER FUNCTIONS ---
 const getQueryString = function(params: MovieDiscoverQueryParams | TvShowDiscoverQueryParams): string {
   const defaultParams = 'include_video' in params ? defaultMovieParams : defaultTvParams;
   const finalParams = { ...defaultParams, ...params };
@@ -39,6 +42,7 @@ const getQueryString = function(params: MovieDiscoverQueryParams | TvShowDiscove
   return searchParams.toString();
 }
 
+// --- SERVICES ---
 export const getDiscoverMovies = async function(
   params: MovieDiscoverQueryParams = {}
 ): Promise<MediaResponse<MovieSummary> | AppError> {

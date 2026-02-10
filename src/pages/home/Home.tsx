@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { MediaSlider, MediaSection, LazyMediaRow} from "@/features/media";
 import { ToggleSwitch } from "@/components/common";
 import { useReducer } from "react";
@@ -6,6 +7,7 @@ import { selectModeReducer, defaultSections } from "./reducer";
 export default function Home() {
   const [sections, dispatchSection] = useReducer(selectModeReducer, defaultSections);
 
+  // --- CHANGE MEDIA SECTION TAB ---
   const handleToggleChange = function(title: string, mode: string) {
     dispatchSection({ type: 'CHANGE_MODE', title, mode });
   }

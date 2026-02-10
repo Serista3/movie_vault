@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { 
   MediaResponse, 
   PersonSummary, 
@@ -10,6 +11,7 @@ import type {
 } from "@/@types"
 import { tmdbFetch } from "@/utils/api"
 
+// --- SERVICES ---
 export const getPeople = async function(page: number): Promise<MediaResponse<PersonSummary> | AppError>{
   return tmdbFetch<MediaResponse<PersonSummary>>(`/person/popular?language=en-US&page=${page}`);
 }

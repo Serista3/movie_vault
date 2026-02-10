@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { MediaSummary, AppError } from "@/@types";
 import { getMovieLists, getMovieVideos } from "@/services";
 
@@ -9,6 +10,7 @@ export const loader = async function(): Promise<MediaSummary[] | AppError> {
 
   const top3NowPlaying = nowPlayingMovies.results.slice(0, 3);
   
+  // --- FETCH TRAILER KEY ---
   const movieWithTrailers = await Promise.all(
     top3NowPlaying.map(async (movie) => {
       const movieVideos = await getMovieVideos(movie.id);

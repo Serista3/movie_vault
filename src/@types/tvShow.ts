@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { 
   Media, 
   MediaGenre, 
@@ -16,6 +17,7 @@ import type {
 import type { CompanySummary } from "./company";
 import type { NetworkSummary } from "./network";
 
+// --- TYPE DEFINATIONS ---
 export interface CreatedBy {
   id: number;
   credit_id: string;

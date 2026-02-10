@@ -1,3 +1,4 @@
+// --- TYPE DEFINATIONS ---
 export interface CompanySummary {
     id: number;
     logo_path: string | null;

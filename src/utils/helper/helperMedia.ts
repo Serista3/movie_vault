@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { formatDateToReadable } from "@/utils";
 import type { MediaSummary, MediaType, } from "@/@types";
 import { 
@@ -10,6 +11,7 @@ import {
   isEpisode,
 } from "@/guards";
 
+// --- TYPE DEFINATIONS ---
 export interface MediaSummaryData {
   mediaCategory: MediaType;
   mediaDetailPath: string | null;
@@ -20,6 +22,7 @@ export interface MediaSummaryData {
   mediaRating: number | 'N/A';
 }
 
+// --- HELPERS ---
 export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryData {
   let mediaCategory: MediaType = 'movie';
   let mediaDetailPath: string | null = null;

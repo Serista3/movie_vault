@@ -1,7 +1,9 @@
+// --- IMPORTS ---
 import type { Media, MediaImage, MediaKeyword, MediaVideo, MediaGenre, MediaLanguage, MediaCountry } from "./media";
 import type { CompanySummary } from "./company";
 import type { CreditCastMember, CreditCrewMember } from "./person";
 
+// --- TYPE DEFINATIONS ---
 export interface MovieSummary extends Media {
     backdrop_path: string | null;
     genre_ids: number[];

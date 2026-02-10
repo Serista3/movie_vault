@@ -1,5 +1,7 @@
+// --- IMPORTS ---
 import type { TmdbSuccessResponse } from "./api";
 
+// --- TYPE DEFINATIONS ---
 export interface User {
   avatar: {
     gravatar: {

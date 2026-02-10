@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { 
   createContext, 
   useState, 
@@ -17,6 +18,7 @@ import {
   getCertificationTvList 
 } from "@/services";
 
+// --- TYPE DEFINATIONS ---
 interface ConfigContextType {
   languages: MediaLanguage[];
   countries: MediaCountry[];
@@ -24,6 +26,7 @@ interface ConfigContextType {
   certificationTv: CertificationSummary;
 }
 
+// --- CONTEXT ---
 export const ConfigContext = createContext<ConfigContextType>({
   languages: [],
   countries: [],
@@ -37,6 +40,7 @@ export default function ConfigProvider({ children }: {children: React.ReactNode}
   const [certificationMovie, setCertificationMovie] = useState<CertificationSummary>({ certifications: {} });
   const [certificationTv, setCertificationTv] = useState<CertificationSummary>({ certifications: {} });
 
+  // --- FUNCTION FETCH CONFIG API ---
   const fetchConfig = useCallback(async function() {
     const [languages, countries, certificationMovie, certificationTv] = await Promise.all([
       getLanguages(),
@@ -53,6 +57,7 @@ export default function ConfigProvider({ children }: {children: React.ReactNode}
       ? certificationTv : { certifications: {} });
   }, [])
 
+  // --- INIT FETCH FUNCTION ---
   useEffect(() => {
     fetchConfig();
   }, [fetchConfig])
@@ -71,4 +76,5 @@ export default function ConfigProvider({ children }: {children: React.ReactNode}
   )
 }
 
+// --- CUSTOM HOOK CONFIG ---
 export const useConfig = () => useContext(ConfigContext);

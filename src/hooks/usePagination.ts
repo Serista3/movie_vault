@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { useSearchParams } from "react-router";
 
 export function usePagination(total_page: number){

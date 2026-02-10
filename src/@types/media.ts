@@ -1,7 +1,9 @@
+// --- IMPORTS ---
 import type { MovieSummary } from './movie';
 import type { TvShowSummary, TvShowLastEpisodeToAir, TvShowSeason, Episode } from './tvShow';
 import type { PersonSummary } from './person';
 
+// --- TYPE DEFINATIONS ---
 export type MediaType = 'movie' | 'tv' | 'person';
 export type MediaSummary = MovieSummary | TvShowSummary | PersonSummary 
     | TvShowLastEpisodeToAir | TvShowSeason | Episode;

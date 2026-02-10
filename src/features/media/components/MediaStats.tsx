@@ -1,7 +1,9 @@
+// --- IMPORTS ---
 import type { MovieDetail, TvShowDetail } from "@/@types"
 import { isMovieDetail, isTvShowDetail } from "@/guards";
 import { Heading, Paragraph, Image }from "@/components/common"
 
+// --- TYPE DEFINATIONS ---
 interface MediaStatsProps {
   mediaDetail: MovieDetail | TvShowDetail;
 }
@@ -9,7 +11,9 @@ interface MediaStatsProps {
 export default function MediaStats({ mediaDetail }: MediaStatsProps){
   return (
     <div className="bg-gray-dark rounded-[10px] p-4">
+      {/* --- STATS --- */}
       <ul className="flex flex-col gap-4">
+        {/* --- ORIGINAL TITLE --- */}
         {isMovieDetail(mediaDetail) && (
           <li>
             <div>
@@ -18,6 +22,8 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
+
+        {/* --- ORIGINAL NAME --- */}
         {isTvShowDetail(mediaDetail) && (
           <li>
             <div>
@@ -26,12 +32,16 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
+
+        {/* --- STATUS --- */}
         <li>
           <div>
             <Heading level={4} className="mb-1">Status</Heading>
             <Paragraph>{mediaDetail.status}</Paragraph>
           </div>
         </li>
+
+        {/* --- NETWORKS --- */}
         {isTvShowDetail(mediaDetail) && (
           <li>
             <div>
@@ -49,6 +59,8 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
+
+        {/* --- BUDGET --- */}
         {isMovieDetail(mediaDetail) && (
           <li>
             <div>
@@ -57,6 +69,8 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
+
+        {/* --- REVENUE --- */}
         {isMovieDetail(mediaDetail) && (
           <li>
             <div>
@@ -65,6 +79,8 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
+
+        {/* --- TYPE --- */}
         {isTvShowDetail(mediaDetail) && (
           <li>
             <div>
@@ -73,6 +89,8 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
             </div>
           </li>
         )}
+
+        {/* --- ORIGINAL LANGUAGE --- */}
         <li>
           <div>
             <Heading level={4} className="mb-1">Original Language</Heading>

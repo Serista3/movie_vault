@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import { type LoaderFunctionArgs, useLoaderData } from "react-router";
 import type { MediaResponse, MediaSummary, AppError } from "@/@types";
 import { isAppError, isMediaResponse } from "@/guards";
@@ -8,6 +9,7 @@ import { WideMediaCard } from "@/features/media";
 import { ErrorMessage, Pagination } from "@/components/common";
 import { SearchResult } from "@/features/search";
 
+// --- TYPE DEFINATIONS ---
 interface SearchLoaderData {
   searchData: MediaResponse<MediaSummary> | AppError;
   countResults: (MediaResponse<MediaSummary> | AppError)[];
@@ -20,7 +22,10 @@ export default function Search(){
 
   return (
     <ExplorerLayout title="Search">
+      {/* --- SEARCH RESULT --- */}
       <SearchResult countResults={countResults} />
+      
+      {/* --- SEARCH DATA --- */}
       {searchData && isMediaResponse(searchData) && (
         <div className="results flex flex-col mt-4 w-full gap-4">
           {searchData.results.length > 0 && (
@@ -41,6 +46,7 @@ export default function Search(){
   );
 }
 
+// --- LOADER ---
 export const loader = async function({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const routePath = url.pathname.split('/').pop() || 'movie';

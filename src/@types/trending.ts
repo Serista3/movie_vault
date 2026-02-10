@@ -1,2 +1,3 @@
+// --- TYPE DEFINATIONS ---
 export type TrendingType = 'all' | 'movie' | 'tv' | 'person';
 export type TimeWindow = 'day' | 'week';

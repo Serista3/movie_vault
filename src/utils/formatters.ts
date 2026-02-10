@@ -1,3 +1,4 @@
+// --- FORMAT FUNCTIONS ---
 export function formatUppercaseFirstLetter(text: string): string {
   if (!text) 
     return text;

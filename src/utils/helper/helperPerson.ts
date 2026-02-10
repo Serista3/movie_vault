@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import type { 
   PersonCombinedCredits, 
   PersonMovieCredit, 
@@ -19,6 +20,7 @@ import {
 } from "@/guards";
 import { formatDateToReadable } from "@/utils";
 
+// --- TYPE DEFINATIONS ---
 export interface ActingInfo {
   id: number;
   year: number;
@@ -35,6 +37,7 @@ export interface CrewInfo {
   credits: (PersonMovieCredit | PersonTvCredit)[];
 }
 
+// --- HELPERS ---
 export const findAllYears = function(credit: PersonMovieCredit | PersonTvCredit) {
   if('release_date' in credit && credit.release_date)
     return new Date(credit.release_date).getFullYear();
@@ -158,12 +161,14 @@ export const getCrewData = function(data: PersonDetail & PersonCombinedCredits |
   return crewData;
 }
 
+// --- TYPE DEFINATIONS ---
 export interface PersonSummaryData {
   personImg: string | null;
   personName: string;
   personSubtitle: string;
 }
 
+// --- HELPERS ---
 export const getPersonSummaryData = function(person: PersonSummary | CreditCastMember 
   | CreditCrewMember | AggregateCreditsCastMember | AggregateCreditsCrewMember): PersonSummaryData {
   const personImg = person.profile_path;

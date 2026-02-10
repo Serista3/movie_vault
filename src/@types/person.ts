@@ -1,7 +1,9 @@
+// --- IMPORTS ---
 import type { Media, MediaImage } from "./media";
 import type { MovieSummary } from "./movie";
 import type { TvShowSummary } from "./tvShow";
 
+// --- TYPE DEFINATIONS ---
 export type KnownForItem = MovieSummary | TvShowSummary;
 
 export interface BasePerson extends Media {

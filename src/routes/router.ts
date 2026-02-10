@@ -1,3 +1,4 @@
+// --- IMPORTS ---
 import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '@/components/layout/MainLayout';
 import Home from '@/pages/home/Home';
 import { loader as homeLoader } from '@/pages/home/loader';
@@ -15,9 +16,9 @@ import PersonDetail, { loader as personDetailLoader } from '@/pages/PersonDetail
 import Favorites, { loader as favoritesLoader } from '@/pages/Favorites';
 import WatchList, { loader as watchListLoader } from '@/pages/WatchList';
 import RootErrorBoundary from '@/components/layout/boundary/RootErrorBoundary';
-
 import { createBrowserRouter } from 'react-router';
 
+// --- ROUTER ---
 const router = createBrowserRouter([
   {
     path: '/',
