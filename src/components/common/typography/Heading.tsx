@@ -9,7 +9,7 @@ interface HeadingProps {
 }
 
 // --- CONSTANTS ---
-const BASE_CLASS = "font-semibold";
+const BASE_CLASS = "font-semibold break-all";
 
 const LEVEL_CLASSES = {
     1: "text-3xl sm:text-4xl",

@@ -72,17 +72,19 @@ export default function MediaDetail(){
                         {formatDateToReadable(mediaDetail.first_air_date)}
                       </Paragraph>
                     )}
-                    <div className="size-1.25 bg-tertiary-dark rounded-full"></div>
                     {mediaDetail.genres && mediaDetail.genres.length > 0 && (
-                      <Paragraph>
-                        {mediaDetail.genres.map(genre => genre.name).join(', ')}
-                      </Paragraph>
+                      <>
+                        <div className="size-1.25 bg-tertiary-dark rounded-full"></div>
+                        <Paragraph>
+                          {mediaDetail.genres.map(genre => genre.name).join(', ')}
+                        </Paragraph>
+                      </>
                     )}
-                    {isMovieDetail(mediaDetail) && mediaDetail.runtime && (
+                    {isMovieDetail(mediaDetail) && mediaDetail.runtime !== null && mediaDetail.runtime !== 0 && (
                       <>
                         <div className="size-1.5 bg-tertiary-dark rounded-full"></div>
                         <Paragraph>
-                          {mediaDetail.runtime / 60 ? `${(mediaDetail.runtime / 60).toFixed(0)}h` : ''}&nbsp;
+                          {Math.round(mediaDetail.runtime / 60) ? `${(mediaDetail.runtime / 60).toFixed(0)}h ` : ''}
                           {mediaDetail.runtime % 60 ? `${mediaDetail.runtime % 60}m` : ''}
                         </Paragraph>
                       </>
