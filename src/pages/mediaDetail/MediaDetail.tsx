@@ -5,7 +5,7 @@ import type { MediaDetailLoaderData } from "@/pages/mediaDetail/loader";
 import type { UserDataResponse } from "@/@types";
 import { isAppError, isMovieDetail, isTvShowDetail } from "@/guards";
 import { formatDateToReadable } from "@/utils/formatters";
-import { Image, Heading, Paragraph, Button, ErrorMessage, AsyncBoundary } from "@/components/common";
+import { Image, Heading, Paragraph, Button, ErrorMessage, AsyncBoundary, Anchor } from "@/components/common";
 import { MediaRating, MediaGrid, TrailerModal, WideMediaCard, MediaSection, MediaUserAction, MediaCrew, MediaReview, MediaRecommendation, MediaStats } from "@/features/media";
 import { FaPlay } from "react-icons/fa";
 
@@ -82,7 +82,8 @@ export default function MediaDetail(){
                       <>
                         <div className="size-1.5 bg-tertiary-dark rounded-full"></div>
                         <Paragraph>
-                          {(mediaDetail.runtime / 60).toFixed(0)}h {mediaDetail.runtime % 60}m
+                          {mediaDetail.runtime / 60 ? `${(mediaDetail.runtime / 60).toFixed(0)}h` : ''}&nbsp;
+                          {mediaDetail.runtime % 60 ? `${mediaDetail.runtime % 60}m` : ''}
                         </Paragraph>
                       </>
                     )}
@@ -122,7 +123,7 @@ export default function MediaDetail(){
 
                 {/* --- MEDIA OVERVIEW --- */}
                 <MediaSection title="Overview" className="px-0">
-                  <Paragraph>{mediaDetail.overview}</Paragraph>
+                  <Paragraph>{mediaDetail.overview || 'No overview information.'}</Paragraph>
                 </MediaSection>
 
                 {/* --- MEDIA CREW --- */}
@@ -146,8 +147,14 @@ export default function MediaDetail(){
                     ? creditsData.crew.slice(0, 10) : [];
 
                   return (
-                    <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path="cast" seeAllText="All Cast & Crew">
-                      <MediaGrid mediaList={displayItems} variant="horizontal" limit={10} />
+                    <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0">
+                      {displayItems.length > 0 && (
+                        <>
+                          <MediaGrid mediaList={displayItems} variant="horizontal" limit={10} />
+                          <Anchor to="cast" className="mt-4 sm:mt-6 w-fit self-end">All Cast & Crew</Anchor>
+                        </>
+                      )}
+                      {displayItems.length === 0 && <Paragraph>No cast information.</Paragraph>}
                     </MediaSection>
                   )
                 }}
