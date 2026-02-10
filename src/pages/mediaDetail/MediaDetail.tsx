@@ -91,7 +91,7 @@ export default function MediaDetail(){
                 <div className="flex flex-col gap-4">
                   {/* --- MEDIA RATING --- */}
                   <div className="relative flex items-center gap-4">
-                    <MediaRating rating={Math.round(mediaDetail.vote_average * 10)} />
+                    <MediaRating rating={Math.round(mediaDetail.vote_average * 10) !== 0 ? mediaDetail.vote_average * 10 : 'N/A'} />
                     <Paragraph className="text-base">User Score</Paragraph>
                   </div>
                   
