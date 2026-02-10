@@ -45,7 +45,7 @@ export default function MediaRating({
       {rating}{rating !== 'N/A' && '%'}
       
       {/* --- SVG CIRCLE --- */}
-      <svg className="-rotate-90 size-full absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+      <svg className="-rotate-90 absolute" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <circle 
           cx="18" 
           cy="18" 
