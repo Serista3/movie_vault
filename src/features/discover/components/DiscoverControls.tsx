@@ -108,7 +108,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
       <div className="flex flex-col gap-2.5">
         {/* --- SORT --- */}
         <Accordion title="Sort" isOpen={isAccordionOpen.sort} onToggle={toggleAccordion}>
-          <Paragraph className="text-base mb-2">Sort {mediaType === 'movie' ? 'Movies' : 'TV Shows'} by</Paragraph>
+          <Paragraph className="text-base sm:text-lg mb-4">Sort {mediaType === 'movie' ? 'Movies' : 'TV Shows'} by</Paragraph>
           <Select 
             name="sort_by" 
             items={sortOptions} 
@@ -135,7 +135,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
 
             {/* --- GENRES --- */}
             <div className="flex flex-col gap-4">
-              <Paragraph className="text-base">Genres</Paragraph>
+              <Paragraph className="text-base sm:text-lg">Genres</Paragraph>
               <div className="flex flex-wrap gap-2">
                 {genres.map(genre => (
                   <FilterChip 
@@ -151,7 +151,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
             
             {/* --- ADULT CONTENT --- */}
             <div className="flex flex-col gap-4">
-              <Paragraph className="text-base">Adult Content</Paragraph>
+              <Paragraph className="text-base sm:text-lg">Adult Content</Paragraph>
               <Select 
                 name="include_adult" 
                 items={option.SELECT_ADULT_OPTIONS} 
@@ -161,7 +161,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
 
             {/* --- LANGUAGES --- */}
             <div className="flex flex-col gap-4">
-              <Paragraph className="text-base">Languages</Paragraph>
+              <Paragraph className="text-base sm:text-lg">Languages</Paragraph>
               <div className="flex flex-wrap gap-2">
                 {languageOptions.length > 0 && (
                   <Select 
@@ -175,7 +175,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
 
             {/* --- USER SCORE SLIDER --- */}
             <div className="flex flex-col gap-4">
-              <Paragraph className="text-base">User Score</Paragraph>
+              <Paragraph className="text-base sm:text-lg">User Score</Paragraph>
               <FilterSlider 
                 {...option.USER_SCORE_OPTION} 
                 value={userScore}
@@ -185,7 +185,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
             
             {/* --- MINIMUM VOTES SLIDER --- */}
             <div className="flex flex-col gap-4">
-              <Paragraph className="text-base">Minimum User Votes</Paragraph>
+              <Paragraph className="text-base sm:text-lg">Minimum User Votes</Paragraph>
               <FilterSlider 
                 {...option.MINIMUN_VOTES_OPTION} 
                 value={minVotes}
@@ -195,7 +195,7 @@ export default function DiscoverControls({ mediaType, className }: DiscoverContr
 
             {/* --- RUNNING TIME SLIDER --- */}
             <div className="flex flex-col gap-4">
-              <Paragraph className="text-base">Runtime</Paragraph>
+              <Paragraph className="text-base sm:text-lg">Runtime</Paragraph>
               <FilterSlider 
                 {...option.RUNNING_TIME_OPTION} 
                 value={runtime}

@@ -12,8 +12,8 @@ interface HeadingProps {
 const BASE_CLASS = "font-semibold";
 
 const LEVEL_CLASSES = {
-    1: "text-3xl",
-    2: "text-2xl",
+    1: "text-3xl sm:text-4xl",
+    2: "text-2xl sm:text-3xl",
     3: "text-xl",
     4: "text-lg",
     5: "text-base",

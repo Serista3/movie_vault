@@ -20,7 +20,7 @@ export default function MediaSection({ title, path, seeAllText = "See All", chil
 
             {/* --- SEE ALL LINK --- */}
             {path && (
-                <Anchor to={path} className="mt-4 self-end w-fit">
+                <Anchor to={path} className="mt-4 sm:mt-6 self-end w-fit">
                     {seeAllText}
                 </Anchor> 
             )}

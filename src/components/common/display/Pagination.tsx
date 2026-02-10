@@ -37,7 +37,7 @@ export default function Pagination({ curPage, totalPages, onPageChange, classNam
 
   // --- COMPUTED CLASS NAMES ---
   const wrapperClass = cn(
-    "pagination flex justify-center items-center gap-2",
+    "pagination flex justify-center items-center gap-2 sm:gap-2.5",
     className
   );
 

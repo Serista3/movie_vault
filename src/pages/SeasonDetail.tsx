@@ -27,7 +27,7 @@ export default function SeasonDetail() {
           anChorEl={<Anchor to={`/tv/${tvShowDetail.id}/seasons`}>Back to seasons</Anchor>}
         >
           {/* --- PREV SEASON && NEXT SEASON --- */}
-          <div className="w-full mb-4 py-2 px-4 border border-gray-dark rounded-md flex items-center justify-between">
+          <div className="w-full mb-4 py-2 px-3 border border-gray-dark rounded-md flex items-center justify-between">
             {prevSeason && tvShowSeasonDetail.season_number - 1 >= 0 && (
               <Anchor 
                 className="w-fit flex items-center gap-1" 
@@ -49,7 +49,7 @@ export default function SeasonDetail() {
           </div>
 
           {/* --- EPISODE TITLE */}
-          <Heading level={2}>
+          <Heading level={2} className="mb-1 sm:mb-2">
             Episodes &nbsp;
             <span className="font-light text-tertiary-dark">
               {tvShowSeasonDetail.episodes.length}

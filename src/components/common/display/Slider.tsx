@@ -10,7 +10,7 @@ interface SliderProps {
 }
 
 // --- CONSTANTS ---
-const BASE_CLASS = "slider w-full min-h-50 overflow-hidden relative z-3 shadow-xl";
+const BASE_CLASS = "slider w-full min-h-50 sm:min-h-75 lg:min-h-100 xl:min-h-125 overflow-hidden relative z-3 shadow-xl";
 
 export default function Slider({ progress, className, children }: SliderProps) {
   return (

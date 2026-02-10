@@ -18,7 +18,7 @@ export default function FilterChip({ label, isSelected, onClick, className, ...p
       shape="capsule"
       onClick={onClick}
       className={cn(
-        "py-1 px-2.5 text-sm",        
+        "py-1 sm:py-1.5 px-2.5 sm:px-3 text-sm sm:text-base",        
         isSelected && "bg-primary-light hover:bg-primary-dark",
         className
       )}

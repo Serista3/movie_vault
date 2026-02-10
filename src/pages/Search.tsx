@@ -22,25 +22,27 @@ export default function Search(){
 
   return (
     <ExplorerLayout title="Search">
-      {/* --- SEARCH RESULT --- */}
-      <SearchResult countResults={countResults} />
-      
-      {/* --- SEARCH DATA --- */}
-      {searchData && isMediaResponse(searchData) && (
-        <div className="results flex flex-col mt-4 w-full gap-4">
-          {searchData.results.length > 0 && (
-            searchData.results.map((media) => (
-              <WideMediaCard key={media.id} media={media} className="mb-4" />
-            ))
-          )}
-          {searchData.results.length === 0 && (
-            <div className="text-tertiary-dark text-center py-20">
-              No results found.
-            </div>
-          )}
-        </div>
-      )}
-      {searchData && isAppError(searchData) && <ErrorMessage error={searchData} />}
+      <div className="grid grid-cols-1 lg:grid-cols-4 items-start gap-6 sm:gap-8 md:gap-10">
+        {/* --- SEARCH RESULT --- */}
+        <SearchResult countResults={countResults} />
+
+        {/* --- SEARCH DATA --- */}
+        {searchData && isMediaResponse(searchData) && (
+          <div className="results flex flex-col mt-4 w-full gap-4 lg:col-span-3 lg:mt-0">
+            {searchData.results.length > 0 && (
+              searchData.results.map((media) => (
+                <WideMediaCard key={media.id} media={media} className="mb-4" />
+              ))
+            )}
+            {searchData.results.length === 0 && (
+              <div className="text-tertiary-dark text-center py-20">
+                No results found.
+              </div>
+            )}
+          </div>
+        )}
+        {searchData && isAppError(searchData) && <ErrorMessage error={searchData} className="lg:col-span-3" />}
+      </div>
       <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} className="mt-8" />
     </ExplorerLayout>
   );

@@ -14,7 +14,7 @@ interface ModalProps {
 // --- CONSTANTS ---
 const OVERLAY_CLASS = "w-full h-screen bg-[rgba(0,0,0,0.75)] fixed top-0 left-0 flex justify-center items-center z-50";
 const BASE_CLASS = "rounded-[10px] overflow-hidden relative mx-8 shadow-xl";
-const CLOSE_BUTTON_CLASS = "bg-transparent hover:bg-transparent px-0 py-0 absolute top-2 right-3";
+const CLOSE_BUTTON_CLASS = "bg-transparent hover:bg-transparent px-0 py-0 absolute top-2.5 right-2.5";
 
 export default function Modal({ children, className }: ModalProps) {
   // --- MODAL STATE ---
@@ -41,7 +41,7 @@ export default function Modal({ children, className }: ModalProps) {
         <Button className={CLOSE_BUTTON_CLASS} onClick={closeModal}>
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            className="w-4 h-4 fill-gray-light" 
+            className="w-4 h-4 sm:w-5 sm:h-5 fill-gray-light" 
             viewBox="0 0 256 256"
           >
             <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>

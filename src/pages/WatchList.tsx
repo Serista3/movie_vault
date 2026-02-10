@@ -29,7 +29,7 @@ export default function Favorites() {
 
   return (
     <ExplorerLayout title="My Watchlist">
-      <Navigation items={navItem} direction="row" isNavLink={true} className="bg-primary-light rounded-[10px] py-2 px-4 mt-6" />
+      <Navigation items={navItem} direction="row" isNavLink={true} className="bg-primary-light rounded-[10px] py-2 px-4 mt-4 sm:mt-6" />
       {isAppError(watchList) && <ErrorMessage error={watchList} />}
       {/* --- WATCH LIST --- */}
       {!isAppError(watchList) && watchList.results.length > 0 && <MediaGrid mediaList={watchList.results} />}

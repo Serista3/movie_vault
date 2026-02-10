@@ -20,11 +20,11 @@ export default function SubPageMediaLayout({ className, mediaDetail, anChorEl, c
     <>
       {/* --- SUBPAGE HEADER --- */}
       <div className="bg-gray-dark w-full">
-        <div className="max-w-300 mx-auto flex items-center gap-4 px-4 py-6">
+        <div className="max-w-300 mx-auto flex items-center gap-4 px-4 py-6 sm:py-8">
           <Image 
             src={mediaDetail.poster_path} 
             alt={isMovieDetail(mediaDetail) ? mediaDetail.title : mediaDetail.name} 
-            containerClassName="h-27 w-18 rounded-md flex-none"
+            containerClassName="h-27 sm:h-34 w-18 sm:w-24 rounded-md flex-none"
           />
           <div className="flex flex-col gap-2">
             <Heading className="flex flex-col gap-0.5">

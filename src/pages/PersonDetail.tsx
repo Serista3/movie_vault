@@ -19,19 +19,20 @@ export default function PersonDetail(){
       {isAppError(data) && <ErrorMessage error={data} />}
       {'id' in data && (
         <ExplorerLayout title={data.name}>
-          <div className="mt-4 flex flex-col items-center justify-center gap-13">
-            {/* --- PERSON IMAGE --- */}
-            <Image src={data.profile_path} alt={data.name} containerClassName="h-90 mx-auto" />
+          <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 justify-center gap-13">
+            <div className="flex flex-col items-start gap-13 w-full">
+              {/* --- PERSON IMAGE --- */}
+              <Image src={data.profile_path} alt={data.name} containerClassName="h-90 w-70 lg:w-full lg:h-110" />
 
-            {/* --- PERSON INFO --- */}
-            <PersonInfo data={data} />
+              {/* --- PERSON INFO --- */}
+              <PersonInfo data={data} />
+            </div>
 
             {/* --- PERSON DETAIL --- */}
-            <div className="person-detail flex flex-col gap-5 w-full">
-              <Heading level={2}>{data.name}</Heading>
+            <div className="person-detail flex flex-col gap-5 w-full lg:col-span-2">
               <div className="detail flex flex-col gap-10">
                 {/* --- PERSON BIOGRAPHY --- */}
-                <div className="biography flex flex-col gap-3">
+                <div className="biography flex flex-col gap-3 sm:gap-4">
                   <Heading level={3}>Biography</Heading>
                   <Paragraph>
                     {data.biography || 'Biography not available.'}
@@ -39,13 +40,13 @@ export default function PersonDetail(){
                 </div>
 
                 {/* --- PERSON KNOWN FOR --- */}
-                <div className="known-for flex flex-col gap-3">
+                <div className="known-for flex flex-col gap-3 sm:gap-4">
                   <Heading level={3}>Known For</Heading>
                   <MediaGrid mediaList={data.cast} variant="horizontal" limit={10} />
                 </div>
 
                 {/* --- PERSON ACTING --- */}
-                <div className="acting flex flex-col gap-3">
+                <div className="acting flex flex-col gap-3 sm:gap-4">
                   <Heading level={3}>Acting</Heading>
                   {actingData.length > 0 && (
                     <Filmography data={actingData} />
@@ -60,7 +61,7 @@ export default function PersonDetail(){
                 {/* --- FILMOGRAPHY CREDIT --- */}
                 {crewData.length > 0 && 
                   crewData.map(crew => (
-                    <div key={`${crew.department}-${crew.credits.reduce((d,c) => d + c.credit_id, '')}`} className="acting flex flex-col gap-3">
+                    <div key={`${crew.department}-${crew.credits.reduce((d,c) => d + c.credit_id, '')}`} className="acting flex flex-col gap-3 sm:gap-4">
                       <Heading level={3}>{crew.department}</Heading>
                       {crew.credits.length > 0 && (
                         <Filmography data={crew.credits} />

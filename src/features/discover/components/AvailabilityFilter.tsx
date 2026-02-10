@@ -15,12 +15,12 @@ export default function AvailabilityFilter({ onChange, selected, className }: Av
   return (
     <div className={cn(className)}>
       {/* --- AVAILABILITY FILTER --- */}
-      <Paragraph className="text-base mb-4">Availabilities</Paragraph>
+      <Paragraph className="text-base sm:text-lg mb-4 sm:mb-6">Availabilities</Paragraph>
       
       {/* --- AVAILABILITY OPTIONS --- */}
       <div className="flex flex-col gap-4">
         {AVAILABILITY_OPTIONS.map(option => (
-          <div key={option.value} className="flex items-center mb-1">
+          <div key={option.value} className="flex items-center mb-1 sm:mb-2">
             <Checkbox.Root
               className="flex size-5 appearance-none items-center justify-center rounded 
                 bg-tertiary-light outline-none hover:bg-tertiary-dark transition-all"

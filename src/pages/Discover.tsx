@@ -28,9 +28,11 @@ export default function Discover() {
 
   return (
     <ExplorerLayout title={discoverType === "movie" ? "Movies" : "TV Shows"}>
-      <DiscoverControls key={location.key} mediaType={discoverType} className="mb-4" />
-      {isMediaResponse(mediaData) && <MediaGrid mediaList={mediaData.results} />}
-      {isAppError(mediaData) && <ErrorMessage error={mediaData} />}
+      <div className="grid grid-cols-1 lg:grid-cols-4 items-start gap-6">
+        <DiscoverControls key={location.key} mediaType={discoverType} className="mb-4 sm:mb-6 md:mb-8 lg:mb-10" />
+        {isMediaResponse(mediaData) && <MediaGrid mediaList={mediaData.results} className="xl:py-0 lg:col-span-3" />}
+        {isAppError(mediaData) && <ErrorMessage error={mediaData} className="lg:col-span-3" />}
+      </div>
       <Pagination curPage={curPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </ExplorerLayout>
   );

@@ -10,7 +10,7 @@ interface MediaStatsProps {
 
 export default function MediaStats({ mediaDetail }: MediaStatsProps){
   return (
-    <div className="bg-gray-dark rounded-[10px] p-4">
+    <div className="bg-gray-dark rounded-[10px] p-4 sm:p-6">
       {/* --- STATS --- */}
       <ul className="flex flex-col gap-4">
         {/* --- ORIGINAL TITLE --- */}

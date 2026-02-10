@@ -19,7 +19,7 @@ export default function ReviewCard({ review, className }: ReviewCardProps) {
     const content = review.content;
 
     return (
-        <div className={cn("p-4 bg-secondary-dark shadow-2xl rounded-[10px]", className)}>
+        <div className={cn("p-4 sm:p-6 bg-secondary-dark shadow-2xl rounded-[10px]", className)}>
             <div className="flex items-center gap-3 mb-2">
                 <div className="user-review w-full flex items-center gap-3 mb-2 border-b border-gray-dark pb-6">
                     {/* --- AUTHOR AVATAR */}

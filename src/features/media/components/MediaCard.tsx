@@ -10,7 +10,7 @@ export default function MediaCard({ media, className }: { media: MediaSummary, c
   const { mediaTitle, mediaSubtitle, mediaDetailPath, mediaImg, mediaCategory, mediaRating } = getMediaSummaryData(media);
 
   // --- COMPUTED CLASS NAME ---
-  const wrapperClass = cn("flex flex-col justify-center gap-2 items-start w-40", className);
+  const wrapperClass = cn("flex flex-col justify-center gap-2 sm:gap-3 items-start w-40", className);
 
   return (
     <Card className={wrapperClass}>
@@ -27,7 +27,7 @@ export default function MediaCard({ media, className }: { media: MediaSummary, c
       <div className="flex flex-col gap-1">
         {mediaDetailPath && <Link 
           to={mediaDetailPath}
-          className="text-base font-semibold line-clamp-1 hover:text-primary-light transition-colors duration-300"
+          className="text-base sm:text-lg font-semibold line-clamp-1 hover:text-primary-light transition-colors duration-300"
         >
           {mediaTitle}
         </Link>}

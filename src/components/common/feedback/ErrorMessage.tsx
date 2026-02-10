@@ -23,7 +23,7 @@ export default function ErrorMessage({ error, className }: ErrorMessageProps){
         <div className={errorClass}>
             <div className='max-w-300 mx-auto p-4'>
                 {/* --- Error Header --- */}
-                <div className='font-semibold text-lg mb-2'>
+                <div className='font-semibold text-lg sm:text-xl mb-2'>
                     {errorHeader}
                 </div>
 

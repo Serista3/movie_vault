@@ -11,7 +11,7 @@ export default function Anchor({ className, children, ...props }: AnchorProps) {
   return (
     <Link
       className={cn(
-        'inline-block w-full text-primary-light hover:text-primary-dark transition-all duration-300',
+        'inline-block text-base w-full text-primary-light hover:text-primary-dark transition-all duration-300',
         className,
       )}
       {...props}

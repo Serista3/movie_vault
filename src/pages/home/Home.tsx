@@ -13,9 +13,9 @@ export default function Home() {
   }
 
   return (
-    <div className="home flex flex-col gap-10 pb-8">
+    <div className="home flex flex-col gap-10 sm:gap-12 md:gap-14 pb-8">
       <MediaSlider />
-      <div className="media-sections flex flex-col items-center gap-15 mb-20">
+      <div className="media-sections flex flex-col items-center gap-15 sm:gap-18 mb-20">
         {sections.map((section) => {
           return (
             <MediaSection key={section.title} title={section.title} className="max-w-300">

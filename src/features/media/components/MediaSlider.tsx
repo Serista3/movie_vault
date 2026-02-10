@@ -53,7 +53,7 @@ export default function MediaSlider() {
                 />
                 <div className="w-full h-full absolute top-0 left-0 backdrop-brightness-50">
                   <div className="max-w-300 h-full px-4 py-6 flex flex-col justify-end mx-auto">
-                    <Heading level={3} className="line-clamp-1">
+                    <Heading className="line-clamp-1">
                       {'title' in item && item.title}
                     </Heading>
                     <div className="flex justify-start gap-3 items-center mt-3">

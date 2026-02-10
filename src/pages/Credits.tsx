@@ -25,7 +25,7 @@ export default function Credits() {
           {isAppError(mediaCredits) && <ErrorMessage error={mediaCredits} />}
           {/* --- LIST MEDIA CAST & CREW --- */}
           {!isAppError(mediaCredits) && (
-            <div className="flex flex-col gap-14 mb-14">
+            <div className="flex flex-col sm:flex-row gap-14 mb-14">
               {/* --- MEDIA CAST --- */}
               <div className="flex flex-col gap-8">
                 <Heading level={2}>

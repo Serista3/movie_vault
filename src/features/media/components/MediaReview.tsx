@@ -28,7 +28,7 @@ export default function MediaReview({ mediaReviews, path }: MediaReviewProps) {
                 {reviewsData.results.slice(0, 1).map(review => (
                   <ReviewCard key={review.id} review={review} />
                 ))}
-                <Anchor to={path} className="mt-4 self-end w-fit">
+                <Anchor to={path} className="mt-4 sm:mt-6 self-end w-fit">
                   Read All Reviews
                 </Anchor>
               </>

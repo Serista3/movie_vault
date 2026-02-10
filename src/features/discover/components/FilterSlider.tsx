@@ -39,8 +39,8 @@ export default function FilterSlider({
         >
           {/* --- VALUE LABEL --- */}
           <div className={cn(
-            "absolute -top-8 left-1/2 -translate-x-1/2",
-            "bg-secondary-dark text-tertiary-light text-sm py-1 px-2 rounded",
+            "absolute -top-8 sm:-top-10 left-1/2 -translate-x-1/2",
+            "bg-secondary-dark text-tertiary-light text-sm sm:text-base py-1 px-2 sm:py-1.5 sm:px-2.5 rounded",
             "min-w-8 text-center shadow-sm opacity-100 transition-opacity"
           )}>
             {val}
