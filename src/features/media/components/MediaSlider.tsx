@@ -49,6 +49,7 @@ export default function MediaSlider() {
                 <Image 
                   src={'backdrop_path' in item ? item.backdrop_path : null} 
                   alt={`Slide ${item.id}`} 
+                  imageSize='w1280'
                   containerClassName="h-full absolute top-0 left-0 rounded-none" 
                 />
                 <div className="w-full h-full absolute top-0 left-0 backdrop-brightness-50">

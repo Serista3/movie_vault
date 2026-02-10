@@ -51,7 +51,8 @@ export default function MediaStats({ mediaDetail }: MediaStatsProps){
                   <Image 
                     key={network.id} 
                     src={network.logo_path} 
-                    alt={network.name} 
+                    alt={network.name}
+                    imageSize='w185'
                     containerClassName="w-20 inline-block mr-2 mb-2 rounded-none shadow-none"
                   />
                 ))}

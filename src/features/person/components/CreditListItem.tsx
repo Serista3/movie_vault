@@ -21,7 +21,7 @@ interface CreditListItemProps {
 export default function CreditListItem({ credit }: CreditListItemProps) {
   return (
     <div className="flex items-center gap-4">
-      <Image src={credit.profile_path} alt={credit.name} containerClassName="h-20 sm:h-22 w-15 sm:w-17 flex-none rounded-md"/>
+      <Image imageSize='w185' src={credit.profile_path} alt={credit.name} containerClassName="h-20 sm:h-22 w-15 sm:w-17 flex-none rounded-md"/>
       <div>
         <Anchor to={`/person/${credit.id}`} className="underline">
           {credit.name}

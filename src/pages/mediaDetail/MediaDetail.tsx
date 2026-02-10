@@ -31,6 +31,7 @@ export default function MediaDetail(){
           {/* --- MEDIA BANNER --- */}
           <div className={`relative border-b border-primary-light`}>
             <Image 
+              imageSize='w780'
               src={mediaDetail.backdrop_path} 
               alt={isMovieDetail(mediaDetail) ? mediaDetail.title : mediaDetail.name}
               containerClassName="rounded-none brightness-50 blur-[2px] absolute top-0 left-0 w-full h-full -z-3"

@@ -24,7 +24,8 @@ export default function ReviewCard({ review, className }: ReviewCardProps) {
                 <div className="user-review w-full flex items-center gap-3 mb-2 border-b border-gray-dark pb-6">
                     {/* --- AUTHOR AVATAR */}
                     <Image 
-                        src={authorAvatarUrl} 
+                        src={authorAvatarUrl}
+                        imageSize={'w185'}
                         alt={`${authorName}'s avatar`}
                         containerClassName="w-11 h-11 rounded-full"
                     />

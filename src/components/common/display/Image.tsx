@@ -1,14 +1,14 @@
 // --- IMPORTS ---
 import noImage from '@/assets/images/no-image.jpg'
-import { cn } from "@/utils/helper";
+import { cn, type ImageSize, getTmdbImage } from "@/utils";
 import { ImageSkeleton } from "@/components/skeleton";
-import { IMAGE_BASE_URL } from "@/services"
 import { useState } from "react";
 
 // --- TYPE DEFINATIONS ---
 interface ImageProps {
   src: string | null;
   alt?: string;
+  imageSize?: ImageSize;
   className?: string;
   containerClassName?: string;
 }
@@ -16,10 +16,10 @@ interface ImageProps {
 // --- CONSTANTS ---
 const BASE_CLASS = "image w-full h-full object-cover transition-all duration-300";
 
-export default function Image({ className, containerClassName, src, alt = "Image" }: ImageProps){
+export default function Image({ src, alt = "Image", imageSize ='w342', className, containerClassName }: ImageProps){
   // --- LOADED STATE ---
   const [isLoaded, setIsLoaded] = useState(false);
-  const imageSrc = src && src !== 'null' ? `${IMAGE_BASE_URL}${src}` : noImage;
+  const imageSrc = src && src !== 'null' ? getTmdbImage(src, imageSize) : noImage;
 
   // --- COMPUTED CLASS NAMES ---
   const wrapperClass = cn(
