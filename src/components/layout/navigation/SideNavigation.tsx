@@ -28,7 +28,7 @@ export default function SideNavigation({ isOpen, onClose }: SideNavigationProps)
   );
 
   const asideClass = cn(
-    "w-3/4 sm:w-2/4 md:w-2/6 bg-primary-light h-screen fixed z-25 transition-all",
+    "w-3/4 sm:w-2/4 md:w-2/6 bg-primary-light h-screen fixed z-25 transition-all duration-300",
     isOpen ? "translate-x-0" : "-translate-x-full"
   );
 
