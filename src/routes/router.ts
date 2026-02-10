@@ -1,22 +1,36 @@
 // --- IMPORTS ---
+import { lazy } from 'react';
+import { createBrowserRouter } from 'react-router';
 import MainLayout, {loader as mainLayoutLoader, action as mainLayoutAction} from '@/components/layout/MainLayout';
-import Home from '@/pages/home/Home';
+import RootErrorBoundary from '@/components/layout/boundary/RootErrorBoundary';
+
 import { loader as homeLoader } from '@/pages/home/loader';
-import Search, { loader as searchLoader } from '@/pages/Search';
-import Discover, { discoverMovieLoader, discoverTvShowLoader } from '@/pages/Discover';
-import MediaDetail from '@/pages/mediaDetail/MediaDetail';
+import { loader as searchLoader } from '@/pages/Search';
+import { discoverMovieLoader, discoverTvShowLoader } from '@/pages/Discover';
 import { mediaDetailLoader } from '@/pages/mediaDetail/loader';
 import { mediaDetailAction } from '@/pages/mediaDetail/action';
-import Credits, { loader as creditsLoader } from '@/pages/Credits';
-import Reviews, { loader as reviewsLoader } from '@/pages/Reviews';
-import Seasons, { loader as seasonsLoader  } from '@/pages/Seasons';
-import SeasonDetail, { loader as seasonDetailLoader } from '@/pages/SeasonDetail';
-import People, { loader as peopleLoader } from '@/pages/People';
-import PersonDetail, { loader as personDetailLoader } from '@/pages/PersonDetail';
-import Favorites, { loader as favoritesLoader } from '@/pages/Favorites';
-import WatchList, { loader as watchListLoader } from '@/pages/WatchList';
-import RootErrorBoundary from '@/components/layout/boundary/RootErrorBoundary';
-import { createBrowserRouter } from 'react-router';
+import { loader as creditsLoader } from '@/pages/Credits';
+import { loader as reviewsLoader } from '@/pages/Reviews';
+import { loader as seasonsLoader  } from '@/pages/Seasons';
+import { loader as seasonDetailLoader } from '@/pages/SeasonDetail';
+import { loader as peopleLoader } from '@/pages/People';
+import { loader as personDetailLoader } from '@/pages/PersonDetail';
+import { loader as favoritesLoader } from '@/pages/Favorites';
+import { loader as watchListLoader } from '@/pages/WatchList';
+
+// --- LAZY COMPONENTS ---
+const Home = lazy(() => import('@/pages/home/Home'))
+const Search = lazy(() => import('@/pages/Search'))
+const Discover = lazy(() => import('@/pages/Discover'))
+const MediaDetail = lazy(() => import('@/pages/mediaDetail/MediaDetail'))
+const Credits = lazy(() => import('@/pages/Credits'))
+const Reviews = lazy(() => import('@/pages/Reviews'))
+const Seasons = lazy(() => import('@/pages/Reviews'))
+const SeasonDetail = lazy(() => import('@/pages/SeasonDetail'))
+const People = lazy(() => import('@/pages/People'))
+const PersonDetail = lazy(() => import('@/pages/PersonDetail'))
+const Favorites = lazy(() => import('@/pages/Favorites'))
+const WatchList = lazy(() => import('@/pages/WatchList'))
 
 // --- ROUTER ---
 const router = createBrowserRouter([
