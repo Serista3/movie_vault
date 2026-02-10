@@ -12,8 +12,8 @@ import Seasons, { loader as seasonsLoader  } from '@/pages/Seasons';
 import SeasonDetail, { loader as seasonDetailLoader } from '@/pages/SeasonDetail';
 import People, { loader as peopleLoader } from '@/pages/People';
 import PersonDetail, { loader as personDetailLoader } from '@/pages/PersonDetail';
-import Favorites from '@/pages/Favorites';
-import WatchList from '@/pages/WatchList';
+import Favorites, { loader as favoritesLoader } from '@/pages/Favorites';
+import WatchList, { loader as watchListLoader } from '@/pages/WatchList';
 import RootErrorBoundary from '@/components/layout/boundary/RootErrorBoundary';
 
 import { createBrowserRouter } from 'react-router';
@@ -65,8 +65,10 @@ const router = createBrowserRouter([
       { path: 'tv/:id/season/:seasonNumber', Component: SeasonDetail, loader: seasonDetailLoader },
       { path: 'person', Component: People, loader: peopleLoader },
       { path: 'person/:id', Component: PersonDetail, loader: personDetailLoader },
-      { path: 'favorite', Component: Favorites },
-      { path: 'watchlist', Component: WatchList },
+      { path: 'user/:id/favorites/movie', Component: Favorites, loader: favoritesLoader },
+      { path: 'user/:id/favorites/tv', Component: Favorites, loader: favoritesLoader },
+      { path: 'user/:id/watchlist/movie', Component: WatchList, loader: watchListLoader },
+      { path: 'user/:id/watchlist/tv', Component: WatchList, loader: watchListLoader },
     ],
   },
 ]);

@@ -15,22 +15,22 @@ export default function MediaCard({ media, className }: { media: MediaSummary, c
   return (
     <Card className={wrapperClass}>
       {/* --- MEDIA IMAGE --- */}
-      <Link to={mediaDetailPath} className="w-full">
+      {mediaDetailPath && <Link to={mediaDetailPath} className="w-full">
         <Image 
           className="hover:scale-120"
           containerClassName="h-60"
           src={mediaImg} 
           alt={`Image of ${mediaTitle}`} />
-      </Link>
+      </Link>}
 
       {/* --- MEDIA INFO --- */}
       <div className="flex flex-col gap-1">
-        <Link 
+        {mediaDetailPath && <Link 
           to={mediaDetailPath}
           className="text-base font-semibold line-clamp-1 hover:text-primary-light transition-colors duration-300"
         >
           {mediaTitle}
-        </Link>
+        </Link>}
         <Paragraph className="text-tertiary-dark line-clamp-2 leading-5">
           {displayMediaSubtitle(mediaSubtitle)}
         </Paragraph>

@@ -6,7 +6,6 @@ import type {
     MediaResponse,
     MovieSummary,
     TvShowSummary,
-    SortBy,
     TmdbSuccessResponse,
     AppError 
 } from "../@types";
@@ -27,7 +26,7 @@ interface WatchlistRequest extends MaskRequest {
 interface AccountMediaParams {
     accountId: number;
     page: number;
-    sortBy: SortBy;
+    sortBy: 'created_at.asc' | 'created_at.desc';
 }
 
 export const toggleFavorite = async function(favoriteRequest: FavoriteRequest, accountId: number): Promise<TmdbSuccessResponse | AppError>{
