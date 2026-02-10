@@ -30,10 +30,10 @@ export default function PersonDetail(){
 
             {/* --- PERSON DETAIL --- */}
             <div className="person-detail flex flex-col gap-5 w-full lg:col-span-2">
-              <div className="detail flex flex-col gap-10">
+              <div className="detail flex flex-col gap-14">
                 {/* --- PERSON BIOGRAPHY --- */}
                 <div className="biography flex flex-col gap-3 sm:gap-4">
-                  <Heading level={3}>Biography</Heading>
+                  <Heading level={2}>Biography</Heading>
                   <Paragraph>
                     {data.biography || 'Biography not available.'}
                   </Paragraph>
@@ -41,13 +41,13 @@ export default function PersonDetail(){
 
                 {/* --- PERSON KNOWN FOR --- */}
                 <div className="known-for flex flex-col gap-3 sm:gap-4">
-                  <Heading level={3}>Known For</Heading>
+                  <Heading level={2}>Known For</Heading>
                   <MediaGrid mediaList={data.cast} variant="horizontal" limit={10} />
                 </div>
 
                 {/* --- PERSON ACTING --- */}
                 <div className="acting flex flex-col gap-3 sm:gap-4">
-                  <Heading level={3}>Acting</Heading>
+                  <Heading level={2}>Acting</Heading>
                   {actingData.length > 0 && (
                     <Filmography data={actingData} />
                   )}
@@ -62,7 +62,7 @@ export default function PersonDetail(){
                 {crewData.length > 0 && 
                   crewData.map(crew => (
                     <div key={`${crew.department}-${crew.credits.reduce((d,c) => d + c.credit_id, '')}`} className="acting flex flex-col gap-3 sm:gap-4">
-                      <Heading level={3}>{crew.department}</Heading>
+                      <Heading level={2}>{crew.department}</Heading>
                       {crew.credits.length > 0 && (
                         <Filmography data={crew.credits} />
                       )}
