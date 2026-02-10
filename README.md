@@ -1,7 +1,5 @@
 # 🎥 Movie Vault
-![Status](https://img.shields.io/badge/Status-Work_in_Progress-orange?style=for-the-badge)
-
-![Project Banner](https://github.com/user-attachments/assets/297e69f9-266e-436d-a8b6-3ea9e8b1251b)
+![Project Banner](https://github.com/user-attachments/assets/b892fd5d-7502-43da-8572-2abda3fab0bb)
 
 > **Web Application สำหรับค้นหาและสำรวจข้อมูลภาพยนตร์และซีรีส์** ช่วยให้คุณเข้าถึงรายละเอียดหนังเรื่องโปรด เรื่องย่อ รวมถึงประวัตินักแสดงได้อย่างครบถ้วน
 
@@ -9,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-🔗 **Live Demo:** - <!--[Click Here to View App](https://expense-tracker-alpha-one-81.vercel.app/)-->
+🔗 **Live Demo:** - [Click Here to View App](https://movie-vault-red-five.vercel.app/)
 
 ---
 
@@ -77,20 +75,43 @@ VITE_API_READ_ACCESS_TOKEN=your_api_read_access_token_here
 ## 🏬 Project Structure
 โครงสร้างไฟล์ถูกออกแบบโดยเน้นความ Modular และ Scalable
 ```text
-src/
-├───assets/              # เก็บไฟล์ Static เช่น รูปภาพ, ไอคอน, และ Global Styles
-│   └───images/          # เก็บรูปภาพที่ใช้ในโปรเจค
-├───components/          # UI Components
-│   ├───common/          # Component พื้นฐานที่ใช้ซ้ำบ่อย (เช่น Button, Input, Card)
-│   ├───layout/          # Component ที่เป็นโครงสร้างหลัก (เช่น Navbar, Sidebar, Footer)
-│   └───skeleton/        # Component สำหรับแสดงผลระหว่างรอโหลดข้อมูล (Loading State)
-├───hooks/               # เก็บ Logic ที่ใช้ซ้ำ (Custom Hooks)
-├───pages/               # เก็บหน้าหลักของเว็บไซต์ (Views)
-├───routes/              # การตั้งค่าเส้นทางของเว็บไซต์ (Router Configuration)
-├───services/            # เก็บฟังก์ชันสำหรับการเรียก API และเชื่อมต่อ Backend
-├───store/               # การจัดการ Global State
-├───types/               # เก็บ TypeScript Interfaces และ Type Definitions
-└───utils/               # เก็บฟังก์ชันตัวช่วยทั่วไป (Helper Functions)
+src
+├───@types                  // เก็บไฟล์ประกาศ Type ของ TypeScript
+├───assets                  // เก็บไฟล์ Static
+│   └───images              // เก็บรูปภาพต่างๆ
+├───components              // UI ที่ใช้ซ้ำได้ทั่วทั้งแอป
+│   ├───common              // UI พื้นฐานทั่วไป
+│   │   ├───display         // ใช้แสดงผลข้อมูล
+│   │   ├───feedback        // แจ้งสถานะผู้ใช้
+│   │   ├───form            // เกี่ยวกับการกรอกข้อมูล (เช่น Input, Button)
+│   │   ├───overlay         // Modal
+│   │   └───typography      // จัดการตัวอักษรและหัวข้อต่างๆ
+│   ├───layout              // ส่วนประกอบโครงสร้างหลักของหน้าเว็บ
+│   │   ├───boundary        // พื้นที่จำกัดขอบเขต (ErrorBoundary)
+│   │   ├───footer          // ส่วนท้ายของเว็บไซต์
+│   │   └───navigation      // ส่วนนำทาง
+│   └───skeleton            // หน้าจอจำลองขณะกำลังโหลดข้อมูล (Loading States)
+├───features                // เก็บโค้ดแยกตาม Business Features
+│   ├───auth                // ระบบยืนยันตัวตน
+│   │   └───components      
+│   ├───discover            // ฟีเจอร์หน้าค้นพบเนื้อหา (Explore/Browse)
+│   │   └───components
+│   ├───media               // ฟีเจอร์จัดการสื่อ
+│   │   └───components
+│   ├───person              // ฟีเจอร์เกี่ยวกับบุคคล
+│   │   └───components
+│   └───search              // ฟีเจอร์การค้นหา
+│       └───components
+├───guards                  // ตัวตรวจสอบ Type (Type Guard)
+├───hooks                   // Custom Hooks
+├───pages                   // หน้าเว็บหลัก (Views)
+│   ├───home                // หน้าแรก
+│   └───mediaDetail         // หน้าแสดงรายละเอียดสื่อ
+├───routes                  // การตั้งค่าเส้นทาง URL (Router Configuration)
+├───services                // ตัวจัดการการเชื่อมต่อ API 
+├───store                   // การจัดการ Global State
+└───utils                   // ฟังก์ชันช่วยเหลือทั่วไป (Utility Functions)
+    └───helper              // ฟังก์ชันคำนวณหรือแปลงค่าต่างๆ
 ```
 
 ## 📚 Technical Highlights (สิ่งที่ได้เรียนรู้)
