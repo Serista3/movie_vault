@@ -23,7 +23,7 @@ const calCuratedRatingColors = function(rating: number): string{
 }
 
 // --- CONSTANTS ---
-const BASE_CLASS = `font-semibold text-tertiary-light bg-secondary-light rounded-full flex justify-center items-center`
+const BASE_CLASS = `font-semibold text-tertiary-light bg-secondary-light rounded-full flex justify-center items-center relative`
 
 export default function MediaRating({ 
   rating,
@@ -40,12 +40,12 @@ export default function MediaRating({
   return (
     <div 
       style={{ width: size, height: size }} 
-      className={cn(className, BASE_CLASS)}
+      className={cn(BASE_CLASS, className)}
     >
       {typeof rating === 'number' ? rating.toFixed(0) : rating}{rating !== 'N/A' && '%'}
       
       {/* --- SVG CIRCLE --- */}
-      <svg className="-rotate-90 absolute w-auto" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+      <svg className="-rotate-90 absolute top-0 left-0 w-full" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <circle 
           cx="18" 
           cy="18" 
