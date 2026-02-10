@@ -67,7 +67,7 @@ npm run dev
 3. เพิ่ม key ของคุณลงในไฟล์:
 ```env
 VITE_API_BASE_URL=https://api.themoviedb.org/3/
-VITE_IMAGE_BASE_URL=https://image.tmdb.org/t/p/original
+VITE_IMAGE_BASE_URL=https://image.tmdb.org/t/p/
 VITE_API_KEY=your_api_key_here
 VITE_API_READ_ACCESS_TOKEN=your_api_read_access_token_here
 ```
