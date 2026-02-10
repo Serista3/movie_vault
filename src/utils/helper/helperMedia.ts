@@ -12,7 +12,7 @@ import {
 
 export interface MediaSummaryData {
   mediaCategory: MediaType;
-  mediaDetailPath: string;
+  mediaDetailPath: string | null;
   mediaImg: string | null;
   mediaTitle: string;
   mediaSubtitle: string | MediaSummary[];
@@ -22,7 +22,7 @@ export interface MediaSummaryData {
 
 export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryData {
   let mediaCategory: MediaType = 'movie';
-  let mediaDetailPath: string = '';
+  let mediaDetailPath: string | null = null;
   let mediaImg: string | null = null;
   let mediaTitle: string = 'No Title';
   let mediaSubtitle: string | MediaSummary[] = 'No Subtitle';
@@ -63,10 +63,14 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
 
   else if (isEpisode(media)) {
     mediaCategory = 'tv';
-    mediaDetailPath = `${pathName.includes('seasons') ? pathName.replace('seasons', 'season') : pathName}/${media.season_number}`;
+    mediaDetailPath = null;
     mediaImg = media.still_path;
     mediaTitle = `${media.episode_number}. ${media.name}`;
-    mediaSubtitle = `${formatDateToReadable(media.air_date)} • ${media.runtime}m`;
+    mediaSubtitle = `${formatDateToReadable(media.air_date)} 
+      ${media.runtime >= 60 || media.runtime % 60 > 0 ? '•': ''} 
+      ${media.runtime >= 60 ? `${Math.floor(media.runtime / 60)}h` : ''} 
+      ${media.runtime % 60 > 0 ? `${media.runtime}m` : ''}
+    `;
     mediaOverview = media.overview;
     mediaRating = media.vote_average !== 0 ? Math.round(media.vote_average * 10) : 'N/A';
   }
@@ -83,7 +87,7 @@ export const getMediaSummaryData = function(media: MediaSummary): MediaSummaryDa
   
   else if (isTvShowLastEpisodeToAir(media)) {
     mediaCategory = 'tv';
-    mediaDetailPath = `tv/${media.id}/seasons/${media.season_number}`;
+    mediaDetailPath = `/tv/${media.id}/seasons/${media.season_number}`;
     mediaImg = media.still_path;
     mediaTitle = `${media.name} ${media.season_number}`;
     mediaSubtitle = `${formatDateToReadable(media.air_date)} • Episodes ${media.episode_number}`;

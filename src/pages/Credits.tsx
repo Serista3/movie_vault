@@ -2,10 +2,10 @@
 import { useLoaderData, type LoaderFunctionArgs } from "react-router";
 import { getMovieCredits, getMovie, getTvShowAggregateCredits, getTvShow } from "@/services";
 import type { MovieCredits, TvShowAggregateCredits, MovieDetail, TvShowDetail, AppError } from "@/@types";
-import { isAppError} from "@/guards";
+import { isAppError, isMovieDetail } from "@/guards";
 import { getMediaCrews } from "@/utils";
 import { SubPageMediaLayout } from "@/components/layout";
-import { Heading, Paragraph, ErrorMessage } from "@/components/common";
+import { Heading, Paragraph, ErrorMessage, Anchor } from "@/components/common";
 import { CreditListItem } from "@/features/person";
 
 export default function Credits() {
@@ -18,7 +18,10 @@ export default function Credits() {
     <>
       {isAppError(mediaDetail) && <ErrorMessage error={mediaDetail} />}
       {!isAppError(mediaDetail) && (
-        <SubPageMediaLayout mediaDetail={mediaDetail}>
+        <SubPageMediaLayout 
+          mediaDetail={mediaDetail}
+          anChorEl={<Anchor to={`/${isMovieDetail(mediaDetail) ? 'movie' : 'tv'}/${mediaDetail.id}`}>Back to Detail</Anchor>}
+        >
           {isAppError(mediaCredits) && <ErrorMessage error={mediaCredits} />}
           {/* --- LIST MEDIA CAST & CREW --- */}
           {!isAppError(mediaCredits) && (

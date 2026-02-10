@@ -2,19 +2,20 @@
 import { cn, formatDateToReadable } from "@/utils";
 import type { MovieDetail, TvShowDetail, TvShowSeasonDetail } from "@/@types";
 import { isMovieDetail, isTvShowDetail, isTvShowSeasonDetail } from "@/guards";
-import { Image, Heading, Paragraph, Anchor } from "@/components/common";
+import { Image, Heading, Paragraph } from "@/components/common";
 
 // --- TYPE DEFINATIONS ---
 interface SubPageMediaLayoutProps {
   mediaDetail: MovieDetail | TvShowDetail | TvShowSeasonDetail ;
   className?: string;
+  anChorEl: React.ReactNode;
   children?: React.ReactNode;
 }
 
 // --- CONSTANTS ---
 const BASE_CLASS = "max-w-300 mx-auto w-full flex flex-col gap-5 pt-10 px-4 pb-14";
 
-export default function SubPageMediaLayout({ className, mediaDetail, children }: SubPageMediaLayoutProps) {
+export default function SubPageMediaLayout({ className, mediaDetail, anChorEl, children }: SubPageMediaLayoutProps) {
   return (
     <>
       {/* --- SUBPAGE HEADER --- */}
@@ -36,9 +37,7 @@ export default function SubPageMediaLayout({ className, mediaDetail, children }:
                 {isTvShowSeasonDetail(mediaDetail) && formatDateToReadable(mediaDetail.air_date)}
               </Paragraph>
             </Heading>
-            <Anchor to={location.pathname.substring(0, location.pathname.lastIndexOf('/'))}>
-              {isTvShowSeasonDetail(mediaDetail) ? 'Back to seasons' : 'Back to Details'}
-            </Anchor>
+            {anChorEl}
           </div>
         </div>
       </div>

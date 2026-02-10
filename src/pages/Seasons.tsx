@@ -5,7 +5,7 @@ import type { TvShowDetail, AppError } from "@/@types";
 import { isAppError } from "@/guards";
 import { SubPageMediaLayout } from "@/components/layout";
 import { WideMediaCard } from "@/features/media";
-import { ErrorMessage, Paragraph } from "@/components/common";
+import { ErrorMessage, Paragraph, Anchor } from "@/components/common";
 
 export default function Seasons() {
   const { tvShowDetail } = useLoaderData<SeasonsLoaderData>();
@@ -14,7 +14,10 @@ export default function Seasons() {
     <>
       {isAppError(tvShowDetail) && <ErrorMessage error={tvShowDetail} />}
       {!isAppError(tvShowDetail) && (
-        <SubPageMediaLayout mediaDetail={tvShowDetail}>
+        <SubPageMediaLayout 
+          mediaDetail={tvShowDetail}
+          anChorEl={<Anchor to={`/tv/${tvShowDetail.id}`}>Back to Detail</Anchor>}
+        >
           {/* --- TV SHOW SEASONS --- */}
           {tvShowDetail.seasons.length > 0 && (
             <div className="flex flex-col gap-8">

@@ -18,14 +18,15 @@ export default function WideMediaCard({ media, showRating = false, className }: 
 
     // --- COMPUTED CLASS NAMES ---
     const wrapperClass = cn(
-        "flex gap-2 items-start h-40 w-full bg-secondary-dark hover:scale-101 shadow-xl", 
+        "flex gap-2 items-start h-40 w-full bg-secondary-dark shadow-xl", 
+        mediaDetailPath && 'hover:scale-101',
         className
     );
 
     return (
         <Card className={wrapperClass}>
             {/* --- LINK OVERLAY --- */}
-            <Link to={mediaDetailPath} className="w-full h-full absolute top-0 left-0 z-5" />
+            {mediaDetailPath && <Link to={mediaDetailPath} className="w-full h-full absolute top-0 left-0 z-5" />}
 
             {/* --- MEDIA IMAGE --- */}
             <Image

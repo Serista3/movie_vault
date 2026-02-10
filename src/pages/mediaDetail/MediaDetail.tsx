@@ -144,7 +144,7 @@ export default function MediaDetail(){
                         ? creditsData.crew.slice(0, 10) : [];
 
                       return (
-                        <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path={`${location.pathname}/cast`} seeAllText="All Casts">
+                        <MediaSection title={mediaType === 'movie' ? 'Cast' : 'Series Cast'} className="px-0" path="cast" seeAllText="All Casts">
                           <MediaGrid mediaList={displayItems} variant="horizontal" limit={10} />
                         </MediaSection>
                       )
@@ -153,13 +153,13 @@ export default function MediaDetail(){
 
                 {/* --- MEDIA LATEST SEASON --- */}
                 {isTvShowDetail(mediaDetail) && mediaDetail.seasons.length > 0 && (
-                  <MediaSection title="Latest Season" className="px-0" path={`${location.pathname}/seasons`} seeAllText="See All Seasons">
+                  <MediaSection title="Latest Season" className="px-0" path="seasons" seeAllText="See All Seasons">
                     <WideMediaCard showRating={true} media={mediaDetail.seasons.at(-1)!} />
                   </MediaSection>
                 )}
                 
                 {/* --- MEDIA REVIEW --- */}
-                <MediaReview mediaReviews={mediaReviews} path={location.pathname} />
+                <MediaReview mediaReviews={mediaReviews} path="reviews" />
 
                 {/* --- MEDIA RECOMMENDATIONS --- */}
                 <MediaRecommendation mediaRecommendations={mediaRecommendations} />

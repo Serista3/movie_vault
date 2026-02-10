@@ -3,9 +3,9 @@ import { useLoaderData, type LoaderFunctionArgs } from "react-router";
 import { usePagination } from "@/hooks";
 import { getMovieReviews, getTvShowReviews, getMovie, getTvShow } from "@/services";
 import type { MediaResponse, ReviewSummary, MovieDetail, TvShowDetail, AppError } from "@/@types";
-import { isAppError, isMediaResponse} from "@/guards";
+import { isAppError, isMediaResponse, isMovieDetail} from "@/guards";
 import { SubPageMediaLayout } from "@/components/layout";
-import { ErrorMessage, Pagination, Paragraph } from "@/components/common";
+import { ErrorMessage, Pagination, Paragraph, Anchor } from "@/components/common";
 import { ReviewCard } from "@/features/media";
 
 export default function Reviews() {
@@ -17,7 +17,10 @@ export default function Reviews() {
     <>
       {isAppError(mediaDetail) && <ErrorMessage error={mediaDetail} />}
       {!isAppError(mediaDetail) && (
-        <SubPageMediaLayout mediaDetail={mediaDetail}>
+        <SubPageMediaLayout 
+          mediaDetail={mediaDetail}
+          anChorEl={<Anchor to={`/${isMovieDetail(mediaDetail) ? 'movie' : 'tv'}/${mediaDetail.id}`}>Back to Detail</Anchor>}
+        >
           {isAppError(mediaReviews) && <ErrorMessage error={mediaReviews} />}
           {/* --- LIST MEDIA REVIEW --- */}
           {!isAppError(mediaReviews) && mediaReviews.results.length > 0 && (
