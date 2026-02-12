@@ -16,7 +16,7 @@ export default function ReleaseDateFilter({ defaultGte, defaultLte, mediaType, .
 
       {/* --- FROM RELEASE DATE FILTER --- */}
       <div className="flex items-center gap-4">
-        <Paragraph className="text-base">from</Paragraph>
+        <Paragraph className="text-base flex-none">from</Paragraph>
         <Input 
           type="date" 
           name={mediaType === 'movie' ? "primary_release_date.gte" : "first_air_date.gte"}
@@ -28,7 +28,7 @@ export default function ReleaseDateFilter({ defaultGte, defaultLte, mediaType, .
 
       {/* --- TO RELEASE DATE FILTER --- */}
       <div className="flex items-center gap-4">
-        <Paragraph className="text-base">to</Paragraph>
+        <Paragraph className="text-base flex-none">to</Paragraph>
         <Input 
           type="date" 
           name={mediaType === 'movie' ? "primary_release_date.lte" : "first_air_date.lte"} 
